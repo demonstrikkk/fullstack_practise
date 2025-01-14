@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Wave Effect</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: black;
+    }
+    canvas {
+      border: 1px solid white;
+    }
+  </style>
+</head>
+<body>
+  <audio id="audio" controls>
+    <source src="songsonge\creative-technology-showreel-241274.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+  
+  <canvas id="waveCanvas"></canvas>
+
+  <script >
+const audioElement = document.getElementById('audio');
+const canvas = document.getElementById('waveCanvas');
+const ctx = canvas.getContext('2d');
+
+// Set canvas size
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+const analyser = audioContext.createAnalyser();
+const source = audioContext.createMediaElementSource(audioElement);
+
+source.connect(analyser);
+analyser.connect(audioContext.destination);
+
+// Set the analyser properties
+analyser.fftSize = 256;  // Frequency data size (higher number = more precision)
+const bufferLength = analyser.frequencyBinCount;  // Number of frequency bins
+const dataArray = new Uint8Array(bufferLength);
+
+function drawSinusoidal() {
+  requestAnimationFrame(drawSinusoidal);
+
+  analyser.getByteFrequencyData(dataArray);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
+
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height / 2);
+
+  for (let i = 0; i < bufferLength; i++) {
+    const amplitude = dataArray[i] / 255 * (canvas.height / 2);  // Map amplitude
+    const x = (canvas.width / bufferLength) * i;  // X coordinate for each point
+    const y = (canvas.height / 2) + Math.sin(i / 10) * amplitude; // Sinusoidal curve effect
+    ctx.lineTo(x, y);
+  }
+
+  ctx.strokeStyle = 'rgb(255, 255, 255)';  // White color for wave
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+function drawCurvedBars() {
+  requestAnimationFrame(drawCurvedBars);
+
+  analyser.getByteFrequencyData(dataArray);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
+
+  const barWidth = (canvas.width / bufferLength) * 2.5;
+  let x = 0;
+
+  for (let i = 0; i < bufferLength; i++) {
+    const barHeight = dataArray[i];
+    
+    const gradient = ctx.createLinearGradient(0, canvas.height - barHeight, 0, canvas.height);
+    gradient.addColorStop(0, `rgb(0, ${barHeight + 100}, 255)`); // Blue gradient
+    gradient.addColorStop(1, `rgb(255, 0, ${barHeight + 100})`); // Red gradient
+
+    ctx.fillStyle = gradient;
+    
+    ctx.beginPath();
+    ctx.moveTo(x, canvas.height - barHeight);
+    ctx.quadraticCurveTo(x + barWidth / 2, canvas.height - barHeight - 50, x + barWidth, canvas.height - barHeight); // Curved top
+    ctx.lineTo(x + barWidth, canvas.height);
+    ctx.lineTo(x, canvas.height);
+    ctx.closePath();
+    ctx.fill();
+
+    x += barWidth + 1;
+  }
+}
+function drawCircularWaves() {
+  requestAnimationFrame(drawCircularWaves);
+
+  analyser.getByteFrequencyData(dataArray);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
+
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const radius = canvas.height / 4;
+
+  for (let i = 0; i < bufferLength; i++) {
+    const amplitude = dataArray[i] / 255 * radius;
+    const angle = (i / bufferLength) * Math.PI * 2;  // Divide the circle into segments
+
+    const x = centerX + Math.cos(angle) * amplitude;
+    const y = centerY + Math.sin(angle) * amplitude;
+
+    ctx.beginPath();
+    ctx.arc(x, y, 2, 0, Math.PI * 2);
+    ctx.fillStyle = `rgb(${Math.min(255, amplitude * 2)}, 0, 255)`;
+    ctx.fill();
+  }
+}
+function drawFluidWave() {
+  requestAnimationFrame(drawFluidWave);
+
+  analyser.getByteFrequencyData(dataArray);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
+
+  const amplitudeFactor = 1.5; // Multiplier for wave height
+  ctx.beginPath();
+  
+  for (let i = 0; i < bufferLength; i++) {
+    const amplitude = dataArray[i] / 255 * canvas.height * amplitudeFactor;
+    const x = (canvas.width / bufferLength) * i;
+    const y = (canvas.height / 2) + Math.sin(i / 5 + Date.now() / 1000) * amplitude;
+    
+    // Smooth gradient color based on amplitude
+    const r = Math.min(255, amplitude + 100);
+    const g = Math.min(255, 255 - amplitude);
+    const b = Math.min(255, amplitude + 150);
+
+    ctx.strokeStyle = `rgb(${r}, ${g}, ${b})`;
+    ctx.lineTo(x, y);
+  }
+
+  ctx.lineWidth = 2;
+  ctx.lineJoin = "round";
+  ctx.stroke();
+}
+
+
+function draw() {
+  requestAnimationFrame(draw);
+
+  analyser.getByteFrequencyData(dataArray);
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
+
+  const barWidth = (canvas.width / bufferLength) * 2.5;
+  let x = 0;
+
+  // Draw the waveform
+  for (let i = 0; i < bufferLength; i++) {
+    const barHeight = dataArray[i];
+    const r = barHeight + (25 * (i / bufferLength));
+    const g = 250 * (i / bufferLength);
+    const b = 50;
+    
+    ctx.fillStyle = `rgb(${r},${g},${b})`;
+    ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+
+    x += barWidth + 1;
+  }
+}
+
+// Start drawing the wave when the audio starts playing
+audioElement.onplay = () => {
+  audioContext.resume().then(() => {
+    drawCircularWaves();
+  });
+};
+
+
+
+  </script>
+</body>
+</html>
+<h2 style="color: white;"></h2>

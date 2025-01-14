@@ -1,0 +1,56 @@
+.search-bar:hover{
+    cursor: pointer;
+    color: white;
+    border: 2px solid white;
+    
+}
+.searchicon img:hover, .browseicon img:hover , .homeo:hover {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+
+}
+h2:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.h2::before,
+.h2::after {
+  content: '';
+  pointer-events: none;
+}
+button:hover{
+    transform: scale(1.15);
+    transition: transform 0.4s ease;
+    
+}
+.buttp:hover {
+    color: white;
+ }
+ .earth:hover{
+    border: 1.8px solid white;
+ }
+ .optionbox:hover{
+    transform: scale(1.111);
+    transition: transform 0.4s ease;
+ }
+ ul a:hover{
+    text-decoration: underline;
+    color: white;
+ }
+ .liblogo:hover{
+    color: white;
+    transition: color 0.3s ease;
+ }
+ .arto:hover, .arti:hover , .arkom:hover{
+    background-color: #1F1F1F;
+
+    transform: background-color 0.4s ease;
+ }
+ .whit:hover{
+   color: rgb(180, 192, 192);
+   text-decoration: underline;
+   
+ }
+
+ .arto:hover, .arti:hover , .arkom:hover{
+   transform: scale(1.19);
+ }

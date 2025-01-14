@@ -1,0 +1,657 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    color: white;
+}
+
+.spotifylogo {
+    padding: 13px 0px 15px 16px;
+    border-radius: 100%;
+    
+
+
+
+
+}
+
+body {
+    display: flex;
+    background-color: #000000;
+    position: relative;
+    z-index: -1;
+
+}
+
+.liblogo {
+    background-color: #111010;
+    padding: 10px 0px 20px 10px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: sans-serif;
+    color: rgb(173, 168, 168);
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+
+}
+
+.plus {
+
+    color: rgb(173, 168, 168);
+    font-family: sans-serif;
+    font-size: 30px;
+    font-weight: 100;
+    background-color: #111010;
+
+    border-radius: 100%;
+    border: 1px solid #111010;
+
+}
+
+.sidebox {
+    margin: 4px;
+    width: 30vw;
+    height: 100vh;
+    border: 1px solid rgb(0, 0, 0);
+    position:relative;
+}
+
+.mainbox {
+    margin: 4px;
+    width: 70vw;
+    height: 100vh;
+    border: 1px solid rgb(0, 0, 0);
+    position: relative;
+    z-index: 0;
+}
+
+.innerside {
+    margin: 5px;
+    background-color: #111010;
+    border: 1px solid #111010;
+    width: 27vw;
+    height: 100%;
+    border-radius: 15px;
+
+}
+
+.scrollbox {
+    background-color: #121212;
+    width: 100%;
+    height: 55%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+
+
+
+}
+
+.scrollbox::-webkit-scrollbar {
+    width: 15px;
+}
+
+.scrollbox::-webkit-scrollbar-track {
+
+    border-radius: 15px;
+}
+
+.scrollbox::-webkit-scrollbar-thumb {
+    background: #575757;
+    border-radius: 1px;
+    border: 1px solid black;
+}
+
+.scrollbox::-webkit-scrollbar-button {
+    display: none;
+}
+
+.scrollbox {
+    scrollbar-width: inherit;
+    scrollbar-color: #575757, #121212;
+}
+
+.firstbox {
+    width: 22vw;
+    height: 140px;
+    text-align: center;
+    border: 1px solid rgb(35, 34, 34);
+    background-color: rgb(35, 34, 34);
+    margin: 0 0 20px 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0 0px 0px 10px;
+    scroll-snap-align: start;
+}
+
+
+
+.button {
+    background-color: black;
+    padding: 5px 15px 5px 15px;
+    border-radius: 15px;
+    filter: invert();
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.home {
+    background-color: #484646;
+    border: 1px solid #111010;
+    padding: 6px;
+    border-radius: 100%;
+}
+
+input {
+    color: #484646;
+}
+
+.line {
+    font-size: 28px;
+}
+
+.libbo {
+    display: flex;
+
+    align-items: baseline;
+    justify-content: space-around;
+
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.io {
+    padding: 13px 21px 9px 20px;
+    border: 1px solid black;
+}
+
+
+.innerboxo {
+    scroll-snap-align: start;
+    margin: 14px;
+    background-color: #111010;
+    border: 1px solid #111010;
+    width: 68vw;
+    height: 100%;
+    border-radius: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.scroller {
+    background-color: #121212;
+    width: 100%;
+    height: 83%;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    position: relative;
+    z-index: 1;
+    overflow-x: hidden;
+
+
+}
+
+.scroller::-webkit-scrollbar {
+    width: 15px;
+}
+
+.scroller::-webkit-scrollbar-track {
+
+    border-radius: 15px;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    background: #575757;
+    border-radius: 1px;
+    border: 1px solid black;
+}
+
+.scroller::-webkit-scrollbar-button {
+    display: none;
+}
+
+.scroller {
+
+    scrollbar-width: inherit;
+    scrollbar-color: #575757, #121212;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(10, auto);
+    gap: 20px;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.optionbox {
+
+    /* scroll-snap-align: start;  */
+    width: 100%;
+    height: 137.1px;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: relative;
+    z-index: 3;
+}
+
+.writer {
+
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    bottom: 35px;
+    right: 0px;
+    overflow-wrap: break-word;
+    position: relative;
+    text-shadow: -1px 1px 20px black;
+}
+
+.photos {
+    position: relative;
+    top: 2em;
+    rotate: 16deg;
+    object-fit: contain;
+    left: 3em;
+}
+
+
+
+@media screen and (max-width: 1118px) {
+    .writer {
+        font-size: 18px;
+
+        color: white;
+
+        font-weight: 600;
+        bottom: 20px;
+        left: 15px;
+        overflow-wrap: break-word;
+        position: relative;
+        text-shadow: -1px 1px 20px black;
+    }
+    
+
+    .optionbox {
+        height: 100px;
+    }
+
+    .options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(10, auto);
+        gap: 20px;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .writer {
+        font-size: 16px;
+
+        color: white;
+
+        font-weight: 600;
+        bottom: 25px;
+        left: 10px;
+        overflow-wrap: break-word;
+        position: relative;
+        text-shadow: -1px 1px 20px black;
+    }
+
+    .optionbox {
+        height: 80px;
+        
+    }
+
+    .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, auto);
+        gap: 20px;
+        padding: 20px;
+        
+    }
+}
+
+
+.text {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.end {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-image: linear-gradient(90deg, #af2896, #509bf5);
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.preview {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.buttp {
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+/* Main music bar */
+.musicdown {
+    width: 100%;
+    height: 90px;
+    background: linear-gradient(to right, black, rgb(76, 73, 73), rgb(40, 234, 86), rgb(40, 155, 36), green);
+    border-radius: 15px;
+    position: relative;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+/* Music controls bar */
+.flex {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    position: relative;
+}
+
+/* Music length bar */
+.musiclength {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, rgb(202, 255, 45), rgb(246, 6, 6), rgb(239, 18, 191));
+    position: relative;
+    margin-top: 10px;
+}
+
+/* Small moving ball on music length */
+.smallball {
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: -3px;
+    left: 0%;
+    background-color: white;
+    border-radius: 50%;
+    z-index: 2;
+    transition: left 0.1s ease;
+}
+
+/* Previous, Play, and Next buttons */
+.previous,
+.play,
+.next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.previous img,
+.play img,
+.next img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Like button */
+.like {
+    position: relative;
+    left: 10%;
+    z-index: 1;
+    cursor: pointer;
+}
+
+/* Song title and artist */
+.textwritten {
+    color: white;
+    margin: 0;
+    padding: 0 10px;
+    position: absolute;
+    top: 5px;
+    z-index: 1;
+}
+
+.durationmusic {
+    color: white;
+    margin: 0;
+    padding: 0 10px;
+    position: absolute;
+    top: 30px;
+    left: 80%;
+    z-index: 1;
+}
+
+/* Control buttons for play/pause interaction */
+.grape {
+    width: 40px;
+    height: 40px;
+}
+
+/* Add hover effect to buttons */
+.previous:hover,
+.play:hover,
+.next:hover,
+.like:hover {
+    opacity: 0.8;
+}
+
+
+
+.musicbox {
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1f1f1f;
+    margin: 10px auto;
+    padding: 10px;
+    width: 90%;
+    color: white;
+}
+
+.imager {
+    width: 3em;
+    height: 3em;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.imager img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.textr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    flex: 1;
+}
+
+.textr h4 {
+    margin: 0;
+    font-size: 16px;
+    color: white;
+}
+
+.textr p {
+    margin: 2px 0 0 0;
+    font-size: 14px;
+    color: #a0a0a0;
+}
+
+.duration {
+    margin-right: 20px;
+    font-size: 14px;
+    color: #a0a0a0;
+}
+
+.graper {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(13, 199, 13);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.grape:hover {
+    transform: scale(1.15);
+}
+
+.grape img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+}
+.crax{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.hamburger {
+    width: 25px;
+    height: 20px;
+    padding: 6px;
+    border-radius: 50%;
+    background-color: #aa9898;
+    /* position: ; */
+    /* left: 3px; */
+    /* top: 60px; */
+    filter: invert();
+    opacity: 0;
+}
+
+@media screen and (max-width: 720px){
+.scrollbox{
+    width: 140%;
+}
+  .sidebox{
+    left: -100%;
+    width: 100%;
+  }
+
+  .innerside{
+    width: 37vw;
+  }
+  .firstbox{
+    width: 50vw;
+  }
+  .hamburger{
+    opacity: 1;
+  }
+.mainbox{
+    /* position: relative; */
+    /* right:100px; */
+    width: 60%;
+}
+}
+.like {
+    transition: transform 0.3s ease; /* Specifies transition for the transform property */
+}
+.like:hover {
+    transform: scale(1.15); /* Applies the scaling effect */
+}
+
+/* .textwritten , .durationmusic{
+    filter:invert()
+} */
+
+.dimmo{
+    background-color: rgba(231, 213, 213, 0.332);
+    
+}
+.songInfo{
+    color: white
+}
+.songButtons{
+    filter:invert();
+   
+}
+
+
+
+.graper:hover {
+    transform: scale(1.15);
+}
+
+
+.playbutton {
+    position: relative;
+    bottom: 85px;
+    left: 25%;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(13, 199, 13);
+    border-radius: 50%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playbutton img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+}
+
+
+.crossey{
+    position: relative;
+    right: -50%;
+    opacity: 0;
+    cursor: pointer;
+
+}
+@media screen and   (max-width: 1135px){
+    .scrollbox{
+        width: 50vw;
+
+    }
+    .firstbox{
+        width: 45vw;
+    }
+}
+    

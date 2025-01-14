@@ -1,0 +1,132 @@
+.flex{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.flexer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px 40px;
+}
+.whit{
+    color: white
+
+}
+
+.justify_content{
+    justify-content: center;
+}
+a{
+    font-size: 12px;
+    text-decoration: none;
+    color: rgb(173, 168, 168);
+    margin: 8px ;
+    padding: 1px 0 0 0 ;
+}
+.empty{
+    width: 100%;
+    height: 4rem;
+}
+.slight{
+    width: 100%;
+    height: 1rem;
+}
+div .whitehover{
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    
+}
+.earth{
+background-color: black;
+margin: 10px 10px 10px 10px;
+padding: 10px 11px 8px 11px;
+border-radius: 30px;
+border: 1px solid rgb(165, 158, 158);
+font-size: 15px;
+display: flex;
+gap: 3px;
+
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #121212;
+    padding: 8px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #3e3e3e;
+    
+}
+
+.search-bar input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: rgb(230, 224, 224);
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    padding-left: 15px;
+}
+
+.search-bar .search-icon {
+    margin-left: 10px;
+   
+    
+}
+
+.search-bar .browse {
+    display: flex;
+    align-items: center;
+    color: #575757;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.search-bar .browse img {
+    margin-right: 5px;
+   
+    
+}
+.blk{
+    background-color: black;
+    color: white;
+}
+.button0{
+    display: flex;
+    align-items: center;
+
+}
+.diagonal {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 50%;
+}
+.buttp{
+    background-color: black;
+    padding: 5px 15px 5px 15px;
+    border-radius: 15px;
+    color: rgb(236, 224, 224);
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h2{
+    padding: 42px 12px;
+}
+li{
+    list-style: none;
+}
+.lightgrey p{
+    color: #aba4a4;
+    word-wrap: break-word;
+}
+.searchicon img, .browsericon img{
+    display: flex;
+    transition: filter 0.3s ease;
+    
+}

@@ -1,0 +1,215 @@
+/* .artists {
+    width: 100%;
+    height: 35%;
+    margin: 5px;
+    position: relative;
+    z-index: 2;
+}
+.art{
+    height: 100%;
+    width: 16.75%;
+    margin: 3px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 3;
+
+}
+.circle {
+    
+    display: block;
+    width: 9em;
+    height: 9em;
+    border-radius: 50%;
+    position: relative;
+    z-index: 4;
+    top: 10;
+    left: 15px;
+    margin: 3px 3px 9px 3px;
+    overflow: hidden;
+}
+.circle img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 4;
+    
+
+}
+.square , .sq , .feature ,.editors{
+    display: block;
+    width: 9em;
+    height: 9em;
+    position: relative;
+    z-index: 4;
+    top: 10px;
+    left: 15px;
+    margin: 3px 3px 9px 3px;
+    overflow: hidden;
+    border-radius: 15px;
+
+}
+.square img , .sq img ,.feature img, .editors img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 4;
+    
+
+} */
+
+@media screen and (max-width: 1118px) {
+    .writer {
+        font-size: 18px;
+         
+    color: white;
+    
+    font-weight: 600;
+    bottom: 20px;
+left: 15px;
+    overflow-wrap: break-word;
+    position: relative;
+    text-shadow: -1px 1px 20px black;
+    }
+
+    .optionbox {
+        height: 100px;
+    }
+    .options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        grid-template-rows: repeat(10, auto);
+        gap: 20px; 
+        padding: 20px;
+}}
+
+@media screen and (max-width: 520px) {
+    .writer {
+        font-size: 16px;
+         
+    color: white;
+    
+    font-weight: 600;
+    bottom: 25px;
+    left: 10px;
+    overflow-wrap: break-word;
+    position: relative;
+    text-shadow: -1px 1px 20px black;
+    }
+
+    .optionbox {
+        height: 80px;
+    }
+    .options{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        grid-template-rows: repeat(5, auto);
+        gap: 20px; 
+        padding: 20px;
+}
+}
+
+.grape {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(233, 243, 243, 0.421);
+    border-radius: 50%;
+    cursor: pointer;
+}
+.grape:hover { transform: scale(1.15); }
+.grape img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;}
+
+
+
+
+
+    .artistso {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+        width: 100%;
+        padding: 10px;
+      }
+
+      .arto , .arti ,.arkom{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background:rgb(18 18 18);
+        padding: 10px;
+      }
+
+      .circleo {
+        width: 8em;
+        height: 8em;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+
+      .circleo img  , .squareo img, .sqo img, .featureo img ,.editorso img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .squareo , .sqo , .featureo ,.editorso {
+        width: 8em;
+        height: 8em;
+        border-radius: 15px;
+        
+        overflow: hidden;
+      }
+
+      .circleo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .white h4 {
+        margin: 10px 0 5px;
+        color: #fff;
+        font-size: 1.1em;
+        text-align: center;
+      }
+
+      .lightgreyo p {
+        margin: 0;
+        color: #bbb;
+        font-size: 0.9em;
+        text-align: center;
+      }
+
+      @media (max-width: 768px) {
+        .artistso {
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        }
+        .circleo , .squareo , .sqo , .featureo ,.editorso{
+          width: 80px;
+          height: 80px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .artistso {
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        }
+        .circleo , .squareo , .sqo , .featureo ,.editorso {
+          width: 60px;
+          height: 60px;
+        }
+      }.flexer p{
+        cursor: pointer;
+      }
+
+      
