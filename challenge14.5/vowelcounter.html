@@ -1,0 +1,56 @@
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <script>
+        function vowelcounter(a) {
+            m = 0
+            for (let i = 0; i < a.length; i++) {
+                
+                if(a[i]=='a' || a[i]=='A' ||a[i]=='e' || a[i]=="E" || a[i]== 'i' || a[i]== 'I' || a[i]== 'o' ||a[i]=='O' || a[i]== 'u' || a[i]== 'U')
+                m +=1
+                
+            }
+            return console.log(m)
+        }
+vowelcounter('yelloOw')
+    </script>
+</body>
+</html>
+
+
+<!-- more refined and better version of the above code 
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel Counter</title>
+</head>
+
+<body>
+    <script>
+        function vowelCounter(str) {
+            const vowels = new Set(['a', 'e', 'i', 'o', 'u']); // Use a Set to store vowels
+            let count = 0;
+
+            for (let char of str.toLowerCase()) { // Convert string to lowercase for easier checking
+                if (vowels.has(char)) { // Check if the character is a vowel
+                    count++;
+                }
+            }
+
+            return count; // Return the vowel count
+        }
+
+        console.log(vowelCounter('yellow')); // Testing the function
+    </script>
+</body>
+
+</html>
+ -->

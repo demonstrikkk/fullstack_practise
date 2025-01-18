@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <button id="authButton">Click me to enter your details</button>
+    <div id="userDetails"></div> <!-- Placeholder for displaying user details -->
+    <script>
+        function setAuthToken() {
+            // Add an event listener to the button
+            document.querySelector('#authButton').addEventListener('click', function () {
+                // Prompt the user for their name and id
+                const name = prompt('Enter your name:');
+                const id = prompt('Enter your ID:');
+
+                if (name && id) {
+                    // Save the data to localStorage
+                    localStorage.setItem('name', name);
+                    localStorage.setItem('id', id);
+                    console.log('Details saved successfully:', { name, id });
+
+                    // Display the data on the page
+                    const userDetailsDiv = document.querySelector('#userDetails');
+                    userDetailsDiv.textContent = `Name: ${name}, ID: ${id}`;
+                } else {
+                    alert('enter the name and id both')
+                    console.log('Name or ID not provided.');
+                }
+            });
+        }
+
+        // Call the function to initialize the event listener
+        setAuthToken();
+
+        // Optionally, display data from localStorage on page load
+        const savedName = localStorage.getItem('name');
+        const savedId = localStorage.getItem('id');
+        if (savedName && savedId) {
+            document.querySelector('#userDetails').textContent = `Name: ${savedName}, ID: ${savedId}`;
+        }
+    </script>
+</body>
+</html>

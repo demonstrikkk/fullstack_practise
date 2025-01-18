@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Scroll to Top</title>
+    <style>
+        body {
+            width: 15000px;
+            height: 2000px; /* Just to create scrollable content */
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            scrollbar-color: white;
+        }
+        button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button id="scrollToTop">Scroll to Top</button>
+ 
+    <script>
+        /**
+         * Function to smoothly scroll the window to the top
+         */
+        function smoothScrollToTop() {
+            window.scrollTo({
+                top: 0, // Scroll to the top
+                behavior: 'smooth' // Enable smooth scrolling
+            });
+        }
+
+        // Attach event listener to the button
+        document.getElementById('scrollToTop').addEventListener('click', smoothScrollToTop);
+    </script>
+</body>
+</html>
+

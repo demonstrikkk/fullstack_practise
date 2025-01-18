@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#bookmark-list {
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmark Manager</title>
+   
+</head>
+<body>
+    <div class="container">
+        <h1>Bookmark Manager</h1>
+        <form id="bookmark-form">
+            <input type="text" id="title" placeholder="Enter website title" required>
+            <input type="url" id="url" placeholder="Enter website URL" required>
+            <button type="submit">Add Bookmark</button>
+        </form>
+        <div id="bookmark-list">
+            <h2>Your Bookmarks</h2>
+            <ul id="bookmarks"></ul>
+        </div>
+    </div>
+
+    <script >
+
+
+// script.js
+
+// Get references to DOM elements
+const bookmarkForm = document.getElementById('bookmark-form');
+const titleInput = document.getElementById('title');
+const urlInput = document.getElementById('url');
+const bookmarksList = document.getElementById('bookmarks');
+
+// Load bookmarks from localStorage when the page loads
+document.addEventListener('DOMContentLoaded', loadBookmarks);
+
+function loadBookmarks() {
+    const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+    bookmarks.forEach(bookmark => {
+        addBookmarkToDOM(bookmark);
+    });
+}
+
+function addBookmarkToDOM(bookmark) {
+    const li = document.createElement('li');
+    li.innerHTML = `
+        <a href="${bookmark.url}" target="_blank">${bookmark.title}</a>
+        <button onclick="removeBookmark('${bookmark.url}')">Remove</button>
+    `;
+    bookmarksList.appendChild(li);
+}
+
+function removeBookmark(url) {
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+    bookmarks = bookmarks.filter(bookmark => bookmark.url !== url);
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    loadBookmarks(); // Re-render the list
+}
+
+// Handle form submission
+bookmarkForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const title = titleInput.value.trim();
+    const url = urlInput.value.trim();
+
+    if (title && url) {
+        const newBookmark = { title, url };
+        
+        // Add to localStorage
+        let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+        bookmarks.push(newBookmark);
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+
+        // Add to the DOM
+        addBookmarkToDOM(newBookmark);
+
+        // Clear the inputs
+        titleInput.value = '';
+        urlInput.value = '';
+    }
+});
+
+    </script>
+</body>
+</html>

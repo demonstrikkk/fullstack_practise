@@ -1,0 +1,45 @@
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <script>
+        async function brewCoffee(k) {
+            for (let m of k) {
+                if (m === 'hazelnut') {
+                    await new Promise(resolve => {
+                        let delay = Math.floor(1 + Math.random() * 4) * 1000; // Random delay between 1 and 4 seconds
+                        setTimeout(() => {
+                            console.log('Your hazelnut coffee is ready');
+                            resolve();
+                        }, delay);
+                    });
+                } else if (m === 'mocha latte') {
+                    await new Promise(resolve => {
+                        let delay = Math.floor(1 + Math.random() * 4) * 1000;
+                        setTimeout(() => {
+                            console.log('Your mocha latte coffee is ready');
+                            resolve();
+                        }, delay);
+                    });
+                } else if (m === 'cold coffee') {
+                    await new Promise(resolve => {
+                        let delay = Math.floor(1 + Math.random() * 4) * 1000;
+                        setTimeout(() => {
+                            console.log('Your cold coffee is ready');
+                            resolve();
+                        }, delay);
+                    });
+                } else {
+                    console.log(`${m} isn't a valid option in the machine`);
+                }
+            }
+        }
+
+        brewCoffee(['mocha latte', 'cappuccino', 'hazelnut']);
+    </script>
+</body>
+</html>

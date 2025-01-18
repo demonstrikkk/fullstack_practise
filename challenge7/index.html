@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        p{
+            text-emphasis:none;
+            text-overflow: ellipsis;
+            font-size: x-small;
+            font-weight: 100;
+            
+        }
+        h1{
+            padding-top: 4%;
+            padding-bottom: 11%;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+        }
+        a{
+            background-color: rgb(76, 190, 28);
+            border: 8px solid rgb(76, 190, 28);;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+        
+
+        }
+        h5{
+            font-weight: 100;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 3%;
+        }
+        
+ 
+
+        .logo img{
+            width: 164px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-family: "Segoe UI";
+        }
+
+        .right ul {
+            display: flex;
+            gap: 34px;
+        }
+
+        .right ul li {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .right ul li span{
+            padding: 0 5px;
+        }
+
+        .item {
+            border: 2px solid rgba(220, 220, 220, 0.408);
+            height: 150px;
+            width: 250px;
+            background-color: rgba(220, 220, 220, 0.408);
+            text-align: center;
+            
+            
+        }
+        .container {
+    width: 100vw; /* Full viewport width */
+    height: 80vh; /* 80% of the viewport height */
+    border: 2px solid rgb(252, 251, 251);
+    display: grid;
+    grid-template-columns: repeat(3, 80px); /* 3 columns of 80px each */
+    grid-template-rows: repeat(3, 80px); /* 3 rows of 80px each */
+    row-gap: 95px; /* Space between rows */
+    column-gap: 185px; /* Space between columns */
+    
+    /* Center the grid items inside the container */
+    justify-content: center; /* Horizontal centering */
+    align-content: center; /* Vertical centering */
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://www.ultraedit.com/wp-content/uploads/2023/01/Dark-logo.png" alt="">
+            </div>
+            <div class="right">
+                <ul>
+                    <li><span>Products </span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 9L11.2929 14.2929C11.6262 14.6262 11.7929 14.7929 12 14.7929C12.2071 14.7929 12.3738 14.6262 12.7071 14.2929L18 9" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        </li>
+                    <li><span>Pricing </span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 9L11.2929 14.2929C11.6262 14.6262 11.7929 14.7929 12 14.7929C12.2071 14.7929 12.3738 14.6262 12.7071 14.2929L18 9" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        </li>
+                    <li><span>Resources </span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 9L11.2929 14.2929C11.6262 14.6262 11.7929 14.7929 12 14.7929C12.2071 14.7929 12.3738 14.6262 12.7071 14.2929L18 9" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        </li>
+                    <li><span>About Us </span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 9L11.2929 14.2929C11.6262 14.6262 11.7929 14.7929 12 14.7929C12.2071 14.7929 12.3738 14.6262 12.7071 14.2929L18 9" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        </li>
+                    <li>
+                        <img src="https://www.ultraedit.com/wp-content/themes/Divi_Child/img/Lang.png" alt=""></div>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <h1>Download <strong>UltraEdit</strong> for Windows&nbsp; <a href="https://www.g2.com/products/ultraedit/reviews/" target="__blank" rel="noopener"><img decoding="async" src="https://www.ultraedit.com/wp-content/uploads/2022/10/Reviews.png" width="112" height="32" alt="Reviews" class="wp-image-1613 alignnone size-full"></a></h1>
+    <h3>Download and try UltraEdit before you buy it! This download includes the full Windows version of the text editor.<br>
+    </h3>
+    <div class="container">
+        <div class="item item-1">
+            <h1>English</h1>
+            <a href="#">Download 64-bit</a>
+            <h5>SHA256</h5>
+            <p>3C783C0872319DE70343C2C79D9E0024
+                FDA3F1DB472B8F1119343D42190AAD8C</p>
+        </div>
+        <div class="item item-2">            <h1>Deutch</h1>
+            <a href="#">Download 64-bit</a>
+            <h5>SHA256</h5>
+            <p>3C783C0872319DE70343C2C79D9E0024
+                FDA3F1DB472B8F1119343D42190AAD8C</p></div>
+        <div class="item item-3">            <h1>Japanese</h1>
+            <a href="#">Download 64-bit</a>
+            <h5>SHA256</h5>
+            <p>3C783C0872319DE70343C2C79D9E0024
+                FDA3F1DB472B8F1119343D42190AAD8C</p></div>
+        <div class="item item-4">            <h1>Chinese</h1>
+            <a href="#">Download 64-bit</a>
+            <h5>SHA256</h5>
+            <p>3C783C0872319DE70343C2C79D9E0024
+                FDA3F1DB472B8F1119343D42190AAD8C</p></div>
+        <div class="item item-5">            <h1>Punjabi</h1>
+            <a href="#">Download 64-bit</a>
+            <h5>SHA256</h5>
+            <p>3C783C0872319DE70343C2C79D9E0024
+                FDA3F1DB472B8F1119343D42190AAD8C</p></div>
+        <div class="item item-6">            <h1>Kashmeri</h1>
+            <a href="#">Download 64-bit</a>
+            <h5>SHA256</h5>
+            <p>3C783C0872319DE70343C2C79D9E0024
+                FDA3F1DB472B8F1119343D42190AAD8C</p></div>
+        <div class="item item-7">            <h1>Brazilian</h1>
+            <a href="#">Download 64-bit</a>
+            <h5>SHA256</h5>
+            <p>3C783C0872319DE70343C2C79D9E0024
+                FDA3F1DB472B8F1119343D42190AAD8C</p></div>
+        <div class="item item-8">            <h1>Afganisthani</h1>
+            <a href="#">Download 64-bit</a>
+            <h5>SHA256</h5>
+            <p>3C783C0872319DE70343C2C79D9E0024
+                FDA3F1DB472B8F1119343D42190AAD8C</p></div>
+        <div class="item item-9">            <h1>Bihari</h1>
+            <a href="#">Download 64-bit</a>
+            <h5>SHA256</h5>
+            <p>3C783C0872319DE70343C2C79D9E0024
+                FDA3F1DB472B8F1119343D42190AAD8C</p></div>
+    </div>
+</body>
+</html>

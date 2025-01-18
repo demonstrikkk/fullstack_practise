@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+</head>
+
+<body>
+   
+    <div class="navbar">
+        <span><img src="images/logo.svg" alt="netflix" class="netflix-log" width="150"></span>
+        <div class="btn">
+            <span class="btn black"><button>English</button></span>
+            <span class="btn white"><button>Sign In</button></span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="box">
+            <div class="hero">
+                <span>
+                    <h1>Unlimited movies,</h1>
+                </span>
+                <span>TV shows and more </span>
+                <span>Starts at ₹149. Cancel at any time.</span>
+            </div>
+            <img src="images/bg_img.jpg" alt="Background" class="photo">
+        </div>
+    </div>
+    <div class="search">
+        <p>Ready to watch? Enter your email to create or restart your membership.</p>
+        <div class="emailid"><span> <input type="email" placeholder="Email address"></span>
+            <span class="red"><button >Join now ></button></span>
+        </div>
+
+    </div>
+    <section>
+        <div class="navbar1">
+            <span class="text">
+                <h1>Trending Now</h1>
+            </span>
+            <div class="button">
+                <span class="black"><button>India</button></span>
+                <span class="black"><button>Movies</button></span>
+            </div>
+        </div>
+
+    <!-- <div class="slider">
+        <button class="arrow left" onclick="moveSlide(-1)">&#10094;</button>
+        <div class="movies">
+            <span class="topp" data-link="images/movie1.html"><span class="number">1</span><img class="move"
+                    src="images/AAAABURx9AyfogBvfeXdgb-y2fRt2u3DGsQQBsmMJniLhF2s8UIN9qIZTnpfFJ0wvKLfH3W1D_JBVDYG_571TUksiotC71p6J8deNJ2092AqZBrDcgacxn4-59k4lKEVv6mFW17acE_2jXiBAXeqe7VT.webp"
+                    alt="lucky baskar"></span>
+            <span class="topp" data-link="movie2.html"><span class="number">2</span><img class="move" src="images/amaran.webp"
+                    alt="araman"></span>
+            <span class="topp" data-link="movie3.html"><span class="number">3</span><img class="move" src="images/carryon.webp"
+                    alt="carry on "></span>
+            <span class="topp" data-link="movie4.html"><span class="number">4</span><img class="move" src="images/christmas.webp"
+                    alt="That Christmas"></span>
+            <span class="topp" data-link="movie5.html"><span class="number">5</span><img class="move" src="images/devara.webp"
+                    alt="Devara"></span>
+            <span class="topp" data-link="movie6.html"><span class="number">6</span><img class="move" src="images/jigra.webp"
+                    alt="Jigrar"></span>
+            <span class="topp" data-link="movie7.html"><span class="number">7</span><img class="move" src="images/mary.webp" alt="Mary"></span>
+            <span class="topp" data-link="movie8.html"><span class="number">8</span><img class="move" src="images/sikrasikander.webp"
+                    alt="Sikamuqa"></span>
+            <span class="topp" data-link="movie9.html"><span class="number">9</span><img class="move" src="images/thalagan.webp"
+                    alt="Thangalaan"></span>
+            <span class="topp" data-link="movie10.html"><span class="number">10</span><img class="move" src="images/vickyvidya.webp"
+                    alt="vickyvidya"></span>
+        </div>
+        <button class="arrow right" onclick="moveSlide(1)">&#10095;</button>
+    </div> -->
+    <div class="slider">
+        <button class="arrow left" onclick="moveSlide(-1)">&#10094;</button>
+        <span class="topp" data-link="images/movie1.html">
+            <span class="number">1</span>
+            <img class="move" src="images/AAAABURx9AyfogBvfeXdgb-y2fRt2u3DGsQQBsmMJniLhF2s8UIN9qIZTnpfFJ0wvKLfH3W1D_JBVDYG_571TUksiotC71p6J8deNJ2092AqZBrDcgacxn4-59k4lKEVv6mFW17acE_2jXiBAXeqe7VT.webp" alt="lucky baskar">
+        </span>
+        <span class="topp" data-link="movie2.html">
+            <span class="number">2</span>
+            <img class="move" src="images/amaran.webp" alt="araman">
+        </span>
+        <span class="topp" data-link="movie3.html">
+            <span class="number">3</span>
+            <img class="move" src="images/carryon.webp" alt="carry on ">
+        </span>
+        <span class="topp" data-link="movie4.html">
+            <span class="number">4</span>
+            <img class="move" src="images/christmas.webp" alt="That Christmas">
+        </span>
+        <span class="topp" data-link="movie5.html">
+            <span class="number">5</span>
+            <img class="move" src="images/devara.webp" alt="Devara">
+        </span>
+        <span class="topp" data-link="movie6.html">
+            <span class="number">6</span>
+            <img class="move" src="images/jigra.webp" alt="Jigrar">
+        </span>
+        <span class="topp" data-link="movie7.html">
+            <span class="number">7</span>
+            <img class="move" src="images/mary.webp" alt="Mary">
+        </span>
+        <span class="topp" data-link="movie8.html">
+            <span class="number">8</span>
+            <img class="move" src="images/sikrasikander.webp" alt="Sikamuqa">
+        </span>
+        <span class="topp" data-link="movie9.html">
+            <span class="number">9</span>
+            <img class="move" src="images/thalagan.webp" alt="Thangalaan">
+        </span>
+        <span class="topp" data-link="movie10.html">
+            <span class="number">10</span>
+            <img class="move" src="images/vickyvidya.webp" alt="vickyvidya">
+        </span>
+        <button class="arrow right" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+    
+
+    </section>
+    <section>
+        <div class="finale">
+            <div>
+                <h1>More reasons to join</h1>
+            </div>
+        </div>
+        <div class="witch">
+            <span class="virtue"><span class="te first">Stories tailored to your taste</span><span class="logo"><img
+                        src="images\premium.png" alt="" width="64px"></span></span>
+            <span class="virtue"><span class="te second">Cancel or switch plans anytime</span><span class="logo"><img
+                        src="images\celebration_14949450.png" alt="" width="64px"></span></span>
+            <span class="virtue"><span class="te third">A place just for kids</span><span class="logo"><img
+                        src="images\favorite_15114103.png"></span></span>
+            <span class="virtue"><span class="te fourth">For your phone, tablet,laptop and TV</span><span
+                    class="logo"><img src="images\television.png" alt=""></span></span>
+        </div>
+        <div>
+            <h1 class="frequent">Frequently Asked Questions</h1>
+            <div class="questions">
+                
+                <span class="blocks 1">What is Netflix? </span>
+               
+                <span class="blocks 2">How much does Netflix cost?</span>
+                
+                <span class="blocks 3">Where can I watch?</span>
+                
+                <span class="blocks 4">How do I cancel?</span>
+                
+                <span class="blocks 5">What can I watch on Netflix?</span>
+                
+                <span class="blocks 6">Is Netflix good for kids?</span>
+                
+            </div>
+            <div class="joinnow red"><button class="joinbut ">Join now</button></div>
+            <div><p class="para">Create or restart your membership</p></div>
+        </div>
+
+    </section>
+    <footer>
+        <p class="rer">Questions? Call <a href="#">000-800-919-1743</a></p>
+<div id="gridd">
+    
+    <span><a href="#">FAQ</a></span><span> <a href="#">Help Centre</a></span><span><a href="#">Account</a></span><span><a href="#">Media Centre</a></span>
+
+    <span><a href="#">Investor Relations</a></span><span><a href="#">Jobs</a></span>
+    <span><a href="#">ways to Watch</a></span>
+    <span><a href="#">Terms of Use</a></span>
+    <span><a href="#">Privacy</a></span><span><a href="#">Cookie Preferences</a></span>
+<span><a href="#">Corporate Information</a></span>
+<span><a href="#">Contact Us</a><span><a href="#">Speed Test</a></span>
+</span>
+<span><a href="#">Legal Notices</a></span>
+<Span><a href="#">Only on Netflix</a></Span>
+</div>
+<span class="btn black downdeck"><button>English</button></span>
+
+    </footer>
+    <!-- Modal Structure -->
+<div id="movieModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h1 id="modalTitle">Movie Title</h1>
+        <p id="modalDescription">This is a description of the movie.</p>
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+
+</html>

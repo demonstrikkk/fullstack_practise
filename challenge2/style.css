@@ -1,0 +1,29 @@
+/* the soln i thought */
+p:first-child{
+    color: rgb(233, 249, 5);
+    background-color: rgb(15, 7,45);
+    padding: 34px;
+    text-align: justify;
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+div {
+    color: white;
+    background-color:pink;
+    padding: 24px;
+    text-align: end;
+}
+
+
+
+
+/* the asked solution */
+
+p:first-child{
+    color: red;
+    background: yellow;
+}
+div p{
+     color: white ;
+    background-color: blue;
+}

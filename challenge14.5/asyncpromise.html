@@ -1,0 +1,30 @@
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <script>
+
+    async function double(k) {
+        // Use a for...of loop to handle async/await properly
+        for (let e of k) {
+            // Create a promise for each doubled value and log it
+           await  new Promise(resolve => {
+                setTimeout(() => {
+                    console.log(e * 2); // Print the doubled value
+                    resolve();
+                }, 2000); // Delay of 2 seconds for each element
+        });
+        }
+    }
+
+    // Call the function
+    double([6, 2, 3, 4]);
+
+
+    </script>
+</body>
+</html>

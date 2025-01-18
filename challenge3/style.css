@@ -1,0 +1,73 @@
+/* my code i think should be with some errors */
+    .bigbox {
+    background-color: rgb(122, 122, 122);
+    padding: 10px;          
+    border: 2px solid rgb(187, 208, 201); 
+    border-radius: 4%;      
+    width: 60%;             
+}
+
+.smallbox {
+    background-color: aliceblue;
+    padding: 29px;
+    border-color: aquamarine;
+    border-style: groove;
+    border: 12%;
+    border-radius: 8%;
+}
+
+.text h1 {
+    text-align: justify;
+    text-decoration: solid;
+    font-weight: 200;
+    font-style: italic;
+    font-family: cursive;
+    text-shadow: none; 
+}
+
+.text p {
+    text-align: center;
+    text-transform: capitalize;
+    text-decoration-style: solid;
+    color: rgb(171, 106, 9);
+    background-color: rgba(130, 234, 255, 0.295);
+    margin: 45px;
+}
+body{
+    padding: 334px;
+}
+
+.link {
+    border: 8px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 45vh;
+    width: 40%;
+    background-color: rgb(53, 167, 255);
+    text-align: center;
+    margin-left: 34vh;;
+}
+
+.image {
+    align-self: center;
+    box-sizing: border-box;
+    
+
+
+} 
+
+#Welcome {
+    padding: 1vh;
+    border-color: beige;
+    border-style: groove;
+    border-radius: 3vh;
+    border-width: 0.2vh;
+}
+#Famous {
+    padding: 1vh;
+    border-color: beige;
+    border-style: groove;
+    border-radius: 3vh;
+    border-width: 0.2vh;
+}

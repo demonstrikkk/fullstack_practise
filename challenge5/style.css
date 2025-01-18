@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding:0;
+}
+body{
+    background-color: gray;
+}
+header {
+    top: 0;
+    position: sticky;
+    width: 100%;
+    color: aqua;
+    padding: 8px;
+    background-color: black;
+    border:5px solid rgba(34, 34, 24, 0.389)
+    
+}
+header ul li a{
+    color: aqua;
+    text-decoration:none;
+}
+header ul li a:hover{
+    color: blueviolet;
+    text-decoration: dashed;
+    font-family:fantasy ;
+}
+header ul li{
+    list-style: none;
+    display: inline;
+    padding:5%;
+}
+footer{
+    border: 5px solid black;
+    color: aquamarine;
+    background-color: rgb(17, 157, 64);
+    display: flex;
+}
+.copy{
+    position: static;
+    
+}
+.bigbox{
+    height: 60%;
+    display:inline-flex;
+    border:0.5% solid peru;
+    color: rgb(6, 108, 250);
+    padding: 3%;
+    background-color: rgb(162, 105, 20);
+
+}
+div .firstbox{
+    width: 50%;
+    border: 5px solid black;
+    background-color: rgb(188, 60, 60);
+    padding: 4%;
+    
+
+}
+div .secondbox{
+    width: 50%;
+    border: 5px solid black;
+    background-color: rgb(7, 69, 106);
+    padding: 4%;
+    
+
+}
+div .firstbox,.secondbox{
+    display: inline-flexbox;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.9); /* Shadow effect for better visibility */
+
+
+}
+footer{
+    align-items: baseline;
+    position: static;
+    bottom: 0; /* Pins it to the bottom */
+    width: 100%; /* Full width of the viewport */
+    background-color: #333;
+    color: rgb(24, 234, 167);
+    text-align: center;
+    te
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5); /* Shadow effect for better visibility */
+
+}
+.copyright{
+    position: fixed;
+   
+    padding-left: 99%;
+
+}
+.finisher{
+    border: 5px solid peachpuff;
+    border-radius: 15px;
+}

@@ -1,0 +1,486 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,400;1,600;1,800&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: rgb(34, 26, 26);
+}
+
+.navbar {
+    padding: 20px 35px 20px 35px;
+    align-items: center;
+    display: flex;
+    align-self: center center;
+    justify-content: space-between;
+
+}
+.netflix-log{
+    padding: 0px 0px 0px 23px;
+
+}
+
+.btn {
+    display: flex;
+    gap: 15px;
+}
+
+button {
+    
+    
+    
+    cursor: pointer;
+    padding: 5px 20px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 16px;
+    
+    background-color: white;
+    color: black;
+    cursor: pointer;
+
+}
+
+.black button {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+.white button {
+    padding: 5px;
+    background-color: white;
+    color: black;
+    border: none;
+}
+.white button:hover {
+    background-color: rgb(227, 225, 225);
+}
+.container {
+    position: relative;
+    width: 100%;
+    height: 500px; }
+
+.box {
+    position: relative;
+    margin: 0 0 0 35px;
+    height: 105%;
+    width: 95%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    border: 3px solid white;
+    border-radius: 25px 25px;
+    
+    border-bottom-right-radius: 75px;
+    border-bottom-left-radius: 75px;
+    border-bottom-width: 0px;
+    
+
+    }
+
+.photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120%;
+    height: 150%;
+    object-fit: cover; 
+    z-index: -1; 
+}
+.hero{
+    height: 100%;
+    display:flex;
+    align-items:center ;
+    justify-content:center;
+    flex-direction: column;
+    padding: 90px 0 0 0;
+
+}
+.hero :nth-child(1) {
+    font-family: "Poppins";
+    font-size: 64px;
+    font-weight:900;
+    color: white;
+ 
+}
+.hero :nth-child(2){
+    font-family: 'Poppins';
+    font-size: 64px;
+    font-weight:900;
+    color: white;
+  
+    
+   
+}
+.hero :nth-child(3){
+    color: white;
+
+}
+.search p{
+    height: 100%;
+    display:flex;
+    align-items:center ;
+    justify-content:center;
+    flex-direction: column;
+    padding: 45px 0 15px 0;  
+    color: rgba(239, 202, 225, 0.668);
+    font-size:14px; 
+    font-weight: 500;
+}
+.emailid{
+    height: 100%;
+    display:flex;
+    align-items:center ;
+    justify-content:center;
+    
+    
+}
+.emailid input{
+    border-radius: 30px;
+    width: 350px; 
+    height: 25px; 
+    padding: 15px;
+    font-size: 18px; 
+    border: 2px solid grey;
+    color: rgba(239, 202, 225, 0.668);
+    background-color: rgb(34, 26, 26);
+    outline: none;
+    margin: 5px;
+
+}
+.emailid button{
+    background-color: red;
+    color: white;
+    padding: 15px;
+    width: 150px;
+    height: 50px;
+    border-radius: 35px;
+    font-weight: 900;
+    font-size: 20px;
+    text-align: center;
+    align-self: center;
+    justify-content: center;
+
+}
+section{
+    color: white;
+}
+.text{
+    color: antiquewhite;
+    font-size: 22px;
+    font-weight: 800px;
+    font-family: sans-serif;
+     margin-right: 290px;
+
+}
+section .navbar1{
+    padding: 20px 35px 20px 35px;
+    align-items: center;
+    display: flex;
+    align-self: center center;
+    justify-content: space-around;
+  
+}
+ 
+.finale h1{
+    color: rgb(221, 224, 227);
+    padding: 100px 150px 20px ;
+    font-size:32px;
+    font-weight: 900;
+    font-family: 'Poppins';
+}
+
+.witch{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+   
+
+}
+.virtue {
+    width: 20%;
+    
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+   
+    justify-content: center;
+    align-items: flex-end;
+    background-color: rgb(45, 43, 43);
+    margin: 10px;
+    border: 1px solid rgb(54, 53, 53);
+    border-radius: 5px;
+}
+.virtue .logo{
+    padding: 70px 0 0 0;
+
+}
+
+.te {
+        font-size: 16px;
+        padding: 7px 7px 0px 1px;
+    }
+
+.te.first{
+    padding: 0px 64px 0px 0px ;
+}
+.te.second{
+    padding: 0px 44px 0px 0px ;
+}
+.te.third{
+    padding: 0px 134px 0px 0px ;
+}
+
+.frequent{
+    font-size: 32px;
+    color: rgb(255, 255, 255);
+    padding: 20px 105px ;
+   
+}
+.questions {
+    display: flex;
+    align-items: center;
+    
+    flex-direction: column;
+    flex-wrap: nowrap;
+   
+    justify-content: space-evenly;
+}
+.blocks {
+    display: flex;
+    width: 90%;
+    border: 1px solid black;
+    background-color: rgb(45, 43, 43);
+    height: 60px;
+    border-radius: 8px;
+    align-items: center;
+    margin: 2px;
+    padding: 0px 0px 0px 10px;
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 600;}
+
+
+
+    .joinnow {
+        padding: 20px 45% 7px ;
+       position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    
+    .joinnow button {
+        display: flex;
+        
+        background-color: red;
+        color: white;
+        align-items: center;
+        height: 40px;
+        border-radius: 40px;
+        border: none;
+        cursor: pointer;
+    }
+ p{
+    text-align: center;
+    color: white;
+    
+}
+a{
+    color: grey;
+}
+
+
+#gridd {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#gridd a {
+    
+    color: grey;
+    font-size: 16px;
+}
+
+
+
+
+@media (max-width: 768px) {
+    #gridd {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.rer{
+      padding: 13px 942px 0 0px;
+}
+
+.downdeck{
+    padding: 10px 10%;
+}
+.red button:hover{
+    background-color: rgb(187, 1, 1);
+}
+
+
+  .movies {
+    display: flex;
+    justify-content: space-around;
+    height: 120%;
+    width: 120%;
+    object-fit: contain;
+    padding: 1px;
+}
+
+
+
+.move {    
+    height: 95%;
+    width: 65%;
+    border-radius: 20px;
+    border: 1px solid white;
+    object-fit: cover;
+}
+
+.topp {
+    font-weight: 800;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 35px;
+    position: relative;
+    text-align: end; 
+    color: white;
+    z-index: 1; 
+justify-content: center;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.3s ease; 
+
+
+
+}
+
+.number {
+    position: absolute;
+    font-size: 69px;
+    font-weight: 800;
+    margin: -7px 0px 0px -25px;
+    color: black;
+    -webkit-text-stroke: 0.015rem rgb(255, 255, 255);
+    font-family: fantasy;
+    transition: transform 0.3s ease; 
+    z-index: 2; 
+}
+
+
+
+
+
+.slider {
+    display: flex;
+    align-items: center;
+    overflow: hidden; 
+    position: relative;
+    width: 100%; 
+}
+
+
+
+    .arrow {
+        border-radius: 100%;
+        background-color: rgba(0, 0, 0, 0.414);
+        border: none;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 10;
+    }
+    
+    .arrow.left {
+        position: absolute;
+        left: 10px; 
+    }
+    
+    .arrow.right {
+        position: absolute;
+        right: 10px; 
+    } 
+    .topp:hover {
+        transform: scale(1.1);}
+    
+    .topp:hover .number {
+        transform: scale(1.1);
+    }
+
+
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1000; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    .modal-content {
+        background-color: rgb(34, 26, 26);
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+    
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+
+    @keyframes slideIn {
+        0% { transform: translateY(-100%);
+            opacity: 0; }
+        60%{
+            opacity: 0;
+        }
+        100% { transform: translateY(0);
+        opacity: 1; }
+    }
+    
+
+ 
+    .animate{
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        font-weight: 300;
+        font-style: normal;
+        color: white;
+        font-size: 19px; 
+        animation: slideIn 0.5s cubic-bezier(0.25, 0.1, 0.3, 1.75);
+       
+    }
+    .blocks:hover{
+        background-color : rgb(88, 86, 86);
+    }

@@ -1,0 +1,32 @@
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <script>
+     function mirror(a) {
+        let k = []
+        for (let i = (a.length -1 ); i >= 0; i--) {
+            k.push(a[i])
+            
+        }
+        return ('reverse:'+ k.join('') + '|'+'original:'+ a)
+        
+
+        //another way to do the same thing 
+//         function reverseString(str) {
+//     return str.split("").reverse().join("");
+// }
+
+// console.log(reverseString("JavaScript")); // Output: "tpircSavaJ"
+
+        
+     }
+console.log(mirror('yashbansal'))
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <script>
+   function sumer(k) {
+    let m = 0;
+    for (let i = 0; i < k.length; i++) {
+        let e = k[i];
+        // Check if the string starts with '-'
+        if (e.startsWith('-')) {
+            break; // Exit the loop if it starts with '-'
+        } else {
+            m += parseInt(e); // Add the parsed integer to the sum
+        }
+    }
+    return m; // Return the sum
+}
+
+console.log(sumer(["10", "20", "30", "-40", "50"])); // Output: 60
+
+            
+        
+    </script>
+</body>
+</html>                  

@@ -1,0 +1,25 @@
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    
+    <script>
+        function twice(a) {
+            let k = []
+            a = [...new Set(a)]
+            a.forEach(e => {
+                e = e*2
+                k.push(e)
+                
+            })
+            return k
+          
+        }
+        console.log(twice([1,2,22,2,5,75,8,4,3,2,1]))
+    </script>
+</body>
+</html>
