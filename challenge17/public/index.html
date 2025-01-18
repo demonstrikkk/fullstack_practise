@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faker Data</title>
+</head>
+<body>
+  <button id="generate">CLICK TO GENERATE 10 RANDOM ENTRIES</button>
+  <ul id="data-list"></ul>
+
+  <script>
+    const button = document.getElementById('generate');
+    const dataList = document.getElementById('data-list');
+
+    button.addEventListener('click', async () => {
+      const response = await fetch('/api/add-data');
+      const data = await response.json();
+
+      
+      dataList.innerHTML = '';
+      data.forEach(entry => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+    <strong>Name:</strong> ${entry.name} <br>
+    <strong>Email:</strong> ${entry.email} <br>
+    <strong>Phone:</strong> ${entry.phone} <br>
+    <strong>Address:</strong> ${entry.address} <br>
+    <strong>Company:</strong> ${entry.company} <br> <br>
+  `;
+        dataList.appendChild(li);
+      });
+    });
+  </script>
+</body>
+</html>
