@@ -1,0 +1,235 @@
+<!-- <html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="src/output.css" rel="stylesheet">
+</head>
+
+<body class="m-0 p-0">
+
+
+  <form action="/submit" method="POST">
+    <label for="thumbnail">Enter thumbnail:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="title" name="title"
+      placeholder="Enter thumbnail url" />
+    <br>
+    <label for="title">Enter Title:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="title" name="title"
+      placeholder="Enter title" />
+    <br>
+    <label for="channelName">Enter Channel Name:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="channelName"
+      name="channelName" placeholder="Enter channel name" />
+    <br>
+    <label for="creatorName">Enter Creator Name:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="creatorName"
+      name="creatorName" placeholder="Enter creator name" />
+    <br>
+    <label for="views">Enter Views:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="views" name="views"
+      placeholder="Enter views" />
+    <br>
+    <label for="link">Enter Link:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="link" name="link"
+      placeholder="Enter link" />
+
+    <div class="emptybox">
+      <div class="button bg-blue-400 text-white font-extrabold m-5 w-1/6 justify-center inline-flex rounded-3xl px-0">
+        <button type="submit">Submit</button>
+      </div>
+    </div>
+
+    <div class="newbox bg-slate-500 w-full h-96 snap-y scroll-m-1 overflow-scroll overflow-x-hidden"></div>
+  </form>
+  <!-- <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-{2px}" type="text" placeholder="enter title">
+  <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-{2px}" type="text" placeholder="enter channel name">
+  <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-{2px}" type="text" placeholder="enter creator name">
+  <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-{2px}" type="text" placeholder="enter views">
+  <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-{2px}" type="text" placeholder="enter link">
+  <div class="emptybox">
+    <div class="button bg-blue-400 text-white font-extrabold m-5 w-1/6 justify-center  inline-flex rounded-3xl px-0 "><button>submit</button></div>
+  </div>
+  <div class="newbox bg-slate-500 w-full h-96 snap-y scroll-m-1 overflow-scroll overflow-x-hidden"></div> -->
+  <!-- <div class="container w-4/5 h-40 m-10 p-4 bg-black rounded-xl flex items-center gap-4 ">
+      
+      <div class="image bg-blue-600 w-28 h-32 rounded-xl ">
+        <img 
+        src="https://tse2.mm.bing.net/th?id=OIP.7cRYFyLoDEDh4sRtM73vvwHaDg&pid=Api&P=0&h=180" 
+        alt="" class="photo object-fill w-full h-full rounded-xl">
+      </div>
+  
+      
+      <div class="content flex flex-col justify-between w-full">
+        
+        <div class="title text-white w-full h-auto bg-pink-400 p-2 rounded-md">
+          <h1 class="font-bold text-3xl underline">blue kink</h1>
+        </div>
+  
+       
+        <div class="jimmy flex gap-3 text-gray-200 mt-2">
+          <div class="cname text-gray-200 hover:underline "><a href="#">cname</a></div>
+          <div class="author">author </div>
+          <div class="views">views</div>
+        </div>
+      </div>
+    </div> 
+</body>
+
+<script>
+  const box = document.querySelector('.emptybox');
+  const nbox = document.querySelector('.newbox');
+  function fetchdata() {
+    fetch('/data')
+      .then(response => response.json())
+      .then(data => {
+        nbox.innerHTML += `    <div class="container w-4/5 h-40 m-10 p-4 bg-black rounded-xl flex items-center gap-4 ">
+      
+      <div class="image bg-blue-600 w-28 h-32 rounded-xl ">
+        <img 
+        src=${thumbnail} 
+        alt="" class="photo object-fill w-full h-full rounded-xl">
+      </div>
+  
+
+      <div class="content flex flex-col justify-between w-full">
+        <
+        <div class="title text-white w-full h-auto bg-pink-400 p-2 rounded-md">
+          <h1 class="font-bold text-3xl underline">${title}</h1>
+        </div>
+  
+     
+        <div class="jimmy flex gap-3 text-gray-200 mt-2">
+          <div class="cname text-gray-200 hover:underline "><a href="#">${channelName}</a></div>
+          <div class="author">${creatorName}</div>
+          <div class="views">${views}</div>
+          div class="link opacity-0"><a href="${link}">Link</a></div>
+        </div>
+      </div>
+    </div>`;
+      })
+  };
+
+  box.addEventListener('click', () => {
+
+
+fetchdata()
+
+  });
+</script>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="src/output.css" rel="stylesheet">
+  <title>Video Submission</title>
+</head>
+<body class="m-0 p-0">
+
+  <form action="/submit" method="POST" id="video-form">
+    <label for="thumbnail">Enter thumbnail:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="thumbnail" name="thumbnail" placeholder="Enter thumbnail url" />
+    <br>
+    <label for="title">Enter Title:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="title" name="title" placeholder="Enter title" />
+    <br>
+    <label for="channelName">Enter Channel Name:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="channelName" name="channelName" placeholder="Enter channel name" />
+    <br>
+    <label for="creatorName">Enter Creator Name:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="creatorName" name="creatorName" placeholder="Enter creator name" />
+    <br>
+    <label for="views">Enter Views:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="views" name="views" placeholder="Enter views" />
+    <br>
+    <label for="link">Enter Link:</label>
+    <input class="bg-gray-300 px-96 m-1 rounded-lg border-solid border-2" type="text" id="link" name="link" placeholder="Enter link" />
+
+    <div class="emptybox">
+      <div class="button bg-blue-400 text-white font-extrabold m-5 w-1/6 justify-center inline-flex rounded-3xl px-0">
+        <button type="submit">Submit</button>
+      </div>
+    </div>
+
+    <div class="newbox bg-slate-500 w-full h-96 snap-y scroll-m-1 overflow-scroll overflow-x-hidden"></div>
+  </form>
+
+<script>
+  const nbox = document.querySelector('.newbox');
+  const form = document.querySelector('form');
+
+  // Fetch data from the server and display it
+  function fetchData() {
+    fetch('/data')
+      .then(response => response.json())
+      .then(data => {
+        // Check if the data is an array
+        if (Array.isArray(data)) {
+          nbox.innerHTML = ''; // Clear existing data
+          data.forEach(item => {
+            nbox.innerHTML += `
+              <div class="container w-4/5 h-40 m-10 p-4 bg-black rounded-xl flex items-center gap-4">
+                <!-- Image Section -->
+                <div class="image bg-blue-600 w-28 h-32 rounded-xl">
+                  <img src="${item.thumbnail}" alt="" class="photo object-fill w-full h-full rounded-xl">
+                </div>
+        
+                <!-- Content Section (Title + Channel) -->
+                <div class="content flex flex-col justify-between w-full">
+                  <!-- Title -->
+                  <div class="title text-white w-full h-auto bg-pink-400 p-2 rounded-md">
+                    <h1 class="font-bold text-3xl underline">${item.title}</h1>
+                  </div>
+          
+                  <!-- Channel and Views -->
+                  <div class="info flex gap-3 text-gray-200 mt-2">
+                    <div class="channel-name text-gray-200 hover:underline"><a href="#">${item.channelName}</a></div>
+                    <div class="creator-name">${item.creatorName}</div>
+                    <div class="views">${item.views}</div>
+                    <div class="link opacity-0"><a href="${item.link}">Link</a></div>
+                  </div>
+                </div>
+              </div>`;
+          });
+        } else {
+          console.error("Error: Data is not an array", data);
+        }
+      })
+      .catch(err => {
+        console.error('Error fetching data:', err);
+      });
+  }
+
+  // Fetch data when the page loads
+  fetchData();
+
+  // Handle form submission
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    const formData = new FormData(form);
+    
+    fetch('/submit', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Form submitted successfully:', data);
+        // Clear the form fields after successful submission
+        form.reset();
+        fetchData(); // Refresh the data list
+      })
+      .catch(error => {
+        console.error('Error submitting form:', error);
+        alert('Error submitting data.');
+      });
+  });
+</script>
+
+</body>
+</html>
