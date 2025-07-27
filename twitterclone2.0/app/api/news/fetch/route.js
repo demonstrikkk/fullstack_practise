@@ -14,7 +14,6 @@ export async function GET(req) {
     const articles = await getNews(tag, userEmail);
     return NextResponse.json(articles);
   } catch (error) {
-    console.error("News fetch error:", error);
     return NextResponse.json({ success: false, message: "Failed to fetch news" }, { status: 500 });
   }
 }

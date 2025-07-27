@@ -405,7 +405,7 @@ border-radius: 10px;
 
 }
 .profilepic{
-object-fit: contain;}
+object-fit: cover;}
 .circle{
 
 background-color: rgb(0, 0, 0);
@@ -536,3 +536,121 @@ grid-template: repeat(2, 1fr) / repeat(4, 1fr);
 .trick {
     max-width: none;
 }
+
+.move{
+  margin:0 0 0 10px;
+}
+.size8{
+  padding:8px
+}
+.space20{
+  margin: 0 0 20px 0;
+}
+.space10{
+  margin: 0 0 10px 0;
+}
+
+.clearity{
+  background: none;
+  background-color: transparent;
+}
+
+.inlineseen{
+  inline-size: max-content;
+}
+.space25{
+  margin: 0 0 -20px 0;
+}
+
+.postbuttontoprelative{
+  position: relative;
+  top:0;
+  margin-bottom: 10px;
+}
+.onepercent{
+  padding: 1%;
+}
+.onepercentmargin{
+  margin: 4%;
+}
+.blacky{
+  background-color: black;
+}
+
+@media screen  and (max-width:1000px){
+  .smallscreeneffect{
+    display: flex;
+    flex-direction: row;
+justify-content: center;
+    width: 52px;
+
+  }
+  .smallscreenposteffect{
+    position:relative;
+    left: 0%;
+
+  }
+  .logger{
+    position:absolute ;
+    bottom: 0px;
+  }
+  .yourpost{
+    height: 100vh;
+  }
+  .postty{
+    height: 1000px;
+  }
+  .gifinside{
+    position: relative;
+    z-index: 5;
+    
+  }
+  .three{
+    position: relative;
+    z-index:4
+  }
+
+  .sidebox{
+    position: relative;
+    z-index:5;
+  }
+  .scrollio{
+    right:75%;
+    bottom: 130px;
+  }
+  
+ 
+ 
+  
+}
+
+
+@media screen  and (max-width:1430px) and (min-width:400px){
+  .relevant{
+    width:108%; 
+  }
+}
+
+@media screen  and (max-width:510px){
+  .section3{
+    display: none;
+  }
+  .smallscreeneffect{
+    gap:2;
+    
+  }
+  .smallscreenposteffect{
+    display: none;
+  }
+  .xlogo{
+    display: none;
+
+  }
+  .logger{
+    left: 0px;
+  }
+
+  
+}
+
+

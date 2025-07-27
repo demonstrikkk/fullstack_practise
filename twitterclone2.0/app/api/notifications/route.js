@@ -1,48 +1,5 @@
 
 
-// import { NextResponse } from "next/server";
-// import dbConnect from "../lib/dBconnect";
-// import { Notification } from "../lib/models/Notification";
-// import UserProfile from "../lib/models/UserProfile";
-// import { Post } from "../lib/models/Post";
-
-// export async function GET(req) {
-//   try {
-//     await dbConnect();
-//     const { searchParams } = new URL(req.url);
-//     const userEmail = searchParams.get("userEmail");
-
-//     if (!userEmail) {
-//       return NextResponse.json({ error: "userEmail missing" }, { status: 400 });
-//     }
-
-//     const notifications = await Notification.find({ userEmail }).sort({ createdAt: -1 });
-
-//     const enriched = await Promise.all(
-//       notifications.map(async (notif) => {
-//         const fromUser = await UserProfile.findOne({ email: notif.fromUserEmail }).lean();
-
-//         let postPreview = null;
-//         if (notif.postId) {
-//           const post = await Post.findOne({ postId: notif.postId }).lean();
-//           postPreview = post?.content?.text || "[Media Post]";
-//         }
-
-//         return {
-//           ...notif.toObject(),
-//           fromUsername: fromUser?.username || "Unknown",
-//           fromAvatar: fromUser?.profile?.avatar || "/default-avatar.png",
-//           postPreview,
-//         };
-//       })
-//     );
-
-//     return NextResponse.json({ notifications: enriched });
-//   } catch (err) {
-//     return NextResponse.json({ error: err.message }, { status: 500 });
-//   }
-// }
-
 
 import { NextResponse } from "next/server";
 import dbConnect from "../lib/dBconnect";
@@ -55,7 +12,7 @@ export async function GET(req) {
   try {
     await dbConnect();
     const { searchParams } = new URL(req.url);
-    const userEmail = searchParams.get("userEmail");
+    const userEmail = searchParams.get("userEmail") || searchParams.get("email");
 
     if (!userEmail) {
       return NextResponse.json({ error: "userEmail missing" }, { status: 400 });

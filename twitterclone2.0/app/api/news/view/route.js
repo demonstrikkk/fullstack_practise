@@ -13,7 +13,6 @@ export async function GET(req) {
     return NextResponse.json(articles); // ✅ just return array
 
 } catch (error) {
-    console.error("News fetch error:", error);
     return NextResponse.json({ success: false, message: "Failed to fetch news" }, { status: 500 });
   }
 }

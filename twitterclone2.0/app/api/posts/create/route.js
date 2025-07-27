@@ -1,32 +1,3 @@
-// // server/app/api/posts/create/route.js
-
-// import { NextResponse } from "next/server";
-// import { Post } from "../../lib/models/Post";
-// import dbConnect from "../../lib/dBconnect";
-// import { v4 as uuidv4 } from "uuid";
-// // import { useEffect } from "react";
-// export async function POST(req) {
-//   await dbConnect();
-//   const { userEmail, text, media, poll } = await req.json();
-  
-  
-//   const newPost = new Post({
-//     postId: uuidv4(),
-//     userEmail,
-//     content: {
-//       text,
-//       media,
-//       poll: poll || null,
-//     },
-//     likes: { count: 0, users: [] },
-//     bookmarks: [],
-//     comments: [],
-//     commentCount: 0,
-//   });
-
-//   await newPost.save();
-//   return NextResponse.json({ success: true, post: newPost });
-// }
 
 
 import { NextResponse } from "next/server";

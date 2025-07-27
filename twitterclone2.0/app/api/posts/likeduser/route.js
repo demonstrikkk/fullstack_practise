@@ -1,35 +1,3 @@
-// // server/app/api/posts/like/route.js
-// import { NextResponse } from "next/server";
-// import { Post } from "../../lib/models/Post";
-// import dbConnect from "../../lib/dBconnect";
-
-// export async function POST(req) {
-//   try {
-//     await dbConnect();
-//     const { postId, userEmail } = await req.json();
-//     const post = await Post.findOne({ postId });
-//     if (!post) {
-//       return NextResponse.json({ error: "Post not found" }, { status: 404 });
-//     }
-
-//     const hasLiked = post.likes.users.includes(userEmail);
-//     if (hasLiked) {
-//       post.likes.users = post.likes.users.filter(u => u !== userEmail);
-//       post.likes.count -= 1;
-//     } else {
-//       post.likes.users.push(userEmail);
-//       post.likes.count += 1;
-//     }
-
-//     await post.save();
-
-//     // ← Return the full post
-//     return NextResponse.json({ post });
-//   } catch (err) {
-//     return NextResponse.json({ error: err.message }, { status: 500 });
-//   }
-// }
-
 
 // server/app/api/posts/like/route.js
 import { NextResponse } from "next/server";

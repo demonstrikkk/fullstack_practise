@@ -55,7 +55,6 @@ export async function POST(req) {
     }), { status: 200 });
 
   } catch (error) {
-    console.error("Bookmark toggle error:", error);
     return new Response(JSON.stringify({ message: 'Internal Server Error' }), { status: 500 });
   }
 }

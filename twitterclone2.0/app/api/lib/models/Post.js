@@ -14,6 +14,8 @@ const replySchema = new mongoose.Schema({
   media:    { type: String, default: null }, // GIF/image/video (URL)
   likes:    { type: [String], default: [] }, // list of userEmails who liked
   timestamp: { type: Date, default: Date.now },
+  username:  { type: String, required: true },  // NEW
+  avatar:    { type: String, default: '/default-avatar.png' } 
 }, { _id: false });
 
 // === Main Comment Schema (includes replies) ===
@@ -25,15 +27,11 @@ const commentSchema = new mongoose.Schema({
   likes:     { type: [String], default: [] }, // emails who liked the comment
   replies:   { type: [replySchema], default: [] }, // nested replies
   timestamp: { type: Date, default: Date.now },
+   username:  { type: String, required: true },  // NEW
+  avatar:    { type: String, default: '/default-avatar.png' } // NEW
 });
 
-// Sub-schemas for comments and polls
-// const commentSchema = new mongoose.Schema({
-//   user: String,
-//   text: String,
-//   media: String,
-//   timestamp: { type: Date, default: Date.now },
-// });
+
 
 const pollOptionSchema = new mongoose.Schema({
   text: String,
@@ -60,6 +58,10 @@ const postSchema = new mongoose.Schema({
     },
   },
   likes: {
+    count: { type: Number, default: 0 },
+    users: [String],
+  },
+  retweet: {
     count: { type: Number, default: 0 },
     users: [String],
   },
@@ -103,3 +105,5 @@ postSchema.methods.isBookmarkedBy = function(userEmail) {
 
 // Export the model
 export const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
+// At the bottom of Post.js
+export const postSchemaed = postSchema;

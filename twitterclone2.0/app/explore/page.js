@@ -193,7 +193,7 @@ const [loading3, setLoading3] = useState(true); // New state for loading indicat
 
 
   return (
-    <div className="bg-black text-white min-h-screen p-4 relative">
+    <div className="bg-black text-white min-h-screen p-4 relative ">
       {/* Header */}
       {!selectedUser && (
         <header className="flex items-center space-x-4 mb-6 sticky top-0 bg-black z-30">
@@ -293,19 +293,7 @@ const [loading3, setLoading3] = useState(true); // New state for loading indicat
 
    
               <div className="space-y-8 kiddospace max-h-[600px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-700 two ">
-                {/* {newsData.map((item, index) => (
-                  <div key={index} className="flex gap-4 cursor-pointer" onClick={() => handleArticleClick(item)}>
-                    {item.thumbnail && (
-                      <img src={item.thumbnail} alt="Thumbnail" className="w-24 h-24 object-cover rounded-lg" />
-                    )}
-                    <div>
-                      <h3 className="text-lg font-semibold">{item.webTitle}</h3>
-                      {item.trailText && (
-                        <p className="text-gray-400 text-sm" dangerouslySetInnerHTML={{ __html: item.trailText }} />
-                      )}
-                    </div>
-                  </div>
-                ))} */}
+               
                  {newsData.map((item, index) => (
         <div
           key={item.id || index}

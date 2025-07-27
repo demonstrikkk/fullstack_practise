@@ -73,9 +73,10 @@ const GifSearch = ({ onGifSelect }) => {
             </div>
 
             <div className="grid grid-cols-3 gap-0.5 mt-4 overflow-y-scroll two h-[50vh]">
-              {gifs.map((gif) => (
+              {gifs.map((gif,idx) => (
                 <img
-                  key={gif.id}
+                  key={`${gif.id}-${idx}`}
+
                   src={gif.images.fixed_height.url}
                   alt={gif.title}
                   className="cursor-pointer hover:opacity-80 transition-opacity"

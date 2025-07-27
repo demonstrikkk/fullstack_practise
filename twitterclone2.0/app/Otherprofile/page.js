@@ -4,7 +4,7 @@ import {React} from "react";
 
 import { useSession } from 'next-auth/react';
 import PostCard from "../component/post-card";
-
+import { Loader2 } from "lucide-react";
 
 
 import { useEffect } from 'react';
@@ -52,6 +52,58 @@ export default function OtherProfileComponent({ userrealname, username, avatar,f
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState('');
   const { handleVote, userSelectedOption } = usePollVoting(email, posts, setPosts);
+   const [activeTab, setActiveTab] = useState('posts');
+   const [reposts, setReposts] = useState([]);
+   const [loadingPosts, setLoadingPosts] = useState(true);  // <-- NEW
+   const [isModalOpen, setIsModalOpen] = useState(false);
+const [modalType, setModalType] = useState(""); // 'followers' or 'following'
+const [modalUsers, setModalUsers] = useState([]);
+const [loadingUsers, setLoadingUsers] = useState(false);
+const handleOpenModal = async (type, data) => {
+  setModalType(type);
+  setIsModalOpen(true);
+  setLoadingUsers(true);
+
+  try {
+    const emails = data?.users || [];
+    const res = await fetch("/api/getUserProfiles", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ emails }),
+    });
+    const result = await res.json();
+
+    if (Array.isArray(result)) {
+      setModalUsers(result);
+    } else {
+      setModalUsers([]);
+    }
+  } catch (err) {
+    setModalUsers([]);
+  } finally {
+    setLoadingUsers(false);
+  }
+};
+
+
+
+   useEffect(() => {
+     const fetchReposts = async () => {
+       try {
+         const res = await fetch(`/api/repostsbyuser?email=${email}`);
+         const data = await res.json();
+         if (res.ok) {
+           setReposts(data.reposts || []);
+         } else {
+           console.error("Failed to fetch reposts:", data.error);
+         }
+       } catch (err) {
+         console.error("Reposts fetch error:", err);
+       }
+     };
+   
+     fetchReposts();
+   }, [email]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -75,7 +127,9 @@ export default function OtherProfileComponent({ userrealname, username, avatar,f
       } catch (err) {
         console.error('Error fetching posts:', err);
         setError('Failed to load posts');
-      }
+      }finally {
+      setLoadingPosts(false); // END loading
+    }
     };
     
     fetchPosts();
@@ -93,6 +147,21 @@ export default function OtherProfileComponent({ userrealname, username, avatar,f
         );
       }
     };
+
+      const handleRetweet = async (postId) => {
+    const res = await fetch('/api/posts/retweetedprofile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ postId, userEmail: email })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      setPosts(prev =>
+        prev.map(p => p.postId === postId ? data.post : p)
+      );
+    }
+  };
+
     
    
 const [followerCount, setFollowerCount] = useState(
@@ -133,6 +202,41 @@ useEffect(() => {
     <>
     
       <div className="flex flex-col justify-center rounded bg-black">
+        {isModalOpen && (
+  <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center">
+    <div className="bg-zinc-900 text-white rounded-lg w-[90vw] max-w-md h-[80vh] overflow-y-auto shadow-2xl relative p-4">
+      <button
+        onClick={() => setIsModalOpen(false)}
+        className="absolute top-2 right-2 text-white text-lg font-bold"
+      >
+        ✕
+      </button>
+      <h2 className="text-xl font-semibold mb-4 capitalize">{modalType}</h2>
+      {loadingUsers ? (
+        <div className="flex justify-center py-10">
+          <Loader2 className="animate-spin text-blue-400 w-6 h-6" />
+        </div>
+      ) : modalUsers.length > 0 ? (
+        modalUsers.map((user, idx) => (
+          <div key={idx} className="flex items-center gap-3 py-2 border-b border-gray-700">
+            <img
+              src={user?.profile?.avatar}
+              className="w-10 h-10 rounded-full object-cover"
+              alt={`${user.username}'s avatar`}
+            />
+            <div>
+              <p className="text-white font-semibold">{user.username}</p>
+              <p className="text-gray-400 text-sm">{user.userrealname}</p>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p className="text-center text-gray-400">No users found.</p>
+      )}
+    </div>
+  </div>
+)}
+
          
       <div className="box0 sticky w-full h-[10vh] top-0 text-white bg-black flex flex-row opacity-90">
           <div className="mx-4" onClick={() => onClose()}>
@@ -146,9 +250,14 @@ useEffect(() => {
         </div>
         <div className="overflow-y-scroll overflow-x-hidden two" style={{ scrollbarWidth: "none" }}>
           <div className="box1 w-full h-[30vh] bg-gray-600 text-white">
-            <div className="circle overflow-hidden">
-              {/* <img src= ${avatar} alt=" Avatar" className="profilepic"/> */}
+            {/* <div className="circle overflow-hidden">
               <img src={avatar} alt="Avatar" className="profilepic" />
+            </div> */}
+            {/* <div className="h-[30vh] w-[45vw]">
+              <img src={avatar} alt="Avatar" className="profilepic circle rounded-full " />
+            </div> */}
+            <div className="h-[20vh] w-[20vh] overflow-hidden rounded-full relative top-[20vh] left-[3%] border-3 border-black">
+              <img src={avatar} alt="Avatar" className="h-full w-full rounded-full object-cover" />
             </div>
           </div>
           <div className="box2 w-full h-[60vh] bg-black text-white">
@@ -185,70 +294,198 @@ if (res.ok) {
             <div className="profileinfo flex flex-col relative top-[10%] left-[5%] w-[80%] h-[100vh] px-2">
               <div className="text-lg font-bold">{userrealname}</div>
               <div className="text-gray-600"><p>@{username}</p></div>
+                            <div className="text-gray-400 text-sm my-2">Currently In : {location}</div>
               <div className="text-white font-serif font-semibold text-lg my-3"><h6>{bio}</h6></div>
               <div className="my-3.5 text-gray-300 text-xs font-serif">
   Joined On : {new Date(createdAt).toLocaleDateString()}
-</div>              <div className="flex">
+</div>            
+  {/* <div className="flex">
                 <div className="followingnumber text-white font-bold mx-1">{followingCount}</div>
                 <div className="text-gray-600  ">Following</div>
                 <div className="space w-[20px]"></div>
                 <div className="followernumber text-white font-bold mx-1">{followerCount}</div>
                 <div className="text-gray-600 ml-1">Followers</div>
+              </div> */}
+              <div className="flex">
+  <div
+    onClick={() => handleOpenModal('following', following)}
+    className="followingnumber text-white font-bold mx-1 cursor-pointer hover:underline"
+  >
+    {following?.count}
+  </div>
+  <div className="text-gray-600 cursor-pointer"     onClick={() => handleOpenModal('following', following)}
+>Following</div>
+
+  <div className="space w-[20px]"></div>
+
+  <div
+    onClick={() => handleOpenModal('followers', followers)}
+    className="followernumber text-white font-bold mx-1 cursor-pointer hover:underline"    
+  >
+    {followers?.count || 0}
+  </div>
+  <div className="text-gray-600 ml-1 cursor-pointer"     onClick={() => handleOpenModal('followers', followers)}
+>Followers</div>
+</div>
+
+
+
+
+
+
+                 <div className="flex flex-col gap-2 mt-6 w-full relative">
+                {/* Tab Buttons */}
+                <div className="flex gap-4 relative">
+                  <button
+                    onClick={() => setActiveTab('posts')}
+                    className={`font-bold px-4 py-2 transition-colors duration-300 ${
+                      activeTab === 'posts' ? 'text-white' : 'text-gray-400'
+                    }`}
+                  >
+                    Posts
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('reposts')}
+                    className={`font-bold px-4 py-2 transition-colors duration-300 ${
+                      activeTab === 'reposts' ? 'text-white' : 'text-gray-400'
+                    }`}
+                  >
+                    Reposts
+                  </button>
+                </div>
+              
+                {/* Animated underline */}
+                <div className="relative h-[2px] bg-transparent w-full mt-1">
+                  <div
+                    className="absolute bottom-0 h-[2px] bg-blue-500 transition-all duration-300 ease-in-out"
+                    style={{
+                      width: '50px',
+                      left: activeTab === 'posts' ? '0px' : '60px', // adjust '80px' as per button width + gap
+                    }}
+                  />
+                </div>
+              
+                {/* Divider below the tab */}
+                <div className="border-b border-gray-500 w-[43vw] my-3" />
               </div>
-              <div className="mt-16 font-bold text-white">Posts</div>
-              <div className="w-16 rounded h-1 relative bottom-[2px] bg-blue-400"></div>
-              <div className="bordere border-b-2 border-gray-400 w-[43vw] my-5"></div>
+              
+              
+              
+              
+              <div className="postsdonebyou border h-auto border-t-2  w-[43vw]">
+                {error && <div className="text-red-500">{error}</div>}
+              
+                {/* {activeTab === 'posts' && posts.length > 0 && (
+                  posts.slice().reverse().map((post, idx) => {
+                    if (post.userEmail !== email) return null; // Only original posts
+                    return (
+                      <PostCard
+                        key={post.postId || idx}
+                        userEmail={email}
+                        postId={post.postId}
+                        text={post.content.text}
+                        media={post.content.media}
+                        poll={post.content.poll}
+                        likedByCurrentUser={post.likedByCurrentUser}
+                        likedbyUsers={post.likedUsernames}
+                        likesCount={post.likes?.count}
+                        comments={post.comments}
+                        retweetByCurrentUser={post.retweetByCurrentUser}
+                        retweetByUsers={post.retweet?.users}
+                        retweetCount={post.retweet?.count}
+                        username={post.userInfo?.username}
+                        userrealname={post.userInfo?.userrealname}
+                        avatar={post.userInfo?.avatar}
+                        createdAt={post.createdAt}
+                        onLike={handleLike}
+                        onretweet={handleRetweet}
+                        onVote={handleVote}
+                        userSelectedOption={userSelectedOption}
+                      />
+                    );
+                  })
+                )} */}
 
+                 {loadingPosts ? (
+    <div className="flex justify-center items-center h-20">
+      <Loader2 className="animate-spin w-6 h-6 text-blue-400" />
+    </div>
+  ) : (
+    <>
+      {activeTab === 'posts' && posts.filter(p => p.userEmail === email).length > 0 && (
+        posts.slice().reverse().map((post, idx) => {
+          if (post.userEmail !== email) return null;
+          return (
+            <PostCard
+              key={post.postId || idx}
+              userEmail={email}
+              postId={post.postId}
+              text={post.content.text}
+              media={post.content.media}
+              poll={post.content.poll}
+              likedByCurrentUser={post.likedByCurrentUser}
+              likedbyUsers={post.likedUsernames}
+              likesCount={post.likes?.count}
+              comments={post.comments}
+              retweetByCurrentUser={post.retweetByCurrentUser}
+              retweetByUsers={post.retweet?.users}
+              retweetCount={post.retweet?.count}
+              username={post.userInfo?.username}
+              userrealname={post.userInfo?.userrealname}
+              avatar={post.userInfo?.avatar}
+              createdAt={post.createdAt}
+              onLike={handleLike}
+              onretweet={handleRetweet}
+              onVote={handleVote}
+              userSelectedOption={userSelectedOption}
+            />
+          );
+        })
+      )}
 
-
-
-              <div className="postsdonebyou border h-auto border-t-2 w-[43vw] ">
-
-                   {error && <div className="text-red-500">{error}</div>}
-                   
-                   {posts.length > 0 ? (
-                     posts.slice().reverse().map((post,idx) => (
-                       <div key = {post.postId || idx}>
-                       <PostCard
-                         // key={post.postId || post._id || post.id}
-                         
-                         userEmail={email}
-                         onLike={handleLike}
-                         // onVote={handleVote}
-                         onVote={handleVote}
-                         userSelectedOption={userSelectedOption}
-                         postId = {post.postId}
-                         text = {post.content.text}
-                         media = {post.content.media}
-                         poll = {post.content.poll}
-                         likedByCurrentUser={post.likedByCurrentUser}
-                         likedbyUsers = {post.likedUsernames}
-                         likesCount = {post.likes.count}
-                         username = {post.userInfo.username }
-                         userrealname = {post.userInfo.userrealname}
-                         avatar =  {post.userInfo.avatar}
-                         createdAt = {post.createdAt}
-                         
-                         // ... other props
-                         />
-                       </div>
-                     ))
-                   ) : (
-                     // <p className="text-gray-500">No posts to show</p>
-                     <center style={{ paddingTop: '26px' }}>
-                             <h2>Create your first post now </h2>
-                             <script src="https://cdn.lordicon.com/lordicon.js"></script>
-             
-                             <lord-icon
-                       src="https://cdn.lordicon.com/mfdeeuho.json"
-                       trigger="hover"
-                       stroke="light"
-                       state="hover-swirl"
-                       colors="primary:#3080e8,secondary:#b4b4b4"
-                       style={{ width: '60px', height: '80px' }}
-                     ></lord-icon>
-                             </center>
-                   )}
+      {activeTab === 'posts' && posts.filter(p => p.userEmail === email).length === 0 && (
+        <center style={{ paddingTop: '26px' }} className="text-white font-extrabold text-xl ">
+          No Posts Created Yet
+        </center>
+      )}
+    </>
+  )}
+              
+               {activeTab === 'reposts' && reposts.length > 0 && (
+                reposts.map((post, idx) => (
+              
+                      <PostCard
+                        key={post.postId || idx}
+                        userEmail={post.userEmail}
+                        postId={post.postId}
+                        text={post.content.text}
+                        media={post.content.media}
+                        poll={post.content.poll}
+                        likedByCurrentUser={post.likedByCurrentUser}
+                        likedbyUsers={post.likedUsernames}
+                        likesCount={post.likes?.count}
+                        comments={post.comments}
+                        retweetByCurrentUser={post.retweetByCurrentUser}
+                        retweetByUsers={post.retweet?.users}
+                        retweetCount={post.retweet?.count}
+                        username={post?.userInfo?.username}
+                        userrealname={post?.userInfo?.userrealname}
+                        avatar={post?.userInfo?.avatar}
+                        createdAt={post.createdAt}
+                        onLike={handleLike}
+                        onretweet={handleRetweet}
+                        onVote={handleVote}
+                        userSelectedOption={userSelectedOption}
+                      />
+                    ))
+                )}
+              
+           
+              
+                {activeTab === 'reposts' && reposts.length === 0 && (
+                <p className="text-gray-500 p-4">No reposts yet.</p>
+              )}
+              
               </div>
             </div>
           </div>

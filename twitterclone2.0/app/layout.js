@@ -1,8 +1,7 @@
 'use client';
 import './globals.css';
 import SessionWrapper from './component/SessionWrapper';
-// import { LoadingProvider } from './context/LoadingContext/page';
-// import SplashScreen from './component/SplashScreen';
+
 import { SessionProvider } from 'next-auth/react';
 export default function RootLayout({ children }) {
   return (

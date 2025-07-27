@@ -6,11 +6,7 @@ export default function NewsPreferenceModal({ email, onClose }) {
 
   const tags = [ "technology", "politics", "entertainment", "business", "world","books","community","culture","law","money"];
 
-  // const toggle = (tag) => {
-  //   setSelected((prev) =>
-  //     prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-  //   );
-  // };
+
 
    const toggle = (tag) => {
     setSelected((prev) =>
@@ -40,35 +36,7 @@ export default function NewsPreferenceModal({ email, onClose }) {
   };
 
   return (
-    // <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
-    //   <div className="bg-gray-900 p-6 rounded-xl max-w-md w-full">
-    //     <h2 className="text-xl font-bold mb-4 text-white">Choose Your Interests</h2>
-    //     <div className="flex flex-wrap gap-2 mb-4">
-    //       {tags.map((tag) => (
-    //         <button
-    //           key={tag}
-    //           onClick={() => toggle(tag)}
-    //           className={`px-4 py-2 rounded-lg border ${
-    //             selected.includes(tag)
-    //               ? "bg-blue-600 border-blue-700 text-white"
-    //               : "bg-gray-700 border-gray-500 text-gray-200"
-    //           }`}
-    //         >
-    //           {tag}
-    //         </button>
-    //       ))}
-    //     </div>
-    //     <button
-    //       onClick={save}
-    //       disabled={loading || selected.length === 0}
-    //       className="w-full bg-green-600 py-2 rounded-lg text-white disabled:opacity-50"
-    //     >
-    //       {loading ? "Saving..." : "Save Preferences"}
-    //     </button>
-    //   </div>
-    // </div>
-
-
+   
 
 <div className="fixed inset-0  bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 p-4 two">
   <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-8 rounded-2xl shadow-2xl max-w-md w-full border border-gray-700 relative two">

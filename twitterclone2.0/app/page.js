@@ -1,15 +1,4 @@
 
-// "use client"; 
-// import './globals.css'
-// import { useRouter } from "next/navigation";
-
-// export default function HomePage() {
-//   const router = useRouter();
-  
-//     router.push("/sidebar");
-  
-//   return null
-// }
 
 "use client";
 import { useEffect } from "react";

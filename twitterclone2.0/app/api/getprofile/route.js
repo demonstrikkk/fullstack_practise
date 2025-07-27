@@ -31,7 +31,7 @@ export async function GET(req) {
 
     return NextResponse.json({ profile });
   } catch (error) {
-    console.error("Profile fetch error:", error);
+    .error("Profile fetch error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

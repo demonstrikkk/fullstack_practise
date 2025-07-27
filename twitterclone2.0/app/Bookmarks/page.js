@@ -79,8 +79,7 @@ export default function BookmarkedPosts() {
   }, [email]);
 
   const handleDeleteCollection = async (collectionName) => {
-    const confirmDelete = window.confirm(`Are you sure you want to delete "${collectionName}"?`);
-    if (!confirmDelete) return;
+   
 
     setDeleting(collectionName);
 
@@ -104,8 +103,7 @@ export default function BookmarkedPosts() {
   };
 
   const handleDeletePost = async (postId) => {
-    const confirm = window.confirm("Are you sure you want to delete this post?");
-    if (!confirm) return;
+    
 
     try {
       const res = await fetch(`/api/posts/delete?postId=${postId}&email=${email}`, {

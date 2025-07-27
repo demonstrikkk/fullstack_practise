@@ -1,49 +1,3 @@
-// import { Post } from "../../lib/models/Post";
-// import dbConnect from "../../lib/dBconnect";
-
-// export async function GET(req) {
-//   try {
-//     const { searchParams } = new URL(req.url);
-//     const userEmail = searchParams.get("userEmail");
-//     const collectionName = searchParams.get("collectionName");
-
-//     if (!userEmail) {
-//       return new Response(JSON.stringify({ error: "Missing userEmail" }), { status: 400 });
-//     }
-
-//     await dbConnect();
-
-//     let filter = {
-//       bookmarks: {
-//         $elemMatch: {
-//           users: userEmail,
-//         },
-//       },
-//     };
-
-//     if (collectionName) {
-//       filter.bookmarks.$elemMatch.collectionName = collectionName;
-//     }
-
-//     const posts = await Post.find(filter);
-
-//     return new Response(JSON.stringify({ posts }), {
-//       status: 200,
-//       headers: { "Content-Type": "application/json" },
-//     });
-
-//   } catch (err) {
-//     console.error("Fetch bookmarked posts error:", err);
-//     return new Response(JSON.stringify({ error: "Internal Server Error" }), {
-//       status: 500,
-//     });
-//   }
-// }
-
-
-
-
-
 import { Post } from "../../lib/models/Post";
 import UserProfile from "../../lib/models/UserProfile"; // Assuming this is your user model
 import dbConnect from "../../lib/dBconnect";
@@ -104,61 +58,9 @@ export async function GET(req) {
     });
 
   } catch (err) {
-    console.error("Fetch bookmarked posts error:", err);
     return new Response(JSON.stringify({ error: "Internal Server Error" }), {
       status: 500,
     });
   }
 }
 
-
-
-
-
-
-// import { Post } from "../../lib/models/Post";
-// import dbConnect from "../../lib/dBconnect";
-
-// export async function GET(req) {
-//   try {
-//     const { searchParams } = new URL(req.url);
-//     const userEmail = searchParams.get("userEmail");
-//     const collectionName = searchParams.get("collectionName");
-
-//     if (!userEmail) {
-//       return new Response(JSON.stringify({ error: "Missing userEmail" }), { status: 400 });
-//     }
-
-//     await dbConnect();
-
-//     // Build dynamic filter
-//     const filter = {
-//       bookmarks: {
-//         $elemMatch: {
-//           users: userEmail,
-//           ...(collectionName ? { collectionName } : {}),
-//         },
-//       },
-//     };
-
-//     // Fetch posts with matching bookmark
-//     const posts = await Post.find(filter).lean();
-
-//     // Add flag for frontend (e.g. fill="white" on bookmark icon)
-//     const enrichedPosts = posts.map(post => ({
-//       ...post,
-//       bookmarkedByCurrentUser: true
-//     }));
-
-//     return new Response(JSON.stringify({ posts: enrichedPosts }), {
-//       status: 200,
-//       headers: { "Content-Type": "application/json" },
-//     });
-
-//   } catch (err) {
-//     console.error("Fetch bookmarked posts error:", err);
-//     return new Response(JSON.stringify({ error: "Internal Server Error" }), {
-//       status: 500,
-//     });
-//   }
-// }

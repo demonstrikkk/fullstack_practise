@@ -4,6 +4,7 @@ import UserProfile from '../../lib/models/UserProfile';
 import { v4 as uuidv4 } from 'uuid';
 // import { useSession } from 'next-auth/react';
 export async function POST(req) {
+  await dbConnect();
   // const { data: session, status } = useSession();
   try {
     const body = await req.json();
@@ -17,7 +18,6 @@ export async function POST(req) {
      
     } = body;
 
-    await dbConnect();
 
     let user = await UserProfile.findOne({ email });
 

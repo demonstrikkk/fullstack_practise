@@ -55,7 +55,6 @@ export async function GET(req) {
 
     return NextResponse.json(formattedPosts);
   } catch (err) {
-    console.error('Error fetching posts by email:', err);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

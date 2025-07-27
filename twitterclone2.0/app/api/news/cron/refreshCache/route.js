@@ -16,7 +16,6 @@ export async function GET() {
       headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
-    console.error("Cache refresh error", err);
     return new Response(JSON.stringify({ success: false, message: "Cache refresh failed" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

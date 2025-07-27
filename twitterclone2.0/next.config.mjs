@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  
 images: {
     domains: [
       'res.cloudinary.com',       // if you're using Cloudinary

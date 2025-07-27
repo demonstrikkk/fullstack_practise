@@ -55,32 +55,68 @@ const RelevantPeople = ({ setSelectedUser }) => {
       {people.map((user) => (
         <div
           key={user._id}
-          onClick={()=>{setSelectedUser(user)}}
+          onClick={() => { setSelectedUser(user) }}
           className="flex justify-between items-center gap-3 border-b border-gray-500 pb-2 hover:bg-gray-600 cursor-pointer"
         >
-          
-          <div className="flex items-center gap-3  ">
-            <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-700 ">
-              <img
-                src={user.profile?.avatar || "/default-avatar.png"}
-                alt={user.profile?.displayName}
-                width={40}
-                height={40}
-                className="object-cover w-full h-full"
-              />
-            </div>
-            <div className="text-white font-medium truncate">
-              {user.profile?.displayName}
-            </div>
-          </div>
 
-          <button
-            onClick={() => handleFollowToggle(user.email)}
-            className={`mt-4 py-2 px-3 rounded-3xl border text-white font-bold 
+          {/* <div className="flex flex-row place-items-center  gap-5">
+            <div >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-700 ">
+                  <img
+                    src={user.profile?.avatar || "/default-avatar.png"}
+                    alt={user.profile?.displayName}
+                    width={40}
+                    height={40}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <div className="text-white font-medium truncate">
+                  {user.profile?.displayName}
+                </div>
+              </div>
+            </div>
+              <div>
+                <button
+                  onClick={() => handleFollowToggle(user.email)}
+                  className={`mt-4 py-2 px-3 rounded-3xl border text-white font-bold 
               ${followStatus[user.email] ? "bg-gray-600" : "bg-blue-400"}`}
-          >
-            {followStatus[user.email] ? "Following" : "Follow"}
-          </button>
+                >
+                  {followStatus[user.email] ? "Following" : "Follow"}
+                </button>
+              </div>
+          </div> */}
+          <div className="flex items-center justify-between w-full gap-6 ">
+  {/* Left: Avatar + Username */}
+  <div className="flex items-center gap-3 min-w-0">
+    <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-700 shrink-0">
+      <img
+        src={user.profile?.avatar || "/default-avatar.png"}
+        alt={user.profile?.displayName}
+        width={40}
+        height={40}
+        className="object-cover w-full h-full"
+      />
+    </div>
+    <div>
+    <p className="text-white font-medium truncate">
+      {user.username}
+    </p>
+    <p className="text-gray-500 text-sm">{user?.profile?.displayName}</p>
+</div>
+  </div>
+
+  {/* Right: Follow Button */}
+  <button
+    onClick={() => handleFollowToggle(user.email)}
+    className={`py-2 px-4 rounded-3xl border text-white font-bold whitespace-nowrap
+      ${followStatus[user.email] ? "bg-gray-600" : "bg-blue-400"}`}
+  >
+    {followStatus[user.email] ? "Following" : "Follow"}
+  </button>
+</div>
+
+
         </div>
       ))}
     </div>

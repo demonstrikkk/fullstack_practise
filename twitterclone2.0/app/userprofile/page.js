@@ -1,12 +1,16 @@
+
 // app/component/page.js
 "use client";
+import { useEffect, useState } from 'react';
+import { getDisplayName } from "next/dist/shared/lib/utils";
 import { React } from "react";
 import PostCard from "../component/post-card";
 import { useSession } from 'next-auth/react';
 import UpdateProfileForm from "../component/updateprofile";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-export  function usePollVoting(userEmail, posts, setPosts) {
+import { Loader2 } from 'lucide-react';
+export  function usePollVoting(userEmail, posts , setPosts) {
   const [userSelectedOption, setUserSelectedOption] = useState({}); // keyed by postId
    
   const handleVote = async (postId, selectedOption) => {
@@ -43,9 +47,6 @@ export  function usePollVoting(userEmail, posts, setPosts) {
 
 
 
-import { useEffect, useState } from 'react';
-import { getDisplayName } from "next/dist/shared/lib/utils";
-
 
 export default function ProfileComponent({ userrealname, username, avatar, followers, following, bio, location, createdAt, email  }) {
   
@@ -53,8 +54,107 @@ export default function ProfileComponent({ userrealname, username, avatar, follo
   const { data: session, status } = useSession();
   const [userPosts, setUserPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [scheduledPosts, setScheduledPosts] = useState([]);
+
    const [refreshNeeded, setRefreshNeeded] = useState(false);
+   const [activeTab, setActiveTab] = useState('posts');
+
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [modalType, setModalType] = useState(""); // 'followers' or 'following'
+const [modalUsers, setModalUsers] = useState([]);
+const [loadingUsers, setLoadingUsers] = useState(false);
+
+
+const handleOpenModal = async (type, data) => {
+  setModalType(type);
+  setIsModalOpen(true);
+  setLoadingUsers(true);
+
+  try {
+    const emails = data?.users || [];
+    const res = await fetch("/api/getUserProfiles", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ emails }),
+    });
+    const result = await res.json();
+
+    if (Array.isArray(result)) {
+      setModalUsers(result);
+    } else {
+      setModalUsers([]);
+    }
+  } catch (err) {
+    console.error("Error fetching user list:", err);
+    setModalUsers([]);
+  } finally {
+    setLoadingUsers(false);
+  }
+};
+
+
+
 const router = useRouter();
+
+
+const fetchScheduledPosts = async () => {
+  try {
+    const res = await fetch(`/api/scheduledposts/user?email=${email}`);
+    const data = await res.json();
+
+    if (res.ok && data.scheduleposts) {
+      setScheduledPosts(data.scheduleposts);  // ✅ Corrected
+    } else {
+      console.error("Failed to load scheduled posts: Invalid response format");
+    }
+  } catch (err) {
+    console.error("Failed to load scheduled posts:", err);
+  }
+};
+
+
+const handleScheduledDelete = async (postId) => {
+
+  try {
+    const res = await fetch(`/api/schedule?id=${postId}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      setScheduledPosts(prev => prev.filter(p => p._id !== postId));
+    }
+  } catch (err) {
+    console.error("Failed to delete scheduled post:", err);
+  }
+};
+useEffect(() => {
+  
+    setLoading(false);
+    fetchScheduledPosts();
+  
+}, [ email]);
+
+
+
+
+useEffect(() => {
+  const fetchReposts = async () => {
+    try {
+      const res = await fetch(`/api/repostsbyuser?email=${email}`);
+      const data = await res.json();
+      if (res.ok) {
+        setReposts(data.reposts || []);
+      } else {
+        console.error("Failed to fetch reposts:", data.error);
+      }
+    } catch (err) {
+      console.error("Reposts fetch error:", err);
+    }
+  };
+
+  fetchReposts();
+}, [email]);
+
 
 useEffect(() => {
   if (refreshNeeded) {
@@ -65,41 +165,50 @@ useEffect(() => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState('');
    const [isOpen, setIsOpen] = useState(false);
+   const [reposts, setReposts] = useState([]);
+
 
   const { handleVote, userSelectedOption } = usePollVoting(email, posts, setPosts);
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await fetch(`/api/posts/postsofemail?email=${email}`);
-        const data = await res.json();
-        
-        // Handle different response structures
-        if (data.posts) {
-          // If response has { posts: [...] }
-          setPosts(data.posts);
-        } else if (Array.isArray(data.users)) {
-          // If response has { users: [...] }
-          setPosts(data.users);
-        } else if (Array.isArray(data)) {
-          // If response is direct array
-          setPosts(data);
-        } else {
-          setError('Invalid posts data format');
-        }
-      } catch (err) {
-        console.error('Error fetching posts:', err);
-        setError('Failed to load posts');
+ 
+
+
+useEffect(() => {
+  const fetchPosts = async () => {
+    setLoading(true);
+
+    try {
+      // Ensure loader stays at least 1.5 seconds
+      const delay = new Promise(resolve => setTimeout(resolve, 1500));
+      const response = fetch(`/api/posts/postsofemail?email=${email}`);
+      const [res] = await Promise.all([response, delay]);
+
+      const data = await res.json();
+
+      if (data.posts) {
+        setPosts(data.posts);
+      } else if (Array.isArray(data.users)) {
+        setPosts(data.users);
+      } else if (Array.isArray(data)) {
+        setPosts(data);
+      } else {
+        setError('Invalid posts data format');
       }
-    };
-    
-    fetchPosts();
-  }, [email]);
-  
-  
-  
+
+    } catch (err) {
+      console.error('Error fetching posts:', err);
+      setError('Failed to load posts');
+    } finally {
+      setLoading(false); // hide loader after delay + fetch
+    }
+  };
+
+  fetchPosts();
+}, [email]);
+
+
+
 const handleDeletePost = async (postId) => {
-  const confirmDelete = window.confirm("Are you sure you want to delete this post?");
-  if (!confirmDelete) return;
+ 
 
   try {
     const res = await fetch(`/api/posts/delete?postId=${postId}&email=${email}`, {
@@ -107,7 +216,10 @@ const handleDeletePost = async (postId) => {
     });
 
     if (res.ok) {
-      setPosts(prev => prev.filter(post => post.postId !== postId));
+      // Refetch posts
+      const updated = await fetch(`/api/posts/postsofemail?email=${email}`);
+      const data = await updated.json();
+      setPosts(data.posts || []);
     } else {
       console.error("Failed to delete post.");
     }
@@ -129,13 +241,63 @@ const handleLike = async (postId) => {
       );
     }
   };
-  
+
+
+  const handleRetweet = async (postId) => {
+    const res = await fetch('/api/posts/retweetedprofile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ postId, userEmail: email })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      setPosts(prev =>
+        prev.map(p => p.postId === postId ? data.post : p)
+      );
+    }
+  };
+
 
     
     return (
     <>
 
       <div className="flex flex-col justify-center rounded bg-black">
+        {isModalOpen && (
+  <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center">
+    <div className="bg-zinc-900 text-white rounded-lg w-[90vw] max-w-md h-[80vh] overflow-y-auto shadow-2xl relative p-4">
+      <button
+        onClick={() => setIsModalOpen(false)}
+        className="absolute top-2 right-2 text-white text-lg font-bold"
+      >
+        ✕
+      </button>
+      <h2 className="text-xl font-semibold mb-4 capitalize">{modalType}</h2>
+      {loadingUsers ? (
+        <div className="flex justify-center py-10">
+          <Loader2 className="animate-spin text-blue-400 w-6 h-6" />
+        </div>
+      ) : modalUsers.length > 0 ? (
+        modalUsers.map((user, idx) => (
+          <div key={idx} className="flex items-center gap-3 py-2 border-b border-gray-700">
+            <img
+              src={user?.profile?.avatar}
+              className="w-10 h-10 rounded-full object-cover"
+              alt={`${user.username}'s avatar`}
+            />
+            <div>
+              <p className="text-white font-semibold">{user.username}</p>
+              <p className="text-gray-400 text-sm">{user.userrealname}</p>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p className="text-center text-gray-400">No users found.</p>
+      )}
+    </div>
+  </div>
+)}
+
 
         <div className="box0 sticky w-full h-[10vh] top-0 text-white bg-black flex flex-row opacity-90">
 
@@ -143,9 +305,18 @@ const handleLike = async (postId) => {
         </div>
         <div className="overflow-y-scroll overflow-x-hidden two" style={{ scrollbarWidth: "none" }}>
           <div className="box1 w-full h-[30vh] bg-gray-600 text-white">
-            <div className="circle overflow-hidden">
-              <img src={avatar} alt="Avatar" className="profilepic" />
+            <div className="h-[20vh] w-[20vh] overflow-hidden rounded-full relative top-[20vh] left-[3%] border-3 border-black">
+              <img src={avatar} alt="Avatar" className="h-full w-full rounded-full object-cover" />
             </div>
+            {/* <div className="h-[30vh] w-[30vh] overflow-hidden rounded-full">
+  <img
+    src={avatar}
+    alt="Avatar"
+    className="h-full w-full object-cover"
+  />
+</div> */}
+
+          
           </div>
           <div className="box2 w-full h-[60vh] bg-black text-white">
             <div className="profile_edit">
@@ -168,75 +339,208 @@ const handleLike = async (postId) => {
               <div className="my-3.5 text-gray-300 text-xs font-serif">
                 Joined on : {new Date(createdAt).toLocaleDateString()}
               </div>
-              <div className="flex">
+              {/* <div className="flex">
                 <div className="followingnumber text-white font-bold mx-1">{following}</div>
                 <div className="text-gray-600  ">Following</div>
                 <div className="space w-[20px]"></div>
                 <div className="followernumber text-white font-bold mx-1">{followers}</div>
                 <div className="text-gray-600 ml-1">Followers</div>
-              </div>
-              <div className="mt-16 font-bold text-white">Posts</div>
-              <div className="w-16 rounded h-1 relative bottom-[2px] bg-blue-400"></div>
-              <div className="bordere border-b-2 border-gray-400 w-[43vw] my-5"></div>
+              </div> */}
+              <div className="flex">
+  <div
+    onClick={() => handleOpenModal('following', following)}
+    className="followingnumber text-white font-bold mx-1 cursor-pointer hover:underline"
+  >
+    {following?.count }
+  </div>
+  <div className="text-gray-600 cursor-pointer "  onClick={() => handleOpenModal('following', following)}>Following</div>
+
+  <div className="space w-[20px]"></div>
+
+  <div
+    onClick={() => handleOpenModal('followers', followers)}
+    className="followernumber text-white font-bold mx-1 cursor-pointer hover:underline"
+  >
+    {followers?.count}
+  </div>
+  <div className="text-gray-600 ml-1 cursor-pointer " onClick={() => handleOpenModal('followers', followers)}>Followers</div>
+</div>
+
+             
+
+
+              <div className="flex flex-col gap-2 mt-6 w-full relative">
+  {/* Tab Buttons */}
+  <div className="flex gap-4 relative">
+    <button
+      onClick={() => setActiveTab('posts')}
+      className={`font-bold px-4 py-2 transition-colors duration-300 ${
+        activeTab === 'posts' ? 'text-white' : 'text-gray-400'
+      }`}
+    >
+      Posts
+    </button>
+    <button
+      onClick={() => setActiveTab('reposts')}
+      className={`font-bold px-4 py-2 transition-colors duration-300 ${
+        activeTab === 'reposts' ? 'text-white' : 'text-gray-400'
+      }`}
+    >
+      Reposts
+    </button>
+    <button
+      onClick={() => setActiveTab('scheduleposts')}
+      className={`font-bold px-4 py-2 transition-colors duration-300 ${
+        activeTab === 'scheduleposts' ? 'text-white' : 'text-gray-400'
+      }`}
+    >
+      Scheduled Posts
+    </button>
+  </div>
+
+  {/* Animated underline */}
+  <div className="relative h-[2px] bg-transparent w-full mt-1">
+    <div
+      className="absolute bottom-0 h-[2px] bg-blue-500 transition-all duration-300 ease-in-out"
+      style={{
+        width: '50px',
+        left: activeTab === 'posts' ? '0px' : activeTab === 'reposts'? '60px' : '150px'
+        // adjust '80px' as per button width + gap
+      }}
+    />
+  </div>
+
+  {/* Divider below the tab */}
+  <div className="border-b border-gray-500 w-[43vw] my-3" />
+</div>
 
 
 
 
-              <div className="postsdonebyou border h-auto border-t-2  w-[43vw]">
-               
-      {error && <div className="text-red-500">{error}</div>}
-      
-      {posts.length > 0 ? (
-        posts.slice().reverse().map((post,idx) => (
+<div className="postsdonebyou border h-auto border-t-2  w-[43vw]">
+  {error && <div className="text-red-500">{error}</div>}
 
-          <div key = {post.postId || idx}>
-{/* <div className=" relative"> */}
-
-              {/* {email === email && (
-    <div className="absolute top-2 right-3 z-20">
-      <div className="relative group">
-        <button className="text-gray-400 hover:text-white text-xl">⋮</button>
-
-        <div className="absolute right-0 mt-1 bg-zinc-800 border border-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 z-10">
-          <button
-            onClick={() => handleDeletePost(post.postId)}
-            className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-600 hover:text-white"
-          >
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
+  {/* {activeTab === 'posts' && posts.length > 0 && (
+    posts.slice().reverse().map((post, idx) => {
+      if (post.userEmail !== email) return null; // Only original posts
+      return (
+        <PostCard
+          key={post.postId || idx}
+          userEmail={email}
+          postId={post.postId}
+          text={post.content.text}
+          media={post.content.media}
+          poll={post.content.poll}
+          likedByCurrentUser={post.likedByCurrentUser}
+          likedbyUsers={post.likedUsernames}
+          likesCount={post.likes?.count}
+          comments={post.comments}
+          retweetByCurrentUser={post.retweetByCurrentUser}
+          retweetByUsers={post.retweet?.users}
+          retweetCount={post.retweet?.count}
+          username={post.userInfo?.username}
+          userrealname={post.userInfo?.userrealname}
+          avatar={post.userInfo?.avatar}
+          createdAt={post.createdAt}
+          onLike={handleLike}
+          onretweet={handleRetweet}
+          onVote={handleVote}
+          onDelete={handleDeletePost}
+          userSelectedOption={userSelectedOption}
+        />
+      );
+    })
   )} */}
-          <PostCard
-            // key={post.postId || post._id || post.id}
-            
-            userEmail={email}
-            onLike={handleLike}
-            onVote={handleVote}
-            userSelectedOption={userSelectedOption}
-            postId = {post.postId}
-            text = {post.content.text}
-            media = {post.content.media}
-            poll = {post.content.poll}
-            likedByCurrentUser={post.likedByCurrentUser}
-            likedbyUsers = {post.likedUsernames}
-            likesCount = {post.likes.count}
-            username = {post.userInfo.username }
-            userrealname = {post.userInfo.userrealname}
-            avatar =  {post.userInfo.avatar}
-            createdAt = {post.createdAt}
-            onDelete={handleDeletePost}
 
-            
-            // ... other props
-            />
-            {/* </div> */}
-          </div>
-        ))
-      ) : (
-        // <p className="text-gray-500">No posts to show</p>
+   {loading ? (
+    <div className="flex justify-center items-center h-20">
+      <Loader2 className="animate-spin w-6 h-6 text-blue-400" />
+    </div>
+  ) : (
+    <>
+      {activeTab === 'posts' && posts.filter(p => p.userEmail === email).length > 0 && (
+        posts
+          .slice()
+          .reverse()
+          .map((post, idx) => {
+            if (post.userEmail !== email) return null;
+            return (
+              <PostCard
+                key={post.postId || idx}
+                userEmail={email}
+                postId={post.postId}
+                text={post.content.text}
+                media={post.content.media}
+                poll={post.content.poll}
+                likedByCurrentUser={post.likedByCurrentUser}
+                likedbyUsers={post.likedUsernames}
+                likesCount={post.likes?.count}
+                comments={post.comments}
+                retweetByCurrentUser={post.retweetByCurrentUser}
+                retweetByUsers={post.retweet?.users}
+                retweetCount={post.retweet?.count}
+                username={post.userInfo?.username}
+                userrealname={post.userInfo?.userrealname}
+                avatar={post.userInfo?.avatar}
+                createdAt={post.createdAt}
+                onLike={handleLike}
+                onretweet={handleRetweet}
+                onVote={handleVote}
+                onDelete={handleDeletePost}
+                userSelectedOption={userSelectedOption}
+              />
+            );
+          })
+      )}
+
+      {activeTab === 'posts' && !loading && posts.filter(p => p.userEmail === email).length === 0 && (
         <center style={{ paddingTop: '26px' }}>
+          <h2>Create your first post now</h2>
+          <script src="https://cdn.lordicon.com/lordicon.js"></script>
+          <lord-icon
+            src="https://cdn.lordicon.com/mfdeeuho.json"
+            trigger="hover"
+            stroke="light"
+            state="hover-swirl"
+            colors="primary:#3080e8,secondary:#b4b4b4"
+            style={{ width: '60px', height: '80px' }}
+          ></lord-icon>
+        </center>
+      )}
+    </>
+  )}
+
+ {activeTab === 'reposts' && reposts.length > 0 && (
+  reposts.map((post, idx) => (
+
+        <PostCard
+          key={post.postId || idx}
+          userEmail={post.userEmail}
+          postId={post.postId}
+          text={post.content.text}
+          media={post.content.media}
+          poll={post.content.poll}
+          likedByCurrentUser={post.likedByCurrentUser}
+          likedbyUsers={post.likedUsernames}
+          likesCount={post.likes?.count}
+          comments={post.comments}
+          retweetByCurrentUser={post.retweetByCurrentUser}
+          retweetByUsers={post.retweet?.users}
+          retweetCount={post.retweet?.count}
+          username={post?.userInfo?.username}
+          userrealname={post?.userInfo?.userrealname}
+          avatar={post?.userInfo?.avatar}
+          createdAt={post.createdAt}
+          onLike={handleLike}
+          onretweet={handleRetweet}
+          onVote={handleVote}
+          userSelectedOption={userSelectedOption}
+        />
+      ))
+  )}
+
+  {/* {activeTab === 'posts' && posts.filter(p => p.userEmail === email).length === 0 && (
+    <center style={{ paddingTop: '26px' }}>
                 <h2>Create your first post now </h2>
                 <script src="https://cdn.lordicon.com/lordicon.js"></script>
 
@@ -249,10 +553,109 @@ const handleLike = async (postId) => {
           style={{ width: '60px', height: '80px' }}
         ></lord-icon>
                 </center>
-      )}
+  )} */}
+
+  {activeTab === 'reposts' && reposts.length === 0 && (
+  <p className="text-gray-500 p-4">No reposts yet.</p>
+)}
+{/* {  scheduledPosts.length > 0 && (
+  <>
+
+    {activeTab === 'scheduleposts' && scheduledPosts.length > 0 && 
+    (scheduledPosts.map((post, idx) => (
+      <div key={idx} className="p-4 my-4 border border-gray-700 rounded-lg bg-zinc-800 text-white">
+        <p><strong>Scheduled Time:</strong> {new Date(post.scheduledFor).toLocaleString()}</p>
+              <PostCard
+          key={post.postId || idx}
+          userEmail={email}
+          postId={post.postId}
+          text={post.content.text}
+          media={post.content.media}
+          poll={post.content.poll}
+          likedByCurrentUser={post.likedByCurrentUser}
+          likedbyUsers={post.likedUsernames}
+          likesCount={post.likes?.count}
+          comments={post.comments}
+          retweetByCurrentUser={post.retweetByCurrentUser}
+          retweetByUsers={post.retweet?.users}
+          retweetCount={post.retweet?.count}
+          username={post.userInfo?.username}
+          userrealname={post.userInfo?.userrealname}
+          avatar={post.userInfo?.avatar}
+          createdAt={post.createdAt}
+          onLike={handleLike}
+          onretweet={handleRetweet}
+          onVote={handleVote}
+          onDelete={handleDeletePost}
+          userSelectedOption={userSelectedOption}
+          />
+
+       
+        <div className="mt-4 flex gap-4">
+          <button
+            onClick={() => handleScheduledDelete(post._id)}
+            className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+            >
+            Delete
+          </button>
+
+         
+        </div>
+      </div>
+    )))}
+  </>
+)} */}
 
 
-              </div>
+{activeTab === 'scheduleposts' && (
+  <>
+    {scheduledPosts.length > 0 ? (
+      scheduledPosts.map((post, idx) => (
+        <div key={idx} className="p-4 my-4 border border-gray-700 rounded-lg bg-zinc-800 text-white">
+          <p><strong>Scheduled Time:</strong> {new Date(post.scheduledFor).toLocaleString()}</p>
+          <PostCard
+            key={post.postId || idx}
+            userEmail={email}
+            postId={post.postId}
+            text={post.content?.text}
+            media={post.content?.media}
+            poll={post.content?.poll}
+            likedByCurrentUser={post.likedByCurrentUser}
+            likedbyUsers={post.likedUsernames}
+            likesCount={post.likes?.count}
+            comments={post.comments}
+            retweetByCurrentUser={post.retweetByCurrentUser}
+            retweetByUsers={post.retweet?.users}
+            retweetCount={post.retweet?.count}
+            username={post.userInfo?.username}
+            userrealname={post.userInfo?.userrealname}
+            avatar={post.userInfo?.avatar}
+            createdAt={post.createdAt}
+            onLike={handleLike}
+            onretweet={handleRetweet}
+            onVote={handleVote}
+            onDelete={() => handleScheduledDelete(post._id)}
+            userSelectedOption={userSelectedOption}
+          />
+        </div>
+      ))
+    ) : (
+      <p className="text-gray-500 p-4">No scheduled posts yet.</p>
+    )}
+  </>
+)}
+
+
+{/* {activeTab === 'scheduleposts' && scheduledPosts.length === 0 && (
+<p className="text-gray-500 p-4">No scheduled posts yet.</p>
+)} */}
+
+</div>
+
+
+
+
+        
             </div>
           </div>
         </div>

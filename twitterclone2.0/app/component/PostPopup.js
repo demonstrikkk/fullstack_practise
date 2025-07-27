@@ -68,35 +68,7 @@ export default function PostPopup({ postId }) {
                                  
                                  // ... other props
                                  />
-        {/* <Image
-          src={post.userInfo?.avatar || "/default-avatar.png"}
-          alt="avatar"
-          width={40}
-          height={40}
-          className="rounded-full"
-        />
-        <div>
-          <p className="font-bold text-white">{post.userInfo?.username}</p>
-          <p className="text-sm text-gray-400">{post.userInfo?.userrealname}</p>
-        </div>
-      </div>
-
-      <div className="text-gray-200">{post.content?.text}</div>
-
-      {post.content?.media?.length > 0 && (
-        <div className="grid grid-cols-2 gap-2">
-          {post.content.media.map((media, index) => (
-            <img
-              key={index}
-              src={media.url}
-              alt="media"
-              width={300}
-              height={200}
-              className="rounded-lg object-cover"
-            />
-          ))}
-        </div>
-      )} */}
+        
     </div>
     </div>
   );

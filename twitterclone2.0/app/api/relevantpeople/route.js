@@ -6,7 +6,7 @@ export async function GET() {
   await dbConnect();
 
   const fixedUserId = "demonstrikk"; // Replace with the fixed user _id or email
-  const limit = 5;
+  const limit = 10;
 
   const topUsers = await UserProfile.find({})
     .sort({ followers: -1 }) // followers is an array, so sort by length manually later

@@ -9,7 +9,6 @@ export async function getOrSetCache(key, fetcherFn, ttl = 300) {
   try {
     const cached = await redis.get(key);
     if (cached) {
-      console.log(`Redis hit for ${key}`);
       return JSON.parse(cached);
     }
 
@@ -20,7 +19,6 @@ export async function getOrSetCache(key, fetcherFn, ttl = 300) {
 
     return freshData;
   } catch (error) {
-    console.error(`Redis caching error for ${key}:`, error);
     return await fetcherFn(); // fallback to DB query if Redis fails
   }
 }

@@ -1,10 +1,11 @@
 'use client';
 import React from 'react';
 import { useState , useEffect } from 'react';
-export default function PostCard({ userEmail,onVote,onDelete, onLike,onBookmark,bookmarkedByCurrentUser, postId, text, media, poll = { question: '', options: [], votedUsers: [] }, likedByCurrentUser, likesCount, username, userrealname, avatar ,userSelectedOption  , likedbyUsers, createdAt}) {
+export default function PostCard({ userEmail,onVote,onDelete, onLike,onBookmark,bookmarkedByCurrentUser, postId, text, media, poll = { question: '', options: [], votedUsers: [] }, likedByCurrentUser, likesCount, username, userrealname, avatar ,userSelectedOption  , likedbyUsers, createdAt , comments, retweetByCurrentUser, retweetByUsers, retweetCount, onretweet}) {
   const mediaUrl = media[0];
   const isVideo = mediaUrl?.endsWith('.mp4');
   const fillColor = likedByCurrentUser ? 'red' : 'none';
+  const filltweetColor = retweetByCurrentUser ? 'cyan' : 'white';
   const hasPoll = Boolean(poll.question && poll.options.length);
   const userVoted = poll.votedUsers.includes(userEmail);
 
@@ -57,10 +58,12 @@ useEffect(() => {
 )}
         <img src={avatar} alt="Avatar" className="w-10 h-10 rounded-full" />
         <div>
+          <div>
           <p className="text-white font-semibold">{username}</p>
           <p className="text-gray-500 text-sm">{userrealname}</p>
         </div>
-        <div className ='relative left-1/2 text-gray-300 text-sm '><p> Posted On :{(createdAt).slice(0,10)}</p></div>
+        <div className =' text-gray-300 text-sm '><p> Posted On :{(createdAt).slice(0,10)}</p></div>
+        </div>
 
 
       </div>
@@ -145,14 +148,38 @@ useEffect(() => {
             </div>
           </div>
 
-          <div className='share'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} color={"#ffffff"} fill={"none"}>
+          {/* <div className='share'         onClick={() => onShareToDM?.(postId)}
+><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} color={"#ffffff"} fill={"none"}>
                         <path d="M20.3927 8.03168L18.6457 6.51461C17.3871 5.42153 16.8937 4.83352 16.2121 5.04139C15.3622 5.30059 15.642 6.93609 15.642 7.48824C14.3206 7.48824 12.9468 7.38661 11.6443 7.59836C7.34453 8.29742 6 11.3566 6 14.6525C7.21697 13.9065 8.43274 13.0746 9.8954 12.7289C11.7212 12.2973 13.7603 12.5032 15.642 12.5032C15.642 13.0554 15.3622 14.6909 16.2121 14.9501C16.9844 15.1856 17.3871 14.5699 18.6457 13.4769L20.3927 11.9598C21.4642 11.0293 22 10.564 22 9.99574C22 9.4275 21.4642 8.96223 20.3927 8.03168Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M10.5676 3C6.70735 3.00694 4.68594 3.10152 3.39411 4.39073C2 5.78202 2 8.02125 2 12.4997C2 16.9782 2 19.2174 3.3941 20.6087C4.78821 22 7.03198 22 11.5195 22C16.0071 22 18.2509 22 19.645 20.6087C20.6156 19.64 20.9104 18.2603 21 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg></div>
+                      </svg></div> */}
                       <div className='comment'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} color={"#ffffff"} fill={"none"}>
                         <path d="M22 11.5667C22 16.8499 17.5222 21.1334 12 21.1334C11.3507 21.1343 10.7032 21.0742 10.0654 20.9545C9.60633 20.8682 9.37678 20.8251 9.21653 20.8496C9.05627 20.8741 8.82918 20.9948 8.37499 21.2364C7.09014 21.9197 5.59195 22.161 4.15111 21.893C4.69874 21.2194 5.07275 20.4112 5.23778 19.5448C5.33778 19.0148 5.09 18.5 4.71889 18.1231C3.03333 16.4115 2 14.1051 2 11.5667C2 6.28357 6.47778 2 12 2C17.5222 2 22 6.28357 22 11.5667Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
                         <path d="M11.9955 12H12.0045M15.991 12H16M8 12H8.00897" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg></div>
+
+                       <div  >
+
+                        <div className="flex">
+                          <div className='retweet ' onClick={() => { onretweet(postId) }} >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={22} height={22} color={"#ffffff"} fill={filltweetColor}>
+                          <g>
+                            <path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z">
+                              </path>
+                              </g>
+                              </svg>
+                              </div>
+                          <span className='text-white ' onClick={() => {
+                            // setOpenretweetPostId(openretweetPostId === post.postId ? null : post.postId);
+                          }}>{retweetCount}</span>
+                        </div>
+
+                      </div>
+
+
+
+
+
       </div>
       <div className='bookmark' onClick={() => onBookmark(postId)}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} color={"#ffffff"} fill={bookmarkedByCurrentUser ? "white" : "none"}
             stroke={bookmarkedByCurrentUser ? "white" : "currentColor"}>

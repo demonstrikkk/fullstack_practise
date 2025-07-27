@@ -26,7 +26,6 @@ export async function POST(req) {
     });
 
   } catch (err) {
-    console.error('Bookmark remove error:', err);
     return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
       status: 500,
     });
