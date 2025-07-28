@@ -513,7 +513,7 @@ function getCleanAvatar(rawAvatar, displayName, email) {
   return (
     <>
 
-      <script src="https://cdn.lordicon.com/lordicon.js"></script>
+      <script src="https://cdn.lordicon.com/lordicon.js" async />
       <div className="containere w-[100%]">
         <div className="section section1 ">
           <div className="logo xlogo justify-center flex ">
