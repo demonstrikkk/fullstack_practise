@@ -8,7 +8,6 @@ export async function POST(req) {
     const profiles = await UserProfile.find({ email: { $in: peers } }).lean();
     return Response.json(profiles);
   } catch (err) {
-    console.error("recentChats API error", err);
     return Response.json([], { status: 500 });
   }
 }
