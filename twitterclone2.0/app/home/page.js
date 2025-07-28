@@ -618,14 +618,14 @@ export default function Section2Content({ userrealname, username, avatar, email 
                   />
 
                 </div> */}
-                <div className="grampa flex items-start gap-2 w-full min-w-0">
+                <div className="grampa flex items-start gap-2 w-full min-w-0  ">
   {showSkeletonProfile ? (
     <SkeletonProfile />
   ) : (
-    <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
+    <div className="w-10 h-10 rounded-full overflow-hidden shrink-0  ">
       <img
         src={avatar}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover "
         alt="Profile"
       />
     </div>

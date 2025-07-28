@@ -71,6 +71,7 @@ export default function HomePage() {
   const [lastSeenStatusMap, setLastSeenStatusMap] = useState({});
 
 
+
   const [recentChats, setRecentChats] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -85,6 +86,38 @@ export default function HomePage() {
 
 
   const [activeGroup, setActiveGroup] = useState(null);
+
+//   function getCleanAvatar(rawAvatar, displayName, email) {
+//   if (rawAvatar && rawAvatar.includes("lh3.googleusercontent")) {
+//     const name = displayName || email;
+//     return `https://placehold.co/40x40?text=${name?.[0] || "U"}`;
+//   }
+//   return rawAvatar || `https://placehold.co/40x40?text=${(displayName || email)?.[0] || "U"}`;
+// }
+
+
+function getCleanAvatar(rawAvatar, displayName, email) {
+  const name = displayName || email || "U";
+  const initial = name[0]?.toUpperCase() || "U";
+
+  // Fixed color mapping A–Z
+  const colorMap = {
+    A: "FFB6C1", B: "87CEFA", C: "20B2AA", D: "FFA07A", E: "9370DB",
+    F: "F4A460", G: "40E0D0", H: "EE82EE", I: "7B68EE", J: "00CED1",
+    K: "BA55D3", L: "3CB371", M: "F08080", N: "48D1CC", O: "FF6347",
+    P: "00BFFF", Q: "DA70D6", R: "FA8072", S: "66CDAA", T: "E9967A",
+    U: "8FBC8F", V: "CD5C5C", W: "9ACD32", X: "BC8F8F", Y: "87CEEB", Z: "B0C4DE"
+  };
+
+  const bgColor = colorMap[initial] || "CCCCCC"; // fallback gray
+
+  if (rawAvatar && !rawAvatar.includes("lh3.googleusercontent")) {
+    return rawAvatar;
+  }
+
+  return `https://placehold.co/40x40/${bgColor}/ffffff?text=${initial}`;
+}
+
 
   const handleStatusTextUpdate = (text, peerEmail) => {
     setLastSeenStatusMap(prev => ({
@@ -238,32 +271,7 @@ export default function HomePage() {
   const [showCreateGroup, setShowCreateGroup] = useState(false);
   const [groups, setGroups] = useState([]);
 
-  // // Fetch user's groups on component mount
-  // useEffect(() => {
-  //   const fetchGroups = async () => {
-  //     try {
-  //       const { data, error } = await supabase
-  //         .from('group_members')
-  //         .select('groups!inner(*)')
-  //         .eq('user_email', session.user.email)
-
-  //       if (error) throw error;
-  //       setGroups(data.map(item => item.groups));
-  //     } catch (err) {
-  //       console.error('Error fetching groups:', err);
-  //     }
-  //   };
-
-  //   if (session?.user?.id) fetchGroups();
-  // }, [session?.user?.id]);
-
-  // const handleGroupCreated = (newGroup) => {
-  //   setGroups(prev => [...prev, newGroup]);
-  //   setShowCreateGroup(false);
-  //   setActiveGroup(newGroup.id);
-  // };
-
-
+ 
 
 
   useEffect(() => {
@@ -447,7 +455,10 @@ export default function HomePage() {
   }
 
   function getPeerAvatar(email) {
-    return userProfiles[email]?.profile?.avatar || "/default-avatar.png";
+    // return userProfiles[email]?.profile?.avatar || "/default-avatar.png";
+     const profile = userProfiles[email]?.profile;
+  const name = profile?.displayName || email;
+  return getCleanAvatar(profile?.avatar, name, email);
   }
 
   function getPeerRealName(email) {
@@ -642,7 +653,7 @@ export default function HomePage() {
                   //  ||
                   data?.profile ? (
                     <img
-                      src={data?.profile?.avatar}
+                      src={getCleanAvatar(data?.profile?.avatar, data?.profile?.displayName, data?.email)}
                       className="absolute w-full h-full object-cover"
                     />
                   ) : (
@@ -711,7 +722,7 @@ export default function HomePage() {
             {!selectedArticle && selectedUser && <OtherProfileComponent
               userrealname={selectedUser?.profile?.displayName}
               username={selectedUser?.username}
-              avatar={selectedUser?.profile?.avatar}
+              avatar={getCleanAvatar(selectedUser?.profile?.avatar, selectedUser?.profile?.displayName, selectedUser?.email)}
               followers={selectedUser?.followers}
               following={selectedUser?.following}
               createdAt={selectedUser?.firstlogincreatedAt}
@@ -724,8 +735,7 @@ export default function HomePage() {
             {activeSection === "Home" && !selectedArticle && <Section2Content
               userrealname={data?.profile?.displayName}
               username={data?.username}
-              avatar={data?.profile?.avatar
-              }
+              avatar={getCleanAvatar(data?.profile?.avatar, data?.profile?.displayName, data?.email)}
               email={data?.email}
             />}
             {activeSection === "Explore" && !selectedArticle && <Explore email={data?.email} />}
@@ -786,7 +796,7 @@ export default function HomePage() {
                                         setActiveChat({
                                           peerEmail: user.email,
                                           peerUserName: user.username,
-                                          peerAvatar: user.avatar,
+                                          peerAvatar: getCleanAvatar(user.avatar, user.userrealname, user.email),
                                           peerRealName: user.userrealname,
                                         });
                                         setSearchTerm("");
@@ -797,7 +807,7 @@ export default function HomePage() {
                                       className="p-4 flex items-center gap-4 hover:bg-gray-800 cursor-pointer"
                                     >
                                       <img
-                                        src={user.avatar || "/default-avatar.png"}
+                                        src={getCleanAvatar(user.avatar, user.userrealname, user.email)}
                                         alt="avatar"
                                         className="w-10 h-10 rounded-full"
                                       />
@@ -1079,7 +1089,7 @@ export default function HomePage() {
               <ProfileComponent
                 userrealname={data?.profile?.displayName}
                 username={data?.username}
-                avatar={data?.profile?.avatar || "https://tse1.mm.bing.net/th?id=OIP.lcdOc6CAIpbvYx3XHfoJ0gHaF3&pid=Api&P=0&h=180"}
+                avatar={getCleanAvatar(data?.profile?.avatar, data?.profile?.displayName, data?.email)}
                 followers={data?.followers}
                 following={data?.following}
                 createdAt={data?.firstlogincreatedAt}
@@ -1124,7 +1134,7 @@ export default function HomePage() {
               </div>
 
 
-              {query && (
+              {query && activeSection !== "Explore" && (
 
                 <div className="searchbox text-white two absolute z-50 bg-black px-4 py-4 my-5 mx-6 min-w-full overflow-y-scroll overflow-x-clip break-words align-middle text-lg font-bold flex flex-col justify-start items-start shadow-lg rounded-xl right-4 bottom-3">
                   {loading ? (
@@ -1136,8 +1146,8 @@ export default function HomePage() {
                         className="gmail pale flex items-center space-x-2 w-full gap-4 border-b border-gray-500 pb-2 m-[2px] px-[4px] py-[6px] hover:bg-zinc-800 cursor-pointer"
                         onClick={() => setSelectedUser(user)}
                       >
-                        <img0k
-                          src={user.profile?.avatar || "/default.png"}
+                        <img
+                          src={getCleanAvatar(user?.profile?.avatar, user?.userrealname, user.email)}
                           alt=""
                           className="w-8 h-8 rounded-full"
                         />
