@@ -34,7 +34,7 @@ const GoogleProviderCustom = (options) => ({
       image: profile.picture,
     };
   },
-  options,
+
 });
 
 export default GoogleProviderCustom;

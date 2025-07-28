@@ -1,6 +1,4 @@
-import { OAuthConfig } from "next-auth/providers/oauth";
-
-const GitHubProviderCustom = (options) => ({
+const GitHubProviderCustom = ({ clientId, clientSecret }) => ({
   id: "github",
   name: "GitHub",
   type: "oauth",
@@ -40,8 +38,8 @@ const GitHubProviderCustom = (options) => ({
       email: profile.email,
       image: profile.avatar_url,
     };
-  },
-  options,
+  }
 });
 
 export default GitHubProviderCustom;
+
