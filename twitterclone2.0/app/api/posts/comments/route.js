@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '../../lib/dBconnect';
 import { Post } from '../../lib/models/Post';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getServerSession}  from 'next-auth';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '../../lib/authOptions';
 import { createNotification } from '../../lib/createNotification';
 export async function GET(req) {
   await dbConnect();

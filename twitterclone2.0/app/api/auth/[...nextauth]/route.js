@@ -2,10 +2,10 @@
 
 // app/api/auth/[...nextauth]/route.js
 
-import NextAuth from "next-auth";
+import NextAuth from "next-auth/next";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
+import Credentials from "next-auth/providers/credentials";
 import dbConnect from "../../lib/dBconnect";
 import UserProfile from "../../lib/models/UserProfile";
 
@@ -19,7 +19,7 @@ export const authOptions = {
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
-    CredentialsProvider({
+    Credentials({
       name: 'Credentials',
       credentials: {
         username: { label: "Username", type: "text" },

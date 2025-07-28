@@ -10,14 +10,12 @@ const NotificationSchema = new mongoose.Schema({
      enum: ["follow", "like", "comment","retweet"],
      required: true,
   },
-  postId:{ type: String },
+  postId:{ type: String,default:null },
   isRead: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
 }, { timestamps: true });
 
 
-export const Notification =
-  mongoose.models.Notification ||
-  mongoose.model("Notification", NotificationSchema);
+export const Notification = mongoose.models.Notification ||mongoose.model("Notification", NotificationSchema);
 
 
