@@ -4,7 +4,6 @@ import { Post } from '../../lib/models/Post';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { createNotification } from '../../lib/createNotification';
-
 export async function GET(req) {
   await dbConnect();
   const { searchParams } = new URL(req.url);
