@@ -85,7 +85,7 @@ useEffect(() => {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="text-3xl text-center font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-8"
         >
-          🎉 Welcome! Let's Complete Your Journey
+          🎉 Welcome! Let&apos;s Complete Your Journey
         </motion.h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
