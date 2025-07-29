@@ -1,0 +1,28 @@
+{
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-env": {},
+        "transform-runtime": {},
+        "styled-jsx": {},
+        "class-properties": {}
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["."],
+        "alias": {
+          "@": "./",
+          "~": "./app",
+          "@components": "./components",
+          "@lib": "./lib",
+          "@models": "./models"
+        }
+      }
+    ]
+  ]
+}

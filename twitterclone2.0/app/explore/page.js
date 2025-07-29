@@ -1,4 +1,4 @@
-
+"use client"
 import React, { useState, useEffect } from 'react';
 import useUserSearch from "../hooks/useUserSearch";
 import { useSession } from "next-auth/react";

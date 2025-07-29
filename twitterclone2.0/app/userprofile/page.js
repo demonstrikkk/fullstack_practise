@@ -496,7 +496,7 @@ const handleLike = async (postId) => {
       {activeTab === 'posts' && !loading && posts.filter(p => p.userEmail === email).length === 0 && (
         <center style={{ paddingTop: '26px' }}>
           <h2>Create your first post now</h2>
-          <script src="https://cdn.lordicon.com/lordicon.js"></script>
+          <script src="https://cdn.lordicon.com/lordicon.js" async />
           <lord-icon
             src="https://cdn.lordicon.com/mfdeeuho.json"
             trigger="hover"
