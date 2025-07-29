@@ -34,7 +34,7 @@ export function WhatsHappening({ onArticleSelect }) {
 
   return (
     <div className="happening w-full border border-gray-600 p-4 rounded-2xl bg-[#121212] overflow-y-auto relative z-20 two ">
-      <h2 className="text-white font-extrabold text-xl mb-4">What's Happening</h2>
+      <h2 className="text-white font-extrabold text-xl mb-4">What&apos;s Happening</h2>
       {TABS.map((section) => (
         <div key={section} className="mb-4">
           <h3 className="text-blue-400 font-semibold text-md mb-2">{section}</h3>

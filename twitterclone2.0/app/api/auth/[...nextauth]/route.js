@@ -2,24 +2,27 @@
 
 // app/api/auth/[...nextauth]/route.js
 
-import NextAuth from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
+import NextAuth from "next-auth/next";
+// import GithubProvider from "next-auth/providers/github";
+import GitHubProviderCustom from "../../lib/githubprovider";
+import GoogleProviderCustom from "../../lib/googleprovider";
+// import GoogleProvider from "next-auth/providers/google";
+// import Credentials from "next-auth/providers/credentials";
+import CustomCredentialsProvider from "../../lib/credentialscustom";
 import dbConnect from "../../lib/dBconnect";
 import UserProfile from "../../lib/models/UserProfile";
 
 export const authOptions = {
   providers: [
-    GithubProvider({
+    GitHubProviderCustom({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
-    GoogleProvider({
+    GoogleProviderCustom({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
-    CredentialsProvider({
+    CustomCredentialsProvider({
       name: 'Credentials',
       credentials: {
         username: { label: "Username", type: "text" },

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // app/api/generate-static-code/route.js
 export async function GET() {
   const htmlCode = `
@@ -10,5 +11,13 @@ export async function GET() {
 
   return new Response(JSON.stringify({ code: htmlCode }), {
     headers: { 'Content-Type': 'application/json' },
+=======
+export async function GET(request) {
+  return new Response(JSON.stringify({ status: "ok" }), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+>>>>>>> 38da3092a9baa9fe3af48ab1c9159325f2626731
   });
 }

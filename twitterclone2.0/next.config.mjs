@@ -8,6 +8,7 @@
 //       'lh3.googleusercontent.com'
 //     ],
 //   },
+<<<<<<< HEAD
 //    eslint: {
 //     // ignoreDuringBuilds: true,
 //     // Or more specifically:
@@ -16,17 +17,29 @@
 //     }
 //   },
   
+=======
+>>>>>>> 38da3092a9baa9fe3af48ab1c9159325f2626731
 // };
 
 
 
 // export default nextConfig;
+<<<<<<< HEAD
 
+=======
+import path from "path";
+import { fileURLToPath } from "url";
+
+/** Needed to replicate __dirname in ES Modules */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+>>>>>>> 38da3092a9baa9fe3af48ab1c9159325f2626731
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     domains: [
+<<<<<<< HEAD
       'res.cloudinary.com',
       'avatars.githubusercontent.com',
       'lh3.googleusercontent.com'
@@ -47,3 +60,17 @@ const nextConfig = {
 };
 
 export default nextConfig;
+=======
+      "res.cloudinary.com",
+      "avatars.githubusercontent.com",
+      "lh3.googleusercontent.com"
+    ],
+  },
+  webpack: (config) => {
+    config.resolve.alias["@" ] = path.resolve(__dirname);
+    return config;
+  },
+};
+
+export default nextConfig;
+>>>>>>> 38da3092a9baa9fe3af48ab1c9159325f2626731

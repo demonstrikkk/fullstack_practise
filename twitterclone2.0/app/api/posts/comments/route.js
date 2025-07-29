@@ -190,8 +190,13 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/route';
 import dbConnect from '../../lib/dBconnect';
 import { Post } from '../../lib/models/Post';
+<<<<<<< HEAD
+=======
+import { getServerSession}  from 'next-auth';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '../../lib/authOptions';
+>>>>>>> 38da3092a9baa9fe3af48ab1c9159325f2626731
 import { createNotification } from '../../lib/createNotification';
-
 export async function GET(req) {
   try {
     await dbConnect();
