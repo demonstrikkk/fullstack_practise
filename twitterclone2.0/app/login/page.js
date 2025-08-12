@@ -199,14 +199,6 @@
 
 
 
-
-
-
-
-
-
-
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -337,7 +329,7 @@ export default function LoginPage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => handleOAuthLogin("github")}
-            className="flex-1 bg-[#24292F] text-white py-3 rounded-lg flex items-center justify-center gap-3"
+            className="flex-1 bg-[#24292F] size8  text-white py-3 rounded-lg flex items-center justify-center gap-3"
           >
             {/* GitHub icon */}
             <svg
@@ -359,7 +351,7 @@ export default function LoginPage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => handleOAuthLogin("google")}
-            className="flex-1 bg-[#4285F4] text-white py-3 rounded-lg flex items-center justify-center gap-3"
+            className="flex-1 bg-[#4285F4] size8  text-white py-3 rounded-lg flex items-center justify-center gap-3"
           >
             {/* Google icon */}
             <svg
@@ -379,9 +371,8 @@ export default function LoginPage() {
           </motion.button>
         </div>
 
-        <div className="text-gray-400 text-sm mb-6">or continue with email</div>
+        {/* <div className="text-gray-400 text-sm mb-6">or continue with email</div>
 
-        {/* Email/password form */}
         <form onSubmit={handleCredentialsLogin} className="w-full space-y-4">
           <input
             type="email"
@@ -390,7 +381,7 @@ export default function LoginPage() {
             onChange={(e) =>
               setCredentials((prev) => ({ ...prev, email: e.target.value }))
             }
-            className="w-full p-3 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:ring-2"
+            className="w-full p-3 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:ring-2 size8 space10"
             required
           />
           <input
@@ -400,7 +391,7 @@ export default function LoginPage() {
             onChange={(e) =>
               setCredentials((prev) => ({ ...prev, password: e.target.value }))
             }
-            className="w-full p-3 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:ring-2"
+            className="w-full p-3 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:ring-2 size8 space10"
             required
           />
 
@@ -411,12 +402,16 @@ export default function LoginPage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             disabled={isLoading}
-            className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
+            className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition size8 space20"
           >
             {isLoading ? "Signing in..." : "Sign in"}
           </motion.button>
-        </form>
+        </form> */}
       </motion.div>
     </div>
   );
 }
+
+
+
+

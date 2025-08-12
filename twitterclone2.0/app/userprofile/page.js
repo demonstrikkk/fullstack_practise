@@ -54,6 +54,19 @@ export default function ProfileComponent({ userrealname, username, avatar, follo
   
   const [session, setSession] = useState(null);
 
+  const [userPosts, setUserPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [scheduledPosts, setScheduledPosts] = useState([]);
+  
+  const [refreshNeeded, setRefreshNeeded] = useState(false);
+  const [activeTab, setActiveTab] = useState('posts');
+  
+  const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState(""); // 'followers' or 'following'
+  const [modalUsers, setModalUsers] = useState([]);
+  const [loadingUsers, setLoadingUsers] = useState(false);
+  
   useEffect(() => {
     // Fetch the session on mount
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -70,18 +83,6 @@ export default function ProfileComponent({ userrealname, username, avatar, follo
       authListener.subscription.unsubscribe();
     };
   }, []);
-    const [userPosts, setUserPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [scheduledPosts, setScheduledPosts] = useState([]);
-
-   const [refreshNeeded, setRefreshNeeded] = useState(false);
-   const [activeTab, setActiveTab] = useState('posts');
-
-const [isModalOpen, setIsModalOpen] = useState(false);
-const [modalType, setModalType] = useState(""); // 'followers' or 'following'
-const [modalUsers, setModalUsers] = useState([]);
-const [loadingUsers, setLoadingUsers] = useState(false);
-
 
 const handleOpenModal = async (type, data) => {
   setModalType(type);
@@ -112,7 +113,6 @@ const handleOpenModal = async (type, data) => {
 
 
 
-const router = useRouter();
 
 
 const fetchScheduledPosts = async () => {

@@ -54,8 +54,6 @@ import { NextResponse } from "next/server";
 import dbConnect from "../lib/dBconnect";
 import UserProfile from "../lib/models/UserProfile";
 import bcrypt from "bcryptjs";
-import { supabase } from "../lib/supabaseClient";
-
 
 export async function POST(req) {
   await dbConnect();

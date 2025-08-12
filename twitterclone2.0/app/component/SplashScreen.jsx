@@ -1,6 +1,7 @@
 // app/components/SplashScreen.jsx
 "use client";
-import { useLoading } from "../context/LoadingContext";
+
+import { useLoading } from "../context/LoadingContext/page";
 import { motion } from "framer-motion";
 
 export default function SplashScreen() {

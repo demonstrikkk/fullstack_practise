@@ -73,15 +73,16 @@ useEffect(() => {
   }
   fetchSession();
 
-  // Optionally listen for auth state changes to update token
-  const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+  const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
     setAccessToken(session?.access_token ?? null);
   });
 
   return () => {
-    listener?.unsubscribe();
+    subscription.unsubscribe();
   };
 }, []);
+
+
   return (
     <AnimatePresence>
       {isOpen && (

@@ -12,6 +12,8 @@ export default function BookmarkedPosts() {
   // const { data: session } = useSession();
   const [session, setSession] = useState(null);
   const [loadingSession, setLoadingSession] = useState(true);
+  const router = useRouter();
+  const email = session?.user?.email;
   
 
   // Load session on mount and listen for changes
@@ -67,8 +69,6 @@ export default function BookmarkedPosts() {
   const [activeCollection, setActiveCollection] = useState(null);
   const [deleting, setDeleting] = useState(null);
 
-  const email = session?.user?.email;
-  const router = useRouter();
 
   // Fetch all collections
   useEffect(() => {

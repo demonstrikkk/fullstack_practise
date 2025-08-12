@@ -5,6 +5,7 @@ import { Post } from "@/app/api/lib/models/Post";
 import { NextResponse } from "next/server";
 import UserProfile from "@/app/api/lib/models/UserProfile";
 
+
 export async function POST(req, context) {
   const { postId } = context.params; // Correct way to access dynamic route params
   const { userEmail, selectedOption } = await req.json();
