@@ -7,8 +7,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import AvatarDropzone from "./AvatarDropzone";
+import { supabase } from "../api/lib/supabaseClient";
 
 export default function UpdateProfileForm({ isOpen, onClose, initialData = {}, triggerRefresh }) {
+  const [accessToken, setAccessToken] = useState(null);
   const [formData, setFormData] = useState({
     displayName: "",
     avatar: "",
@@ -30,7 +32,7 @@ export default function UpdateProfileForm({ isOpen, onClose, initialData = {}, t
         password: "",
       });
     }
-  }, [isOpen, initialData]);
+  }, [isOpen, initialData, accessToken]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -44,7 +46,7 @@ export default function UpdateProfileForm({ isOpen, onClose, initialData = {}, t
     try {
       const res = await fetch("/api/updateProfile", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" , ...(accessToken ? { 'Authorization': `Bearer ${accessToken}` } : {})},
         body: JSON.stringify(formData),
       });
 
@@ -62,6 +64,24 @@ export default function UpdateProfileForm({ isOpen, onClose, initialData = {}, t
     }
   };
 
+
+
+useEffect(() => {
+  async function fetchSession() {
+    const { data: { session } } = await supabase.auth.getSession();
+    setAccessToken(session?.access_token ?? null);
+  }
+  fetchSession();
+
+  // Optionally listen for auth state changes to update token
+  const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+    setAccessToken(session?.access_token ?? null);
+  });
+
+  return () => {
+    listener?.unsubscribe();
+  };
+}, []);
   return (
     <AnimatePresence>
       {isOpen && (

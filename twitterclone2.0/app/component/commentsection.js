@@ -13,6 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import EmojiPicker from "./emojiupload";
 import { formatDistanceToNow } from 'date-fns';
 import { MessageCircle, Heart, X, Loader2 } from 'lucide-react';
+import { supabase } from '../api/lib/supabaseClient';
 
 import GifSearch from './gifupload'; // Assuming you have a GiphySearch component for GIFs
 
@@ -40,6 +41,9 @@ const CommentSection = ({
     setInputText = () => {},
   } = state;
 
+
+
+
   // State management
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,6 +57,26 @@ const CommentSection = ({
   const [showGifUpload, setShowGifUpload] = useState(false);
   const popupRef = useRef(null);
   const [selectedMedia, setSelectedMedia] = useState(null); // holds GIF url or null
+
+
+  const [accessToken, setAccessToken] = useState(null);
+
+useEffect(() => {
+  async function fetchSession() {
+    const { data: { session } } = await supabase.auth.getSession();
+    setAccessToken(session?.access_token ?? null);
+  }
+  fetchSession();
+
+  // Optionally listen for auth state changes to update token
+  const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+    setAccessToken(session?.access_token ?? null);
+  });
+
+  return () => {
+    listener?.unsubscribe();
+  };
+}, []);
 
 
   const commentListRef = useRef(null);
@@ -75,7 +99,11 @@ const toggleReplies = (commentId) => {
     setError(null);
     
     try {
-      const res = await fetch(`/api/posts/comments?postId=${postId}`);
+      const res = await fetch(`/api/posts/comments?postId=${postId}`, {
+     headers: {
+          ...(accessToken ? { 'Authorization': `Bearer ${accessToken}` } : {}),
+        },
+  });
       const data = await res.json();
       
       if (res.ok) {
@@ -89,7 +117,7 @@ const toggleReplies = (commentId) => {
     } finally {
       setLoading(false);
     }
-  }, [postId]);
+  }, [postId,accessToken]);
 
   // Initial fetch and setup
   useEffect(() => {
@@ -117,7 +145,7 @@ const toggleReplies = (commentId) => {
 
 const res = await fetch('/api/posts/comments', {
   method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+  headers: { 'Content-Type': 'application/json' , ...(accessToken ? { 'Authorization': `Bearer ${accessToken}` } : {})},
   body: JSON.stringify({
   type: "ADD_COMMENT",
    postId,
@@ -149,7 +177,7 @@ if (res.ok) {
     } finally {
       setIsSending(false);
     }
-  }, [inputText, postId, currentUserEmail, currentUsername, currentUserAvatar, setInputText]);
+  }, [inputText, postId, currentUserEmail, currentUsername, currentUserAvatar, setInputText,accessToken]);
 
   const handleSendReply = useCallback(async (commentId) => {
   const replyText = (replyInputs[commentId] || '').trim();
@@ -161,7 +189,7 @@ if (res.ok) {
   try {
     const res = await fetch('/api/posts/comments', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' , ...(accessToken ? { 'Authorization': `Bearer ${accessToken}` } : {}) },
       body: JSON.stringify({
         postId,
         type: 'ADD_REPLY',
@@ -193,7 +221,7 @@ if (res.ok) {
   } finally {
     setIsSending(false);
   }
-}, [replyInputs, postId, currentUserEmail, currentUsername, currentUserAvatar]);
+}, [replyInputs, postId, currentUserEmail, currentUsername, currentUserAvatar,accessToken]);
 
 
 // ✅ FIXED toggleLike function – no trimmedText, no avatar, no username
@@ -206,7 +234,7 @@ const toggleLike = useCallback(async (type, commentId, replyId = null) => {
   try {
     const res = await fetch('/api/posts/comments', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...(accessToken ? { 'Authorization': `Bearer ${accessToken}` } : {}) },
       body: JSON.stringify({
         postId,
         type,
@@ -227,7 +255,7 @@ const toggleLike = useCallback(async (type, commentId, replyId = null) => {
     setError('Failed to connect to server');
     console.error('Error toggling like:', err);
   }
-}, [postId, currentUserEmail]);
+}, [postId, currentUserEmail,accessToken]);
 
 
 

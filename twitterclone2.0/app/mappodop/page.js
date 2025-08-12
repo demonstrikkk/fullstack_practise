@@ -161,7 +161,7 @@ export default function Pirate() {
 
   return (
     <div className="flex flex-col items-center p-6 bg-yellow-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-4 text-yellow-800">Pirate's Treasure Map</h1>
+      <h1 className="text-3xl font-bold mb-4 text-yellow-800">Pirate&apos;s Treasure Map</h1>
       <audio autoPlay loop className="hidden">
   <source src="/images/pirates_theme.mp3" type="audio/mpeg" />
   

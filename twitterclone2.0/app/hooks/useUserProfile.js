@@ -1,14 +1,31 @@
 
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-
+import { supabase } from '../api/lib/supabaseClient';
 export default function useUserProfile() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const [session, setSession] = useState(null);
 
+  useEffect(() => {
+    // Fetch the session on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Also subscribe to auth state changes (optional, for realtime updates)
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
   // Fetch All Users Data
   const getAllUsers = async () => {
     setLoading(true);

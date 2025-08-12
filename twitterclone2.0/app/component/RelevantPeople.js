@@ -1,9 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import HomePage from "../sidebar/page";
-
+import { supabase } from "../api/lib/supabaseClient";
 const RelevantPeople = ({ setSelectedUser }) => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Fetch the session on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Also subscribe to auth state changes (optional, for realtime updates)
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);  
   const [people, setPeople] = useState([]);
   const [followStatus, setFollowStatus] = useState({}); // {email: boolean}
 

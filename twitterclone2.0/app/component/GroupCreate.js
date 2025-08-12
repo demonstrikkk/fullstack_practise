@@ -3,18 +3,36 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../api/lib/supabaseClient";
 import { useSession } from "next-auth/react";
+// import { supabase } from "../api/lib/supabaseClient";
+export default function GroupCreate({ onGroupCreated, onClose, searchTerm, setSearchTerm }) {
+  // const { data: session } = useSession();
+  const [session, setSession] = useState(null);
 
-export default function GroupCreate({ onGroupCreated, onClose ,searchTerm,setSearchTerm}) {
-  const { data: session } = useSession();
+  useEffect(() => {
+    // Fetch the session on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Also subscribe to auth state changes (optional, for realtime updates)
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
   const [groupName, setGroupName] = useState("");
-//   const [searchTerm, setSearchTerm] = useState("");
+  //   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState({});
   const [isSearching, setIsSearching] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-const currentUserEmail = session?.user?.email;
- 
+  const currentUserEmail = session?.user?.email;
+
   useEffect(() => {
     if (!searchTerm.trim()) {
       setSearchResults([]);
@@ -54,48 +72,48 @@ const currentUserEmail = session?.user?.email;
     setIsLoading(true);
     setError("");
 
-try {
-  const { data: groupData, error: groupError } = await supabase
-    .from("groups")
-    .insert({
-      name: groupName,
-      created_by: session.user.email,
-      description: "",
-      avatar_url: "",
-    })
-    .select()
-    .single();
+    try {
+      const { data: groupData, error: groupError } = await supabase
+        .from("groups")
+        .insert({
+          name: groupName,
+          created_by: session.user.email,
+          description: "",
+          avatar_url: "",
+        })
+        .select()
+        .single();
 
-  if (groupError) throw groupError;
+      if (groupError) throw groupError;
 
-  const membersToInsert = [
-    { group_id: groupData.id, user_email: session.user.email, role: 'admin' },
-    ...membersArray.map(member => ({
-      group_id: groupData.id,
-      user_email: member.email,
-      role: 'member'
-    }))
-  ];
+      const membersToInsert = [
+        { group_id: groupData.id, user_email: session.user.email, role: 'admin' },
+        ...membersArray.map(member => ({
+          group_id: groupData.id,
+          user_email: member.email,
+          role: 'member'
+        }))
+      ];
 
-  const { error: groupMembersError } = await supabase
-    .from("group_members")
-    .insert(membersToInsert);
+      const { error: groupMembersError } = await supabase
+        .from("group_members")
+        .insert(membersToInsert);
 
-  if (groupMembersError) throw groupMembersError;
+      if (groupMembersError) throw groupMembersError;
 
-  alert("Group created successfully!");
-  onGroupCreated(groupData);
+      alert("Group created successfully!");
+      onGroupCreated(groupData);
 
-  setGroupName("");
-  setSelectedMembers({});
-  setSearchTerm("");
-  setSearchResults([]);
-} catch (err) {
-  console.error("Error creating group:", err);
-  setError(err.message || "Failed to create group.");
-} finally {
-  setIsLoading(false);
-}
+      setGroupName("");
+      setSelectedMembers({});
+      setSearchTerm("");
+      setSearchResults([]);
+    } catch (err) {
+      console.error("Error creating group:", err);
+      setError(err.message || "Failed to create group.");
+    } finally {
+      setIsLoading(false);
+    }
 
   };
 

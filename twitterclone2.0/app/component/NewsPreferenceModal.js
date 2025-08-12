@@ -45,8 +45,7 @@ export default function NewsPreferenceModal({ email, onClose }) {
       🧠 Tailor Your Feed
     </h2>
     <p className="text-gray-400 text-sm text-center mb-6 max-w-xs mx-auto">
-      Select topics you care about. We'll show you news that matter most ✨
-    </p>
+Select topics you care about. We&apos;ll show you news that matters most ✨    </p>
 
     <div className="flex flex-wrap gap-3 justify-center max-h-[200px] overflow-y-auto custom-scroll pr-2 mb-8">
       {tags.map((tag) => (

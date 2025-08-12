@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -18,12 +10,29 @@ import ReplyPreview from "./ReplyPreview";
 import MediaUploader from "./MediaUploader";
 import GifSearch from "./gifupload";
 import GroupInfoPanel from "./groupinfopanel";
-
 const EmojiPicker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
 export function GroupChatBox({ groupId, onClose ,onStatusTextUpdate , onNewMessage  }) {
-  const { data: session } = useSession();
-  const currentUserEmail = session?.user?.email;
+  // const { data: session } = useSession();
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Fetch the session on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Also subscribe to auth state changes (optional, for realtime updates)
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+    const currentUserEmail = session?.user?.email;
   const [showGroupInfo, setShowGroupInfo] = useState(false);
 const [showScrollButton, setShowScrollButton] = useState(false);
 const [bookmarkUnreadId, setBookmarkUnreadId] = useState(null);

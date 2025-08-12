@@ -9,7 +9,7 @@ import useUserProfile from "../hooks/useUserProfile";
 import NewsPreferenceModal from '../component/NewsPreferenceModal';
 const TABS = ['For You', 'Trending', 'News', 'Sports', 'Entertainment'];
 
-
+import { supabase } from '../api/lib/supabaseClient';
 
 export function WhatsHappening({ onArticleSelect }) {
   const [newsPreview, setNewsPreview] = useState({});
@@ -34,7 +34,7 @@ export function WhatsHappening({ onArticleSelect }) {
 
   return (
     <div className="happening w-full border border-gray-600 p-4 rounded-2xl bg-[#121212] overflow-y-auto relative z-20 two ">
-      <h2 className="text-white font-extrabold text-xl mb-4">What's Happening</h2>
+      <h2 className="text-white font-extrabold text-xl mb-4">What&apos;s Happening</h2>
       {TABS.map((section) => (
         <div key={section} className="mb-4">
           <h3 className="text-blue-400 font-semibold text-md mb-2">{section}</h3>
@@ -77,7 +77,25 @@ const [showPrefModal, setShowPrefModal] = useState(false);
 
 const [loadingPreferences, setLoadingPreferences] = useState(true);
 
-const { data: session, status } = useSession();
+// const { data: session, status } = useSession();
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Fetch the session on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Also subscribe to auth state changes (optional, for realtime updates)
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
 const userEmail = session?.user?.email || email;
 
 useEffect(() => {

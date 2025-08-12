@@ -105,5 +105,3 @@ postSchema.methods.isBookmarkedBy = function(userEmail) {
 
 // Export the model
 export const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
-// At the bottom of Post.js
-export const postSchemaed = postSchema;

@@ -2,7 +2,7 @@ import { Notification } from "./models/Notification";
 import dbConnect from "./dBconnect";
 
 
-export async function createNotification({ userEmail, fromUserEmail, type, postId = null }) {
+export  async function createNotification({ userEmail, fromUserEmail, type, postId = null }) {
 
 
 

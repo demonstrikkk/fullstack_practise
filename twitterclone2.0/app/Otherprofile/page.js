@@ -5,7 +5,7 @@ import {React} from "react";
 import { useSession } from 'next-auth/react';
 import PostCard from "../component/post-card";
 import { Loader2 } from "lucide-react";
-
+import { supabase } from "../api/lib/supabaseClient";
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -46,7 +46,25 @@ export  function usePollVoting(userEmail, posts, setPosts) {
 
 
 export default function OtherProfileComponent({ userrealname, username, avatar,followers,following,bio,location,createdAt,email,onClose }) {
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Fetch the session on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Also subscribe to auth state changes (optional, for realtime updates)
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);  
   const [isFollowing, setIsFollowing] = useState(false);
   
   const [posts, setPosts] = useState([]);

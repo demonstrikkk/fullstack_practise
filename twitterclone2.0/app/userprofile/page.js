@@ -10,6 +10,7 @@ import UpdateProfileForm from "../component/updateprofile";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Loader2 } from 'lucide-react';
+import { supabase } from '../api/lib/supabaseClient';
 export  function usePollVoting(userEmail, posts , setPosts) {
   const [userSelectedOption, setUserSelectedOption] = useState({}); // keyed by postId
    
@@ -51,8 +52,25 @@ export  function usePollVoting(userEmail, posts , setPosts) {
 export default function ProfileComponent({ userrealname, username, avatar, followers, following, bio, location, createdAt, email  }) {
   
   
-  const { data: session, status } = useSession();
-  const [userPosts, setUserPosts] = useState([]);
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Fetch the session on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Also subscribe to auth state changes (optional, for realtime updates)
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+    const [userPosts, setUserPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [scheduledPosts, setScheduledPosts] = useState([]);
 

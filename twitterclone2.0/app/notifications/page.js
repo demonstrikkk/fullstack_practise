@@ -12,7 +12,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import PostPopup from "../component/PostPopup"; // adjust path as needed
 import OtherProfileComponent from "../Otherprofile/page";
-
+import { supabase } from "../api/lib/supabaseClient";
 const iconMap = {
   like: <Heart className="text-pink-500 w-5 h-5" />,
   follow: <UserPlus className="text-blue-500 w-5 h-5" />,
@@ -193,7 +193,25 @@ export function NotificationPanel({ userEmail }) {
 }
 
 export default function Notifications() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Fetch the session on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Also subscribe to auth state changes (optional, for realtime updates)
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);  
   const userEmail = session?.user?.email;
 
   return (

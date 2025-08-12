@@ -6,9 +6,59 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import PostCard from "../component/post-card";
 import { useRouter } from "next/navigation";
+import { supabase } from "../api/lib/supabaseClient";
 
 export default function BookmarkedPosts() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const [session, setSession] = useState(null);
+  const [loadingSession, setLoadingSession] = useState(true);
+  
+
+  // Load session on mount and listen for changes
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setLoadingSession(false);
+    });
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      setLoadingSession(false);
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
+
+
+  // Redirect if no session (user not logged in)
+  useEffect(() => {
+    if (!loadingSession && !session) {
+      router.push("/login");
+    }
+  }, [loadingSession, session, router]);
+
+  // Fetch collections when email available
+  useEffect(() => {
+    if (!email) return;
+
+    const fetchCollections = async () => {
+      try {
+        const res = await fetch(`/api/posts/collections?userEmail=${email}`);
+        const data = await res.json();
+        setCollections(data.collections || []);
+        if (data.collections?.length === 1) {
+          setActiveCollection(data.collections[0]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch collections:", err);
+      }
+    };
+
+    fetchCollections();
+  }, [email]);
   const [collections, setCollections] = useState([]);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);

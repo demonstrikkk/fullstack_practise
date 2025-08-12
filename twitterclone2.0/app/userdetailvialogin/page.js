@@ -6,9 +6,27 @@ import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-
+import { supabase } from '../api/lib/supabaseClient';
 const UserDetailsViaLogin = () => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Fetch the session on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Also subscribe to auth state changes (optional, for realtime updates)
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
   const [userDetails, setUserDetails] = useState({
     username: '',
     password: '',
@@ -85,7 +103,7 @@ useEffect(() => {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="text-3xl text-center font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-8"
         >
-          🎉 Welcome! Let's Complete Your Journey
+          🎉 Welcome! Let&apos;s Complete Your Journey
         </motion.h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">

@@ -28,7 +28,6 @@ import GroupCreate from "../component/GroupCreate";
 import { GroupChatBox } from "../component/groupchatting";
 import { SkeletonProfile } from "../component/skeletionpost";
 
-
 // Modularize your Private Chats into this:
 
 
@@ -51,7 +50,25 @@ export default function HomePage() {
     }, 300);
     return () => clearTimeout(debounce);
   }, [query]);
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Fetch the session on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Also subscribe to auth state changes (optional, for realtime updates)
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
   const router = useRouter();
   // router.push('/userdetailvialogin')
   const [showPopup, setShowPopup] = useState(false);
@@ -87,36 +104,36 @@ export default function HomePage() {
 
   const [activeGroup, setActiveGroup] = useState(null);
 
-//   function getCleanAvatar(rawAvatar, displayName, email) {
-//   if (rawAvatar && rawAvatar.includes("lh3.googleusercontent")) {
-//     const name = displayName || email;
-//     return `https://placehold.co/40x40?text=${name?.[0] || "U"}`;
-//   }
-//   return rawAvatar || `https://placehold.co/40x40?text=${(displayName || email)?.[0] || "U"}`;
-// }
+  //   function getCleanAvatar(rawAvatar, displayName, email) {
+  //   if (rawAvatar && rawAvatar.includes("lh3.googleusercontent")) {
+  //     const name = displayName || email;
+  //     return `https://placehold.co/40x40?text=${name?.[0] || "U"}`;
+  //   }
+  //   return rawAvatar || `https://placehold.co/40x40?text=${(displayName || email)?.[0] || "U"}`;
+  // }
 
 
-function getCleanAvatar(rawAvatar, displayName, email) {
-  const name = displayName || email || "U";
-  const initial = name[0]?.toUpperCase() || "U";
+  function getCleanAvatar(rawAvatar, displayName, email) {
+    const name = displayName || email || "U";
+    const initial = name[0]?.toUpperCase() || "U";
 
-  // Fixed color mapping A–Z
-  const colorMap = {
-    A: "FFB6C1", B: "87CEFA", C: "20B2AA", D: "FFA07A", E: "9370DB",
-    F: "F4A460", G: "40E0D0", H: "EE82EE", I: "7B68EE", J: "00CED1",
-    K: "BA55D3", L: "3CB371", M: "F08080", N: "48D1CC", O: "FF6347",
-    P: "00BFFF", Q: "DA70D6", R: "FA8072", S: "66CDAA", T: "E9967A",
-    U: "8FBC8F", V: "CD5C5C", W: "9ACD32", X: "BC8F8F", Y: "87CEEB", Z: "B0C4DE"
-  };
+    // Fixed color mapping A–Z
+    const colorMap = {
+      A: "FFB6C1", B: "87CEFA", C: "20B2AA", D: "FFA07A", E: "9370DB",
+      F: "F4A460", G: "40E0D0", H: "EE82EE", I: "7B68EE", J: "00CED1",
+      K: "BA55D3", L: "3CB371", M: "F08080", N: "48D1CC", O: "FF6347",
+      P: "00BFFF", Q: "DA70D6", R: "FA8072", S: "66CDAA", T: "E9967A",
+      U: "8FBC8F", V: "CD5C5C", W: "9ACD32", X: "BC8F8F", Y: "87CEEB", Z: "B0C4DE"
+    };
 
-  const bgColor = colorMap[initial] || "CCCCCC"; // fallback gray
+    const bgColor = colorMap[initial] || "CCCCCC"; // fallback gray
 
-  if (rawAvatar && !rawAvatar.includes("lh3.googleusercontent")) {
-    return rawAvatar;
+    if (rawAvatar && !rawAvatar.includes("lh3.googleusercontent")) {
+      return rawAvatar;
+    }
+
+    return `https://placehold.co/40x40/${bgColor}/ffffff?text=${initial}`;
   }
-
-  return `https://placehold.co/40x40/${bgColor}/ffffff?text=${initial}`;
-}
 
 
   const handleStatusTextUpdate = (text, peerEmail) => {
@@ -271,7 +288,7 @@ function getCleanAvatar(rawAvatar, displayName, email) {
   const [showCreateGroup, setShowCreateGroup] = useState(false);
   const [groups, setGroups] = useState([]);
 
- 
+
 
 
   useEffect(() => {
@@ -456,9 +473,9 @@ function getCleanAvatar(rawAvatar, displayName, email) {
 
   function getPeerAvatar(email) {
     // return userProfiles[email]?.profile?.avatar || "/default-avatar.png";
-     const profile = userProfiles[email]?.profile;
-  const name = profile?.displayName || email;
-  return getCleanAvatar(profile?.avatar, name, email);
+    const profile = userProfiles[email]?.profile;
+    const name = profile?.displayName || email;
+    return getCleanAvatar(profile?.avatar, name, email);
   }
 
   function getPeerRealName(email) {
@@ -1163,7 +1180,7 @@ function getCleanAvatar(rawAvatar, displayName, email) {
 
               <div className="relevant two w-[80%] h-max[400px] border relative overflow-y-scroll z-20 border-gray-600 my-9 p-4 rounded-2xl bg-[#121212]">
                 <h2 className="text-white font-extrabold text-xl mb-4">Relevant People</h2>
-{/* 1100-1550 tak ka responsive theek karna */}
+                {/* 1100-1550 tak ka responsive theek karna */}
                 <RelevantPeople email={email} followers={data?.followers?.count} following={data?.following?.count} setSelectedUser={setSelectedUser} />
               </div>
 
