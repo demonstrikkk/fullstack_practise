@@ -317,20 +317,20 @@ export default function LoginPage() {
   }
 
   // Loading state
-  if (loading || authInProgress) {
-    return (
-      <div className="flex flex-col h-screen items-center justify-center bg-gradient-to-br from-black via-slate-800 to-black">
-        <p className="text-white text-lg mb-4">
-          {loading ? "Initializing..." : "Authenticating..."}
-        </p>
-        {error && (
-          <p className="text-red-500 text-sm max-w-md text-center px-4">
-            {error}
-          </p>
-        )}
-      </div>
-    );
-  }
+  // if (loading || authInProgress) {
+  //   return (
+  //     <div className="flex flex-col h-screen items-center justify-center bg-gradient-to-br from-black via-slate-800 to-black">
+  //       <p className="text-white text-lg mb-4">
+  //         {loading ? "Initializing..." : "Authenticating..."}
+  //       </p>
+  //       {error && (
+  //         <p className="text-red-500 text-sm max-w-md text-center px-4">
+  //           {error}
+  //         </p>
+  //       )}
+  //     </div>
+  //   );
+  // }
 
   // Main login UI
   return (
