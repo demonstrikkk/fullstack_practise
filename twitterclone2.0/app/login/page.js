@@ -335,12 +335,13 @@ export default function LoginPage() {
   // Main login UI
   return (
     <div className="relative h-screen w-full bg-gradient-to-br from-black via-slate-800 to-black flex items-center justify-center overflow-hidden">
-      {/* Background animations */}
+      {/* Background animations */} 
+    nononoono
       <motion.div
         className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-purple-600 opacity-30 blur-3xl"
         animate={{ scale: [1, 1.1, 1], opacity: [0.25, 0.35, 0.25] }}
         transition={{ duration: 6, repeat: Infinity }}
-      />
+      /> 
       <motion.div
         className="absolute -bottom-20 -right-20 w-[400px] h-[400px] rounded-full bg-blue-500 opacity-30 blur-2xl"
         animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.4, 0.3] }}
@@ -353,7 +354,7 @@ export default function LoginPage() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="z-10 backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-xl p-10 w-full max-w-md flex flex-col items-center"
-      >
+      > broooo
         <h1 className="text-4xl font-bold text-white mb-4">Welcome Back</h1>
         <p className="text-gray-300 mb-6">Sign in to access your world</p>
 
