@@ -7,6 +7,7 @@
 // DELETE /api/posts/deleteCollection?userEmail=...&collectionName=...
 import { Post } from "../../lib/models/Post";
 import dbConnect from "../../lib/dBconnect";
+export const dynamic = 'force-dynamic';
 
 export async function DELETE(req) {
   const { searchParams } = new URL(req.url);

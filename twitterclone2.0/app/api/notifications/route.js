@@ -7,6 +7,7 @@ import { Notification } from "../lib/models/Notification";
 import UserProfile from "../lib/models/UserProfile";
 import { Post } from "../lib/models/Post";
 import redis from "../lib/redis"; // ✅ Import Redis
+export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   try {

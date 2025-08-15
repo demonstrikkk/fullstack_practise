@@ -1,6 +1,7 @@
 // app/api/schedule/[id]/route.js
 import { ScheduledPost } from "../../lib/models/ScheduledPost";
 import dbConnect from "../../lib/dBconnect";
+export const dynamic = 'force-dynamic';
 
 export async function PUT(req, { params }) {
   const body = await req.json();

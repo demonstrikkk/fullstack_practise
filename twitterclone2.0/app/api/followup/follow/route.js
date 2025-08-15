@@ -4,6 +4,8 @@ import dbConnect from "../../lib/dBconnect";
 import UserProfile from "../../lib/models/UserProfile";
 import { invalidateCache } from "../../lib/cacheInvalidator";
 import { createNotification } from "../../lib/createNotification";
+export const dynamic = 'force-dynamic';
+
 export async function POST(req) {
   await dbConnect();
 

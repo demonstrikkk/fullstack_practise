@@ -3,6 +3,7 @@
 import { NextResponse } from "next/server";
 import { Post } from "../../lib/models/Post";
 import dbConnect from "../../lib/dBconnect";
+export const dynamic = 'force-dynamic';
 
 export async function POST(req) {
   try {

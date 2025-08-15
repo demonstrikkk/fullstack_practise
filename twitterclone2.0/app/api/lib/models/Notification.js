@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 
+export const dynamic = 'force-dynamic';
 
 const NotificationSchema = new mongoose.Schema({
   userEmail:  { type: String, required: true },

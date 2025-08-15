@@ -1,5 +1,6 @@
 // server/app/api/lib/models/ScheduledPost.js
 import mongoose from "mongoose";
+export const dynamic = 'force-dynamic';
 
 // === Nested Reply Schema (for replies to comments) ===
 const replySchema = new mongoose.Schema({

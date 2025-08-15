@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getNews } from "../fetchGuardian";
+export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);

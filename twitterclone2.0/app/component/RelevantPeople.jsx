@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import HomePage from "../sidebar/page";
 import { supabase } from "../api/lib/supabaseClient";

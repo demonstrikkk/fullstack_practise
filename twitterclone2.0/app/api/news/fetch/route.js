@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getNews } from "../fetchGuardian"; // update path if your file is elsewhere
+export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);

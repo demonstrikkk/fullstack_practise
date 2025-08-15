@@ -7,6 +7,7 @@ import { NewsCache } from "../lib/models/NewsCache";
 import UserProfile from "../lib/models/UserProfile";
 import redis from "../lib/redis";
 const GUARDIAN_API_KEY = process.env.NEWS_API_KEY;
+export const dynamic = 'force-dynamic';
 
 // Fetch fresh news from The Guardian API
 async function fetchGuardianNews(tag, userEmail = null) {

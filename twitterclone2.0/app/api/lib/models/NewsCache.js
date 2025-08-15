@@ -1,5 +1,6 @@
 // /lib/models/NewsCache.js
 import mongoose from "mongoose";
+export const dynamic = 'force-dynamic';
 
 const NewsCacheSchema = new mongoose.Schema({
   tag: { type: String, required: true },         // e.g. "sports", "general", "trending"

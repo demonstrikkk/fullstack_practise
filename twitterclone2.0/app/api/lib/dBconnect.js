@@ -38,6 +38,7 @@
 
 
 import mongoose from 'mongoose';
+export const dynamic = 'force-dynamic';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 

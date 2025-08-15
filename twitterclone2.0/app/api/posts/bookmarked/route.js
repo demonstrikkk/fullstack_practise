@@ -1,6 +1,7 @@
 import { Post } from "../../lib/models/Post";
 import UserProfile from "../../lib/models/UserProfile"; // Assuming this is your user model
 import dbConnect from "../../lib/dBconnect";
+export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   try {

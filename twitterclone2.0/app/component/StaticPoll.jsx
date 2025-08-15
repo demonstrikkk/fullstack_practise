@@ -1,6 +1,7 @@
 
 
 
+"use client";
 
 
 // components/StaticPollPreview.js

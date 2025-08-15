@@ -2,6 +2,7 @@
 import { ScheduledPost } from "../../lib/models/ScheduledPost";
 import { Post } from "../../lib/models/Post";
 import dbConnect from "../../lib/dBconnect";
+export const dynamic = 'force-dynamic';
 
 export const runtime = "nodejs"; // Needed for Vercel Serverless
 

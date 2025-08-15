@@ -8,6 +8,7 @@ import { NextResponse } from "next/server";
 import dbConnect from "../../lib/dBconnect";
 import UserProfile from "../../lib/models/UserProfile";
 
+export const dynamic = 'force-dynamic';
 
 export async function POST(req) {
   try {

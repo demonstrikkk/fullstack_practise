@@ -1,6 +1,7 @@
 
 
 import mongoose from 'mongoose';
+export const dynamic = 'force-dynamic';
 
 const UserProfileSchema = new mongoose.Schema({
   userId: { type: String, required: true, unique: true },

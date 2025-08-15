@@ -1,6 +1,7 @@
 // server/app/api/posts/user/[email]/route.js
 import { Post } from "@/app/api/lib/models/Post";
 import { NextResponse } from "next/server";
+export const dynamic = 'force-dynamic';
 
 export async function GET(_, { params }) {
   const { email } = params;

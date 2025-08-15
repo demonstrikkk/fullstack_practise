@@ -1,6 +1,8 @@
 import { Notification } from "./models/Notification";
 import dbConnect from "./dBconnect";
 
+export const dynamic = 'force-dynamic';
+
 
 export  async function createNotification({ userEmail, fromUserEmail, type, postId = null }) {
 

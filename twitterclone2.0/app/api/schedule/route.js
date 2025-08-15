@@ -2,6 +2,7 @@
 import { ScheduledPost } from "../lib/models/ScheduledPost";
 import { v4 as uuidv4 } from "uuid";
 import dbConnect from "../lib/dBconnect";
+export const dynamic = 'force-dynamic';
 
 export async function POST(req) {
   const body = await req.json();

@@ -5,6 +5,7 @@ import { Post } from "../../lib/models/Post";
 import UserProfile from "../../lib/models/UserProfile";
 import dbConnect from "../../lib/dBconnect";
 import { v4 as uuidv4 } from "uuid";
+export const dynamic = 'force-dynamic';
 
 export async function POST(req) {
   await dbConnect();

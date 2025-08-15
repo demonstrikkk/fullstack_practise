@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import dbConnect from "../../lib/dBconnect";
 import { Post } from "../../lib/models/Post";
 import UserProfile from "../../lib/models/UserProfile";
+export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   try {

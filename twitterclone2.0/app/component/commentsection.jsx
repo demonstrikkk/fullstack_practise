@@ -7,6 +7,7 @@
 
 
 
+"use client";
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';

@@ -201,6 +201,7 @@ import dbConnect from '../../lib/dBconnect';
 import { Post } from '../../lib/models/Post';
 import { createNotification } from '../../lib/createNotification';
 import { supabase } from '../../lib/supabaseClient';
+export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   await dbConnect();

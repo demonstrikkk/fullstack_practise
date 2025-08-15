@@ -5,6 +5,7 @@
 
 import dbConnect from '../lib/dBconnect';
 import UserProfile from '../lib/models/UserProfile';
+export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   try {

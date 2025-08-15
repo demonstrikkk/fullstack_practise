@@ -1,6 +1,7 @@
 // app/api/upload-media/route.js
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 
 // Initialize the admin client for secure server-side operations
 const supabaseAdmin = createClient(

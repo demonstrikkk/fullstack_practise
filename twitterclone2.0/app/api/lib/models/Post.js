@@ -4,6 +4,7 @@
 
 // server/app/api/lib/models/Post.js
 import mongoose from "mongoose";
+export const dynamic = 'force-dynamic';
 
 
 // === Nested Reply Schema (for replies to comments) ===

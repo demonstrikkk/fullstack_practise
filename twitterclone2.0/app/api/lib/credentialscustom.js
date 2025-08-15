@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 const CustomCredentialsProvider = (options) => ({
   id: "credentials",
   name: options.name || "Credentials",

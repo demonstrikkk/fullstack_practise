@@ -4,6 +4,7 @@
 import { Post } from "@/app/api/lib/models/Post";
 import { NextResponse } from "next/server";
 import UserProfile from "@/app/api/lib/models/UserProfile";
+export const dynamic = 'force-dynamic';
 
 
 export async function POST(req, context) {

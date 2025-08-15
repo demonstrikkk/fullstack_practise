@@ -1,3 +1,5 @@
+"use client";
+
 const MediaUpload = (accept) => {
   const fileInput = document.createElement('input');
   fileInput.type = 'file';

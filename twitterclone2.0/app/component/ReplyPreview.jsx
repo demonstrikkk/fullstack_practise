@@ -1,3 +1,5 @@
+"use client";
+
 // components/ReplyPreview.js
 
 import { X } from 'lucide-react';

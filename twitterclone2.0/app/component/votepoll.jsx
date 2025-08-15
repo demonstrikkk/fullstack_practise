@@ -1,3 +1,5 @@
+"use client";
+
 // components/VotePoll.js
 import { useState } from "react";
 

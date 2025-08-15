@@ -5,6 +5,7 @@ import { Post } from "../../lib/models/Post";
 import UserProfile from "../../lib/models/UserProfile";
 import dbConnect from "../../lib/dBconnect";
 import { createNotification } from "../../lib/createNotification";
+export const dynamic = 'force-dynamic';
 
 export async function POST(req) {
   try {

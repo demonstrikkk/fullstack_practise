@@ -53,6 +53,7 @@ import { NextResponse } from "next/server";
 import dbConnect from "../lib/dBconnect";
 import UserProfile from "../lib/models/UserProfile";
 import bcrypt from "bcryptjs";
+export const dynamic = 'force-dynamic';
 
 export async function POST(req) {
   await dbConnect();

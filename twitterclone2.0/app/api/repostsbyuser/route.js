@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import dbConnect from '../lib/dBconnect';
 import { Post } from '../lib/models/Post';
 import UserProfile from '../lib/models/UserProfile'; // make sure this is correct
+export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);

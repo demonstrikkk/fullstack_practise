@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { Post } from "../lib/models/Post";
 import UserProfile from "../lib/models/UserProfile";
 import dbConnect from "../lib/dBconnect";
+export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   await dbConnect();

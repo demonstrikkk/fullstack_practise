@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 
 export function useTypingStatus(channelRef, currentUser, peerUser) {
