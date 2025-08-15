@@ -1,7 +1,7 @@
 import dbConnect from '../lib/dBconnect';
 import UserProfile from '../lib/models/UserProfile';
 import redis from '../lib/redis';
-
+export const dynamic = 'force-dynamic';
 export async function GET(req) {
   try {
     // ✅ Use Next.js native URL handling
