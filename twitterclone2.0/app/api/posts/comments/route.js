@@ -1,7 +1,6 @@
 // import { NextResponse } from 'next/server';
 // import dbConnect from '../../lib/dBconnect';
 // import { Post } from '../../lib/models/Post';
-// import { getServerSession}  from 'next-auth/next';
 // // import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 // import { authOptions } from '../../lib/authOptions';
 // import { createNotification } from '../../lib/createNotification';

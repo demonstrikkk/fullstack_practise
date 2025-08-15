@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-// import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ProfileComponent from "../userprofile/page";
 import Section2Content from "../home/page";

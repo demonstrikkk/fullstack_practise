@@ -4,7 +4,6 @@
 // import dbConnect from "../lib/dBconnect";
 // import UserProfile from "../lib/models/UserProfile";
 // import bcrypt from "bcryptjs";
-// import { getServerSession } from "next-auth/next";
 // import { authOptions } from "../lib/authOptions";
 
 // export async function POST(req) {

@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { getDisplayName } from "next/dist/shared/lib/utils";
 import { React } from "react";
 import PostCard from "../component/post-card";
-import { useSession } from 'next-auth/react';
 import UpdateProfileForm from "../component/updateprofile";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";

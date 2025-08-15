@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import dbConnect from '../../lib/dBconnect';
 import UserProfile from '../../lib/models/UserProfile';
 import { v4 as uuidv4 } from 'uuid';
-// import { useSession } from 'next-auth/react';
 export async function POST(req) {
   await dbConnect();
   // const { data: session, status } = useSession();

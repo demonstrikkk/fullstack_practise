@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "../api/lib/supabaseClient";
 import { ChevronLeft, Smile, Send, Paperclip, Film ,ChevronDown} from "lucide-react";
-// import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import GroupMessage from "./groupmessages";
 import ReplyPreview from "./ReplyPreview";

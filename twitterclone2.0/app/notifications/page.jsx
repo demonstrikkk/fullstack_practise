@@ -8,7 +8,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Loader2, Bell, MessageCircle, Heart, UserPlus } from "lucide-react";
-// import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import PostPopup from "../component/PostPopup"; // adjust path as needed
 import OtherProfileComponent from "../Otherprofile/page";

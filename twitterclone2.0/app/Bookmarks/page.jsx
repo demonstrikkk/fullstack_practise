@@ -3,7 +3,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-// import { useSession } from "next-auth/react";
 import PostCard from "../component/post-card";
 import { useRouter } from "next/navigation";
 import { supabase } from "../api/lib/supabaseClient";

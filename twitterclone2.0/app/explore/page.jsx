@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import useUserSearch from "../hooks/useUserSearch";
-// import { useSession } from "next-auth/react";
 import OtherProfileComponent from "../Otherprofile/page";
 
 import { v4 as uuvid } from 'uuid';
