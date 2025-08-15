@@ -18,14 +18,14 @@
     "test": "brittle test/*.test.js",
     "dev": "next dev --turbopack",
     "devp": "pear run --dev .",
-    "build":"next build",
-    "pages:build": "npx @cloudflare/next-on-pages",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "clean": "rimraf .next",
     "deploy": "npx @cloudflare/next-on-pages"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^15.4.6",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.50.3",
     "@upstash/redis": "^1.35.0",
@@ -54,22 +54,23 @@
     "uuid": "^11.1.0"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.13",
     "@eslint/config-array": "^0.21.0",
     "@eslint/eslintrc": "^3",
     "@eslint/object-schema": "^2.1.6",
     "@tailwindcss/postcss": "^4.1.11",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
     "autoprefixer": "^10.4.21",
     "babel-plugin-module-resolver": "^5.0.2",
     "brittle": "^3.0.0",
-    "eslint": "^9.32.0",
-    "eslint-config-next": "15.2.4",
+    "eslint": "^9.33.0",
+    "eslint-config-next": "^15.2.4",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.32.0",
     "pear-interface": "^1.0.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "wrangler": "^4.30.0"
   }
 }
