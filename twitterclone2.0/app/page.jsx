@@ -39,12 +39,11 @@
 
 //   return null; // or add a loading spinner here if you want
 // }
-// "use client";
+"use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "./api/lib/supabaseClient";
 import './globals.css';
-export const dynamic = 'force-dynamic';
 export default function HomePage() {
   const router = useRouter();
   const [session, setSession] = useState(undefined); // undefined for loading state
