@@ -1,0 +1,6 @@
+name = "clonytweet"
+main = ".vercel/output/static" # Adjusted automatically by adapter
+compatibility_date = "2024-08-15"
+
+[site]
+bucket = ".vercel/output/static"
