@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import HomePage from "../sidebar/page";
 import { supabase } from "../api/lib/supabaseClient";
 const RelevantPeople = ({ setSelectedUser }) => {

@@ -2,7 +2,7 @@
 "use client";
 import {React} from "react";
 
-import { useSession } from 'next-auth/react';
+// import { useSession } from 'next-auth/react';
 import PostCard from "../component/post-card";
 import { Loader2 } from "lucide-react";
 import { supabase } from "../api/lib/supabaseClient";

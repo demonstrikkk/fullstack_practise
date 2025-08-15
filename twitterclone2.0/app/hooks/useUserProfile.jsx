@@ -1,7 +1,7 @@
 
 
 import { useState,useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+// import { useSession } from 'next-auth/react';
 import { supabase } from '../api/lib/supabaseClient';
 export default function useUserProfile() {
   const [loading, setLoading] = useState(false);

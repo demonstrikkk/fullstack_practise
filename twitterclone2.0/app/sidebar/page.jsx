@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+// import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ProfileComponent from "../userprofile/page";
 import Section2Content from "../home/page";
@@ -74,11 +74,11 @@ export default function HomePage() {
   const [showPopup, setShowPopup] = useState(false);
   const [activeSection, setActiveSection] = useState("Home");
   const [message, setMessage] = useState('');
-  const userrealname = session?.user?.name || "User";
-  const username = session?.user?.username || "username";
-  const avatar = session?.user?.image || "https://via.placeholder.com/150";
+  const userrealname = session?.user?.name || session?.user?.user_metadata?.full_name ||session?.user?.user_metadata?.name ;
+  const username = session?.user?.username || session?.user?.user_metadata?.preferred_username || "username";
+  const avatar = session?.user?.image || session?.user?.user_metadata?.avatar_url || session?.user?.user_metadata?.picture || "https://via.placeholder.com/150";
   const email = session?.user?.email || ''
-  const auth = session?.user?.provider
+  const auth = session?.user?.provider|| session?.user?.app_metadata?.provider 
   const { data, loading1, error, getAllUsers, getFirstUser, createUser, updateUser, deleteUser } = useUserProfile();
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [selectedUserchat, setSelectedUserchat] = useState(false);
@@ -111,6 +111,31 @@ export default function HomePage() {
   //   }
   //   return rawAvatar || `https://placehold.co/40x40?text=${(displayName || email)?.[0] || "U"}`;
   // }
+
+
+  // Supabase OAuth sign-in function
+const handleSignIn = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google', // or 'github', 'facebook', etc.
+    options: {
+      redirectTo: `${window.location.origin}/auth/callback` // optional redirect
+    }
+  });
+  if (error) {
+    console.error('OAuth SignIn error:', error);
+  }
+};
+
+// Supabase sign-out function
+const handleSignOut = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    console.error('Sign out error:', error);
+  } else {
+    setSession(null);
+    router.push('/login'); // redirect to login page if needed
+  }
+};
 
 
   function getCleanAvatar(rawAvatar, displayName, email) {
@@ -516,13 +541,13 @@ export default function HomePage() {
 
 
 
-  const handleGmailClick = () => {
-    if (session) {
-      setShowPopup((prev) => !prev);
-    } else {
-      signIn();
-    }
-  };
+ const handleGmailClick = () => {
+  if (session) {
+    setShowPopup((prev) => !prev);
+  } else {
+    handleSignIn(); // Now uses Supabase OAuth
+  }
+};
 
 
 
@@ -697,8 +722,7 @@ export default function HomePage() {
                 <button
                   className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-700"
                   onClick={async () => {
-                    await signOut({ redirect: false });
-                    router.push("/login");
+                    onClick={handleSignOut}
                     setShowPopup(false);
                   }}
                 >

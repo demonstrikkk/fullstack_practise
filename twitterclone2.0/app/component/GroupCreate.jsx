@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { supabase } from "../api/lib/supabaseClient";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 // import { supabase } from "../api/lib/supabaseClient";
 export default function GroupCreate({ onGroupCreated, onClose, searchTerm, setSearchTerm }) {
   // const { data: session } = useSession();
