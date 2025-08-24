@@ -25,6 +25,7 @@
 
 import { useState, useEffect } from "react";
 import { createBrowserClient } from "@supabase/ssr";
+import './globals.css';
 
 export default function RootLayout({ children }) {
   const [supabase] = useState(() =>
@@ -55,10 +56,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <header >
-
-        </header>
-        <main>{children}</main>
+     
+        {children}
       </body>
     </html>
   );
