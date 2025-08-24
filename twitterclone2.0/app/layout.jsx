@@ -1,63 +1,56 @@
-// // 'use client';
-// import './globals.css';
-// import { SessionProvider } from 'next-auth/react';
-// import SessionWrapper from './component/SessionWrapper.jsx';
 
-// export const dynamic = 'force-dynamic';
+// "use client";
+
+// import { useState, useEffect } from "react";
+// import { createBrowserClient } from "@supabase/ssr";
+// import './globals.css';
+
 // export default function RootLayout({ children }) {
+//   const [supabase] = useState(() =>
+//     createBrowserClient(
+//       process.env.NEXT_PUBLIC_SUPABASE_URL,
+//       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+//     )
+//   );
+
+//   const [session, setSession] = useState(null);
+
+//   // Subscribe to auth state
+//   useEffect(() => {
+//     supabase.auth.getSession().then(({ data: { session } }) => {
+//       setSession(session);
+//     });
+
+//     const {
+//       data: { subscription },
+//     } = supabase.auth.onAuthStateChange((_event, session) => {
+//       setSession(session);
+//     });
+
+//     return () => subscription.unsubscribe();
+//   }, [supabase]);
+
+
 //   return (
 //     <html lang="en">
 //       <body>
-//         <SessionWrapper>
-//       <SessionProvider refetchInterval={300}>
-//         {/* <LoadingProvider> */}
-//           {children}
-//           {/* <SplashScreen /> */}
-//          {/* </LoadingProvider>  */}
-//   </SessionProvider>
-//         </SessionWrapper>
+     
+//         {children}
 //       </body>
 //     </html>
 //   );
 // }
 
-"use client";
+import "./globals.css";
+import RootLayoutClient from "./RootLayoutClient";
 
-import { useState, useEffect } from "react";
-import { createBrowserClient } from "@supabase/ssr";
-import './globals.css';
+export const dynamic = "force-dynamic"; // makes the whole app dynamic
 
 export default function RootLayout({ children }) {
-  const [supabase] = useState(() =>
-    createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    )
-  );
-
-  const [session, setSession] = useState(null);
-
-  // Subscribe to auth state
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, [supabase]);
-
-
   return (
     <html lang="en">
       <body>
-     
-        {children}
+        <RootLayoutClient>{children}</RootLayoutClient>
       </body>
     </html>
   );
