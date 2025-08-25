@@ -5,7 +5,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { supabase } from '../api/lib/supabaseClient';
+import { supabase } from '../api/lib/supabaseClientbrowser';
 const UserDetailsViaLogin = () => {
   // const { data: session } = useSession();
   const [session, setSession] = useState(null);

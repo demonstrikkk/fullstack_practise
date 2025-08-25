@@ -11,7 +11,7 @@ import { Loader2, Bell, MessageCircle, Heart, UserPlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import PostPopup from "../component/PostPopup"; // adjust path as needed
 import OtherProfileComponent from "../Otherprofile/page";
-import { supabase } from "../api/lib/supabaseClient";
+import { supabase } from "../api/lib/supabaseClientbrowser";
 const iconMap = {
   like: <Heart className="text-pink-500 w-5 h-5" />,
   follow: <UserPlus className="text-blue-500 w-5 h-5" />,

@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import AvatarDropzone from "./AvatarDropzone";
-import { supabase } from "../api/lib/supabaseClient";
+import { supabase } from "../api/lib/supabaseClientbrowser";
 
 export default function UpdateProfileForm({ isOpen, onClose, initialData = {}, triggerRefresh }) {
   const [accessToken, setAccessToken] = useState(null);

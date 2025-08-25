@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { supabase } from "../api/lib/supabaseClient";
+import { supabase } from "../api/lib/supabaseClientbrowser";
 import { ChevronLeft, Smile, Send, Paperclip, Film ,ChevronDown} from "lucide-react";
 import dynamic from "next/dynamic";
 import GroupMessage from "./groupmessages";

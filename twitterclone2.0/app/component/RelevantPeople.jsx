@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import HomePage from "../sidebar/page";
-import { supabase } from "../api/lib/supabaseClient";
+import { supabase } from "../api/lib/supabaseClientbrowser";
 const RelevantPeople = ({ setSelectedUser }) => {
   // const { data: session } = useSession();
   const [session, setSession] = useState(null);

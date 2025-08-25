@@ -1,8 +1,9 @@
 {
   "name": "twitterclone2.0",
-  "main": "index.html",
+
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "pear": {
     "name": "twitterclone2_0",
     "type": "desktop",

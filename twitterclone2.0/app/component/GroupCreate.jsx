@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "../api/lib/supabaseClient";
+import { supabase } from "../api/lib/supabaseClientbrowser";
 // import { supabase } from "../api/lib/supabaseClient";
 export default function GroupCreate({ onGroupCreated, onClose, searchTerm, setSearchTerm }) {
   // const { data: session } = useSession();

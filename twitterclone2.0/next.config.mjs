@@ -24,6 +24,7 @@ const __dirname = path.dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  productionBrowserSourceMaps: true,
   images: {
     domains: [
 
@@ -32,8 +33,12 @@ const nextConfig = {
       "lh3.googleusercontent.com"
     ],
   },
-  webpack: (config) => {
+  webpack: (config , { isServer }) => {
     config.resolve.alias["@" ] = path.resolve(__dirname);
+    if (!isServer) {
+      // Exclude better-sqlite3 from client bundles
+      config.externals.push("better-sqlite3");
+    }
     return config;
   },
 };

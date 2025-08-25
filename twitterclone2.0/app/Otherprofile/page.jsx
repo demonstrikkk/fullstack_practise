@@ -4,7 +4,7 @@ import {React} from "react";
 
 import PostCard from "../component/post-card";
 import { Loader2 } from "lucide-react";
-import { supabase } from "../api/lib/supabaseClient";
+import { supabase } from "../api/lib/supabaseClientbrowser";
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';

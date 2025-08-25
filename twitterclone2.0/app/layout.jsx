@@ -1,3 +1,17 @@
+import "./globals.css";
+import RootLayoutClient from "./RootLayoutClient";
+
+export const dynamic = "force-dynamic"; // makes the whole app dynamic
+export const revalidate = 0;
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <RootLayoutClient>{children}</RootLayoutClient>
+      </body>
+    </html>
+  );
+}
 
 // "use client";
 
@@ -41,17 +55,3 @@
 //   );
 // }
 
-import "./globals.css";
-import RootLayoutClient from "./RootLayoutClient";
-
-export const dynamic = "force-dynamic"; // makes the whole app dynamic
-
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        <RootLayoutClient>{children}</RootLayoutClient>
-      </body>
-    </html>
-  );
-}

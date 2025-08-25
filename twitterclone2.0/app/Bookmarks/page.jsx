@@ -5,7 +5,7 @@
 import React, { useEffect, useState } from "react";
 import PostCard from "../component/post-card";
 import { useRouter } from "next/navigation";
-import { supabase } from "../api/lib/supabaseClient";
+import { supabase } from "../api/lib/supabaseClientbrowser";
 
 export default function BookmarkedPosts() {
   // const { data: session } = useSession();

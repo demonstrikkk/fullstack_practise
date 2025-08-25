@@ -9,7 +9,7 @@ import UpdateProfileForm from "../component/updateprofile";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Loader2 } from 'lucide-react';
-import { supabase } from '../api/lib/supabaseClient';
+import { supabase } from '../api/lib/supabaseClientbrowser';
 export  function usePollVoting(userEmail, posts , setPosts) {
   const [userSelectedOption, setUserSelectedOption] = useState({}); // keyed by postId
    

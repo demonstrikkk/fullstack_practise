@@ -2,7 +2,7 @@
 "use client";
 
 import { useState,useEffect } from 'react';
-import { supabase } from '../api/lib/supabaseClient';
+import { supabase } from '../api/lib/supabaseClientbrowser';
 export default function useUserProfile() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

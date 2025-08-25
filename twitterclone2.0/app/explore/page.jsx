@@ -8,7 +8,7 @@ import useUserProfile from "../hooks/useUserProfile";
 import NewsPreferenceModal from '../component/NewsPreferenceModal';
 const TABS = ['For You', 'Trending', 'News', 'Sports', 'Entertainment'];
 
-import { supabase } from '../api/lib/supabaseClient';
+import { supabase } from '../api/lib/supabaseClientbrowser';
 
 export function WhatsHappening({ onArticleSelect }) {
   const [newsPreview, setNewsPreview] = useState({});

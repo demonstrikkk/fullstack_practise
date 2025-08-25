@@ -14,7 +14,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import EmojiPicker from "./emojiupload";
 import { formatDistanceToNow } from 'date-fns';
 import { MessageCircle, Heart, X, Loader2 } from 'lucide-react';
-import { supabase } from '../api/lib/supabaseClient';
+import { supabase } from '../api/lib/supabaseClientbrowser';
 
 import GifSearch from './gifupload'; // Assuming you have a GiphySearch component for GIFs
 

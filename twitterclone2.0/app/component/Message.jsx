@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { format, formatDistanceToNowStrict } from "date-fns";
 import { Smile, Reply, Trash2, Plus } from "lucide-react";
 import dynamic from "next/dynamic";
-import { supabase } from "../api/lib/supabaseClient";
+import { supabase } from "../api/lib/supabaseClientbrowser";
 import PostCard from "./post-card";
 import PostPopup from "./PostPopup";
 
