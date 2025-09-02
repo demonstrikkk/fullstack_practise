@@ -1,13 +1,18 @@
 import "./globals.css";
 import RootLayoutClient from "./RootLayoutClient";
-
+import { SessionProvider } from "next-auth/react";
 export const dynamic = "force-dynamic"; // makes the whole app dynamic
 export const revalidate = 0;
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <RootLayoutClient>{children}</RootLayoutClient>
+        <RootLayoutClient>
+          {/* <SessionProvider> */}
+          {children}
+
+          {/* </SessionProvider> */}
+          </RootLayoutClient>
       </body>
     </html>
   );

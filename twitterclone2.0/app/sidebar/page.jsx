@@ -1,3 +1,12 @@
+
+export const dynamic = "force-dynamic"; // make sure page is not static
+import HomePageClient from "./sidebarpage";
+export default function HomePage() {
+  return <HomePageClient />;
+}
+
+
+
 // "use client";
 
 // import { useState, useEffect, useRef } from "react";
@@ -1253,11 +1262,3 @@
 //   );
 // }
 
-
-export const dynamic = "force-dynamic"; // make sure page is not static
-
-import HomePageClient from "./sidebarpage";
-
-export default function HomePage() {
-  return <HomePageClient />;
-}

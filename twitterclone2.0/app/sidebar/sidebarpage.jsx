@@ -6,17 +6,17 @@ import ProfileComponent from "../userprofile/page";
 import Section2Content from "../home/page";
 
 import Explore from "../explore/page"; // Fixed import name
-import Community from "../Community/page";
+// import Community from "../Community/page";
 import Notifications from "../notifications/page";
 import Bookmarks from "../Bookmarks/page";
 import useUserProfile from "../hooks/useUserProfile";
 import { v4 as uuvid } from 'uuid';
 import useUserSearch from "../hooks/useUserSearch";
 import OtherProfileComponent from "../Otherprofile/page";
-import Pirate from "../mappodop/page";
+// import Pirate from "../mappodop/page";
 import RelevantPeople from "../component/RelevantPeople";
 import Postbutton from "../component/postbutton";
-import { WhatsHappening } from "../explore/page";
+import { WhatsHappening } from "../explore/exploreeclient";
 import Comment from "../component/commentsection";
 import ChatBox from "../component/chatting";
 import { formatDistanceToNow } from 'date-fns';

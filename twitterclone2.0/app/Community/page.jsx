@@ -1,12 +1,12 @@
-"use client";
-import React from 'react'
+// "use client";
+// import React from 'react'
 
-const Community = () => {
-  return (
-    <div>
-      this is the community page
-    </div>
-  )
-}
+// const Community = () => {
+//   return (
+//     <div>
+//       this is the community page
+//     </div>
+//   )
+// }
 
-export default Community
+// export default Community
