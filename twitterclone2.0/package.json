@@ -20,8 +20,7 @@
     "devp": "pear run --dev .",
     "build": "next build",
     "pages:build": "npx @cloudflare/next-on-pages",
-    "start": "node .next/standalone/server.js",
-    "start:regular": "next start",
+    "start": "next start",
     "lint": "next lint",
     "clean": "rimraf .next",
     "deploy": "npx @cloudflare/next-on-pages"

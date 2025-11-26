@@ -41,9 +41,6 @@ const nextConfig = {
       bodySizeLimit: '10mb',
     },
   },
-  // Output configuration for standalone deployment
-  output: 'standalone',
-  outputFileTracingRoot: path.join(__dirname, '../../'),
 };
 
 export default nextConfig;
