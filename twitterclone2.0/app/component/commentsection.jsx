@@ -10,7 +10,6 @@
 "use client";
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import EmojiPicker from "./emojiupload";
 import { formatDistanceToNow } from 'date-fns';
 import { MessageCircle, Heart, X, Loader2 } from 'lucide-react';
@@ -317,15 +316,12 @@ const handleReplyEmojiSelect = useCallback((commentId, emojiData, event) => {
             No comments yet. Be the first to comment!
           </div>
         ) : (
-          <AnimatePresence>
-            {[...comments].reverse().map((comment) => (
-              <motion.div
+          <>
+            {[...comments].reverse().map((comment, index) => (
+              <div
                 key={comment.commentId}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className="border-b border-gray-700 pb-4 last:border-b-0 "
+                className="border-b border-gray-700 pb-4 last:border-b-0 animate-fade-in"
+                style={{ animationDelay: `${index * 50}ms` }}
                 data-testid={`comment-${comment.commentId}`}
               >
                 {/* Comment */}
@@ -542,9 +538,8 @@ const handleReplyEmojiSelect = useCallback((commentId, emojiData, event) => {
 
                   </div> 
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+              </div>
+            ))}\n          </>
         )}
       </div>
 

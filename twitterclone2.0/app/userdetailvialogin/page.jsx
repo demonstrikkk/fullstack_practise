@@ -4,7 +4,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
 import { supabase } from '../api/lib/supabaseClient';
 const UserDetailsViaLogin = () => {
   // const { data: session } = useSession();
@@ -128,20 +127,10 @@ useEffect(() => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center px-4 text-white font-semibold">
-      <motion.div
-        initial={{ y: 40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="backdrop-blur-lg bg-white/5 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-3xl p-10 w-full max-w-md border border-white/20"
-      >
-        <motion.h2
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-3xl text-center font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-8"
-        >
+      <div className="backdrop-blur-lg bg-white/5 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-3xl p-10 w-full max-w-md border border-white/20 animate-fade-in">
+        <h2 className="text-3xl text-center font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-8 animate-slide-in">
           🎉 Welcome! Let&apos;s Complete Your Journey
-        </motion.h2>
+        </h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -195,17 +184,15 @@ useEffect(() => {
             />
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
+          <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3 bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-600 text-white font-bold rounded-xl shadow-xl hover:opacity-90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+            className="w-full py-3 bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-600 text-white font-bold rounded-xl shadow-xl hover:opacity-90 hover:scale-105 active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
           >
             {isSubmitting ? 'Saving...' : '🚀 Save & Continue'}
-          </motion.button>
+          </button>
         </form>
-      </motion.div>
+      </div>
     </div>
   );
 };

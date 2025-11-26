@@ -3,7 +3,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import AvatarDropzone from "./AvatarDropzone";
@@ -84,15 +83,10 @@ useEffect(() => {
 
 
   return (
-    <AnimatePresence>
+    <>
       {isOpen && (
-        <motion.div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <motion.div
-            className="bg-black dark:bg-[#181818] p-8 rounded-2xl shadow-2xl w-full max-w-md relative"
-            initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }}
-            transition={{ duration: 0.3 }}
-          >
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center animate-fade-in">
+          <div className="bg-black dark:bg-[#181818] p-8 rounded-2xl shadow-2xl w-full max-w-md relative animate-scale-in">
             <button onClick={onClose}
               className="absolute top-2 right-3  hover:text-red-500 text-xl">
               ×
@@ -137,10 +131,10 @@ useEffect(() => {
                 )}
               </button>
             </form>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   );
 }
 
