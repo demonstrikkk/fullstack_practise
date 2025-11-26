@@ -20,7 +20,7 @@
     "devp": "pear run --dev .",
     "build": "next build",
     "pages:build": "npx @cloudflare/next-on-pages",
-    "start": "node .next/standalone/twitterclone2.0/server.js",
+    "start": "node .next/standalone/server.js",
     "start:regular": "next start",
     "lint": "next lint",
     "clean": "rimraf .next",
