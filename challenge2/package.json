@@ -23,7 +23,6 @@
     "dotenv": "^16.4.7",
     "emoji-picker-react": "^4.12.2",
     "express": "^4.21.2",
-    "framer-motion": "^12.18.1",
     "gauge": "^5.0.2",
     "glob": "^11.0.1",
     "inflight": "^1.0.6",
