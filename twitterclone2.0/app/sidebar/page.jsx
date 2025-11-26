@@ -35,19 +35,7 @@ export default function HomePage() {
 
 
   // Add polyfill for missing addon functionality
-if (typeof window !== 'undefined') {
-  // Browser environment - provide mock
-  const mockAddon = () => ({
-    // Provide mock implementations of expected methods
-    init: () => {},
-    // Add other methods as needed
-  });
-  
-  // Patch the module system if possible
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports.addon = mockAddon;
-  }
-}
+
 
 
 
