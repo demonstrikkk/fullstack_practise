@@ -35,15 +35,15 @@ const nextConfig = {
     config.resolve.alias["@"] = path.resolve(__dirname);
     return config;
   },
-  // Optimize for Vercel deployment
+  // Optimize for production deployment
   experimental: {
-    // Use serverless functions more efficiently
     serverActions: {
-      bodySizeLimit: '2mb',
+      bodySizeLimit: '10mb',
     },
   },
-  // Output configuration for Vercel
+  // Output configuration for standalone deployment
   output: 'standalone',
+  outputFileTracingRoot: path.join(__dirname, '../../'),
 };
 
 export default nextConfig;
