@@ -3,6 +3,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "types": []
+  },
+  "typeAcquisition": {
+    "enable": false
   }
 }
