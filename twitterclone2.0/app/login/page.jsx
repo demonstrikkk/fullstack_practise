@@ -281,9 +281,18 @@ export default function LoginPage() {
       const res = await fetch(`/api/users/verify?email=${email}`);
       const data = await res.json();
 
+      console.log("Verification response:", data);
+
       if (res.ok && data.success) {
-        router.push(data.verified ? "/sidebar" : "/userdetailvialogin");
+        if (data.userExists && data.verified) {
+          // Existing verified user - go to sidebar
+          router.push("/sidebar");
+        } else {
+          // New user or unverified - go to user details
+          router.push("/userdetailvialogin");
+        }
       } else {
+        // Error or no user - go to user details
         router.push("/userdetailvialogin");
       }
     } catch (err) {
@@ -304,7 +313,7 @@ export default function LoginPage() {
       const { error } = await supabase.auth.signInWithOAuth({ 
         provider,
         options: {
-          redirectTo: `${window.location.origin}/userdetailvialogin`
+          redirectTo: `${window.location.origin}/login`
         }
       });
       

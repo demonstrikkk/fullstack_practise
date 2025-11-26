@@ -58,7 +58,10 @@ if (typeof window !== 'undefined') {
   const [selectedUser, setSelectedUser] = useState(null);
   const [query, setQuery] = useState('');
   const { results, loading, searchUsers } = useUserSearch();
-  const [showpostbutton, setshowpostbutton] = useState(false)
+  const [showpostbutton, setshowpostbutton] = useState(false);
+  const router = useRouter();
+  const [isSessionLoading, setIsSessionLoading] = useState(true);
+  
   useEffect(() => {
     const debounce = setTimeout(() => {
       searchUsers(query);
@@ -72,19 +75,30 @@ if (typeof window !== 'undefined') {
     // Fetch the session on mount
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
+      setIsSessionLoading(false);
+      
+      // If no session, redirect to login
+      if (!session) {
+        router.push('/login');
+      }
     });
 
     // Also subscribe to auth state changes (optional, for realtime updates)
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      setIsSessionLoading(false);
+      
+      // If session ends, redirect to login
+      if (!session) {
+        router.push('/login');
+      }
     });
 
     // Cleanup subscription on unmount
     return () => {
       authListener.subscription.unsubscribe();
     };
-  }, []);
-  const router = useRouter();
+  }, [router]);
   // router.push('/userdetailvialogin')
   const [showPopup, setShowPopup] = useState(false);
   const [activeSection, setActiveSection] = useState("Home");
@@ -563,6 +577,24 @@ const handleSignOut = async () => {
     handleSignIn(); // Now uses Supabase OAuth
   }
 };
+
+
+  // Add loading state
+  if (isSessionLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-gradient-to-br from-black via-slate-800 to-black">
+        <p className="text-white text-lg">Loading your dashboard...</p>
+      </div>
+    );
+  }
+
+  if (!session) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-gradient-to-br from-black via-slate-800 to-black">
+        <p className="text-white text-lg">Redirecting to login...</p>
+      </div>
+    );
+  }
 
 
 

@@ -38,28 +38,50 @@ const UserDetailsViaLogin = () => {
 
 useEffect(() => {
   const checkUserExists = async () => {
-    if (!session?.user?.email) return;
+    if (!session?.user?.email) {
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch(`/api/users/verify?email=${encodeURIComponent(session.user.email)}`);
       const data = await res.json();
 
-      if (res.ok && data.userExists && data.verified === true) {
+      console.log('User verification check:', data);
+
+      if (res.ok && data.success && data.userExists && data.verified === true) {
+        // User already exists and is verified, redirect to sidebar
         router.push('/sidebar');
+      } else {
+        // User doesn't exist or not verified, stay on this page
+        setLoading(false);
       }
     } catch (error) {
       console.error('Error checking existing user:', error);
-    } finally {
       setLoading(false);
     }
   };
 
-  checkUserExists();
+  if (session) {
+    checkUserExists();
+  } else {
+    setLoading(false);
+  }
 }, [session, router]);
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!userDetails.username.trim()) {
+      alert('Username is required');
+      return;
+    }
+    if (!userDetails.password.trim()) {
+      alert('Password is required');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -68,25 +90,41 @@ useEffect(() => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: session.user.email,
-          name: session.user.name,
-          image: session.user.image,
+          name: session.user.user_metadata?.full_name || session.user.user_metadata?.name || session.user.name,
+          image: session.user.user_metadata?.avatar_url || session.user.user_metadata?.picture || session.user.image,
           username: userDetails.username,
           password: userDetails.password,
-          bio: userDetails.bio,
+          bio: userDetails.bio || '',
         }),
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Failed to save user');
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to save user');
+      }
+      
+      console.log('User created successfully:', data);
       router.push('/sidebar');
     } catch (error) {
       console.error('Error saving user details:', error);
+      alert(`Failed to save user details: ${error.message}`);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (loading) return null;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center">
+        <div className="text-white text-xl">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!session) {
+    router.push('/login');
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center px-4 text-white font-semibold">
@@ -110,7 +148,7 @@ useEffect(() => {
             <label className="text-sm text-gray-400">Name</label>
             <input
               type="text"
-              value={session?.user?.name || ''}
+              value={session?.user?.user_metadata?.full_name || session?.user?.user_metadata?.name || session?.user?.name || ''}
               disabled
               className="w-full mt-1 px-4 py-3 bg-gray-700/60 border border-gray-600 rounded-lg text-white cursor-not-allowed"
             />
