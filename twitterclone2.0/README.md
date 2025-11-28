@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📣 ClonyTweet 2.0 — A Modern Social Media Experience
 
-## Getting Started
+> *A full-stack social media platform built for real-time interaction and scale.*
 
-First, run the development server:
+<!-- PROJECT BANNER -->
+
+<p align="center">
+  <img src="assets/banner-dark-placeholder.png" alt="ClonyTweet 2.0 Banner" width="100%" />
+</p>
+
+---
+
+## 🎥 Screenshots (Add Yours Here)
+
+> Replace placeholders with real UI screenshots (PNG/JPG recommended)
+
+| Feature          |                         Preview                        |
+| ---------------- | :----------------------------------------------------: |
+| Home Feed        |    ![Feed Placeholder](assets/feed-placeholder.png)    |
+| Chat / Messaging |    ![Chat Placeholder](assets/chat-placeholder.png)    |
+| User Profile     | ![Profile Placeholder](assets/profile-placeholder.png) |
+| Authentication   |    ![Auth Placeholder](assets/auth-placeholder.png)    |
+
+> Create an **assets** folder in your repo and drop your images there.
+
+---
+
+## 🚀 Live Demo
+
+> Deployment (Render): Add link in repo description or first comment
+
+---
+
+## 🧩 Features
+
+### Core Social Experience
+
+* Create, like, and comment on posts
+* Real-time 1-to-1 messaging via **Supabase Realtime**
+* View and edit user profile
+* Clean dark UI for modern social feel
+
+---
+
+## 🏗️ Tech Stack
+
+| Category   | Technologies                 |
+| ---------- | ---------------------------- |
+| Frontend   | Next.js, React, Tailwind CSS |
+| Backend    | Next.js API Routes           |
+| Database   | MongoDB Atlas                |
+| Real-Time  | Supabase                     |
+| Auth       | MongoDB Atlas                |
+| Deployment | Render                       |
+
+---
+
+## 🛠️ Getting Started
 
 ```bash
+git clone https://github.com/your-username/clonytweet-2.0.git
+cd clonytweet-2.0
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+➡️ Visit `http://localhost:3000` in your browser
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔧 Environment Variables
 
-## Learn More
+Add `.env.local`:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+MONGODB_URI=your_mongodb_connection_string
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> Never push actual secrets to GitHub — use `.gitignore` ✔
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📚 Folder Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+ ├─ app/
+ ├─ components/
+ ├─ lib/
+ ├─ server/
+public/
+assets/      # Add screenshots + banner here
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🧠 Key Learnings
+
+* Debugging deployment is where real backend learning happens
+* Real-time state sync requires careful architecture decisions
+* UI responsiveness directly improves engagement
+
+---
+
+## 🔮 Roadmap
+
+* Media messaging (images & GIFs)
+* Notifications
+* Infinite scrolling + trending topics
+* Following system + personalized feed
+
+> Open for suggestions from the community 🤝
+
+---
+
+## 🤝 Contributing
+
+Feedback and pull requests are always welcome!
+Let’s build something bigger together 🚀
+
+
+
+
+
+## 🧩 System Architecture Overview
+
+
+
+```
+[ Client: Next.js UI ]
+        ⇅ Realtime
+[ Supabase Realtime ]
+        ⇅ Data
+[ MongoDB Atlas Cloud ]
+```
+
+
