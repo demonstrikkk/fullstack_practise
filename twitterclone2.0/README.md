@@ -5,7 +5,7 @@
 <!-- PROJECT BANNER -->
 
 <p align="center">
-  <img src="assets/banner-dark-placeholder.png" alt="ClonyTweet 2.0 Banner" width="100%" />
+  <img width="1911" height="870" alt="Screenshot 2025-11-28 201928" src="https://github.com/user-attachments/assets/324aed27-1343-4255-a847-0c7a4c1afc98" />
 </p>
 
 ---
@@ -16,20 +16,20 @@
 
 | Feature          |                         Preview                        |
 | ---------------- | :----------------------------------------------------: |
-| Home Feed        |    ![Feed Placeholder](assets/feed-placeholder.png)    |
-| Chat / Messaging |    ![Chat Placeholder](assets/chat-placeholder.png)    |
-| User Profile     | ![Profile Placeholder](assets/profile-placeholder.png) |
-| Authentication   |    ![Auth Placeholder](assets/auth-placeholder.png)    |
+| Home Feed        |    ![Feed Placeholder](<img width="1911" height="870" alt="Screenshot 2025-11-28 201928" src="https://github.com/user-attachments/assets/324aed27-1343-4255-a847-0c7a4c1afc98" />)    |
 
-> Create an **assets** folder in your repo and drop your images there.
+| Chat / Messaging |    ![Chat Placeholder](<img width="1918" height="864" alt="Screenshot 2025-11-28 202034" src="https://github.com/user-attachments/assets/b4286c76-3fdf-4135-8b8b-e6f509de830a" />)    |
 
----
+| User Profile     | ![Profile Placeholder](<img width="1909" height="863" alt="Screenshot 2025-11-28 202113" src="https://github.com/user-attachments/assets/c1dc0d24-1ede-45dd-9d87-a9c0cc6661ab" />) |
+
+
+
+
 
 ## 🚀 Live Demo
 
-> Deployment (Render): Add link in repo description or first comment
+> Deployment (Render): https://clonytweet2-0.onrender.com/
 
----
 
 ## 🧩 Features
 
