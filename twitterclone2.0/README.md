@@ -3,24 +3,22 @@
 > *A full-stack social media platform built for real-time interaction and scale.*
 
 <!-- PROJECT BANNER -->
-
+| Home |
 <p align="center">
   <img width="1911" height="870" alt="Screenshot 2025-11-28 201928" src="https://github.com/user-attachments/assets/324aed27-1343-4255-a847-0c7a4c1afc98" />
 </p>
 
----
+| Explore |
 
-## 🎥 Screenshots (Add Yours Here)
+<p align="center">
+ <img width="1916" height="865" alt="Screenshot 2025-11-28 202004" src="https://github.com/user-attachments/assets/97eae131-6865-4636-9d9f-413163022d90" />
+</p>
 
-> Replace placeholders with real UI screenshots (PNG/JPG recommended)
 
-| Feature          |                         Preview                        |
-| ---------------- | :----------------------------------------------------: |
-| Home Feed        |    ![Feed Placeholder](<img width="1911" height="870" alt="Screenshot 2025-11-28 201928" src="https://github.com/user-attachments/assets/324aed27-1343-4255-a847-0c7a4c1afc98" />)    |
 
-| Chat / Messaging |    ![Chat Placeholder](<img width="1918" height="864" alt="Screenshot 2025-11-28 202034" src="https://github.com/user-attachments/assets/b4286c76-3fdf-4135-8b8b-e6f509de830a" />)    |
+| Chat / Messaging |    <p align="center"><img width="1918" height="864" alt="Screenshot 2025-11-28 202034" src="https://github.com/user-attachments/assets/b4286c76-3fdf-4135-8b8b-e6f509de830a" /></p>    
 
-| User Profile     | ![Profile Placeholder](<img width="1909" height="863" alt="Screenshot 2025-11-28 202113" src="https://github.com/user-attachments/assets/c1dc0d24-1ede-45dd-9d87-a9c0cc6661ab" />) |
+| User Profile     | <p align="center"><img width="1909" height="863" alt="Screenshot 2025-11-28 202113" src="https://github.com/user-attachments/assets/c1dc0d24-1ede-45dd-9d87-a9c0cc6661ab" /></p> 
 
 
 
