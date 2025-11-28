@@ -231,34 +231,48 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [authInProgress, setAuthInProgress] = useState(false);
+  const [hasVerified, setHasVerified] = useState(false); // Prevent multiple verifications
 
   // Initialize authentication and handle session
   useEffect(() => {
+    let isSubscribed = true;
+    
     async function initializeAuth() {
       try {
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
         if (sessionError) throw sessionError;
         
         console.log("Session state:", session ? "Active" : "No session");
+        
+        if (!isSubscribed) return;
         setSession(session);
         
-        if (session) {
+        if (session && !hasVerified) {
+          setHasVerified(true);
           await handleExistingSession(session);
         }
       } catch (error) {
         console.error("Auth initialization error:", error);
-        setError(`Authentication initialization failed: ${error.message}`);
+        if (isSubscribed) {
+          setError(`Authentication initialization failed: ${error.message}`);
+        }
       } finally {
-        setLoading(false);
+        if (isSubscribed) {
+          setLoading(false);
+        }
       }
     }
 
     // Set up auth state listener
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log("Auth state changed:", event);
+      
+      if (!isSubscribed) return;
       setSession(session);
       
-      if (session) {
+      // Only verify on SIGNED_IN event, not on every state change
+      if (session && event === 'SIGNED_IN' && !hasVerified) {
+        setHasVerified(true);
         await handleExistingSession(session);
       }
     });
@@ -266,14 +280,18 @@ export default function LoginPage() {
     initializeAuth();
 
     return () => {
+      isSubscribed = false;
       authListener?.subscription?.unsubscribe();
     };
-  }, [router]);
+  }, []);
 
   // Handle existing session verification and routing
   async function handleExistingSession(session) {
     try {
-      if (!session?.user?.email) return;
+      if (!session?.user?.email) {
+        setAuthInProgress(false);
+        return;
+      }
       
       setAuthInProgress(true);
       const email = encodeURIComponent(session.user.email);
@@ -285,21 +303,20 @@ export default function LoginPage() {
       if (res.ok && data.success) {
         if (data.userExists && data.verified) {
           // Existing verified user - go to sidebar
-          router.push("/sidebar");
+          router.replace("/sidebar");
         } else {
           // New user or unverified - go to user details
-          router.push("/userdetailvialogin");
+          router.replace("/userdetailvialogin");
         }
       } else {
         // Error or no user - go to user details
-        router.push("/userdetailvialogin");
+        router.replace("/userdetailvialogin");
       }
     } catch (err) {
       console.error("Session verification failed:", err);
       setError("Failed to verify user status. Please try again.");
-      router.push("/userdetailvialogin");
-    } finally {
       setAuthInProgress(false);
+      setHasVerified(false); // Reset so user can try again
     }
   }
 

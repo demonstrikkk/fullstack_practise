@@ -60,30 +60,37 @@ export default function HomePage() {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
+    let isSubscribed = true;
+    
     // Fetch the session on mount
     supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!isSubscribed) return;
+      
       setSession(session);
       setIsSessionLoading(false);
       
       // If no session, redirect to login
       if (!session) {
-        router.push('/login');
+        router.replace('/login');
       }
     });
 
     // Also subscribe to auth state changes (optional, for realtime updates)
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!isSubscribed) return;
+      
       setSession(session);
       setIsSessionLoading(false);
       
       // If session ends, redirect to login
-      if (!session) {
-        router.push('/login');
+      if (!session && _event === 'SIGNED_OUT') {
+        router.replace('/login');
       }
     });
 
     // Cleanup subscription on unmount
     return () => {
+      isSubscribed = false;
       authListener.subscription.unsubscribe();
     };
   }, [router]);
@@ -145,12 +152,16 @@ const handleSignIn = async () => {
 
 // Supabase sign-out function
 const handleSignOut = async () => {
-  const { error } = await supabase.auth.signOut();
-  if (error) {
-    console.error('Sign out error:', error);
-  } else {
-    setSession(null);
-    router.push('/login'); // redirect to login page if needed
+  try {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Sign out error:', error);
+    } else {
+      setSession(null);
+      router.replace('/login'); // Use replace to prevent back navigation
+    }
+  } catch (err) {
+    console.error('Unexpected sign out error:', err);
   }
 };
 

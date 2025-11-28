@@ -8,20 +8,28 @@ import { supabase } from '../api/lib/supabaseClient';
 const UserDetailsViaLogin = () => {
   // const { data: session } = useSession();
   const [session, setSession] = useState(null);
+  const [hasCheckedUser, setHasCheckedUser] = useState(false); // Prevent multiple checks
 
   useEffect(() => {
+    let isSubscribed = true;
+    
     // Fetch the session on mount
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
+      if (isSubscribed) {
+        setSession(session);
+      }
     });
 
     // Also subscribe to auth state changes (optional, for realtime updates)
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
+      if (isSubscribed) {
+        setSession(session);
+      }
     });
 
     // Cleanup subscription on unmount
     return () => {
+      isSubscribed = false;
       authListener.subscription.unsubscribe();
     };
   }, []);
@@ -41,8 +49,11 @@ useEffect(() => {
       setLoading(false);
       return;
     }
+    
+    if (hasCheckedUser) return; // Prevent multiple checks
 
     try {
+      setHasCheckedUser(true);
       const res = await fetch(`/api/users/verify?email=${encodeURIComponent(session.user.email)}`);
       const data = await res.json();
 
@@ -50,7 +61,7 @@ useEffect(() => {
 
       if (res.ok && data.success && data.userExists && data.verified === true) {
         // User already exists and is verified, redirect to sidebar
-        router.push('/sidebar');
+        router.replace('/sidebar');
       } else {
         // User doesn't exist or not verified, stay on this page
         setLoading(false);
@@ -58,6 +69,7 @@ useEffect(() => {
     } catch (error) {
       console.error('Error checking existing user:', error);
       setLoading(false);
+      setHasCheckedUser(false); // Reset on error so user can retry
     }
   };
 
@@ -121,8 +133,12 @@ useEffect(() => {
   }
 
   if (!session) {
-    router.push('/login');
-    return null;
+    router.replace('/login');
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center">
+        <div className="text-white text-xl">Redirecting to login...</div>
+      </div>
+    );
   }
 
   return (
